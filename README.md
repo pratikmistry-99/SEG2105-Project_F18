@@ -6,6 +6,6 @@ Students working on this project include:
 
 Gabrielle Naubert
 Saabiqa Chowdhury
-[]
+Pratik Mistry
 []
 []

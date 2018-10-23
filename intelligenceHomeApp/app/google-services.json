@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "353086303084-hmtata6utigagktudg9fq84q97t06mml.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gaba.intelligence_homeapp",
+            "certificate_hash": "269800cb9f91b14ca6b45be15d7d3908108d6fd1"
+          }
+        },
+        {
           "client_id": "353086303084-ladc1ns8og7eoh2cjo7v64m4v64tqir1.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353086303084-ladc1ns8og7eoh2cjo7v64m4v64tqir1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

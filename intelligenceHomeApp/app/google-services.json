@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "353086303084",
+    "firebase_url": "https://seg-home-app.firebaseio.com",
+    "project_id": "seg-home-app",
+    "storage_bucket": "seg-home-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353086303084:android:acc9cf4c5a0e6fbe",
+        "android_client_info": {
+          "package_name": "com.example.gaba.intelligence_homeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353086303084-ladc1ns8og7eoh2cjo7v64m4v64tqir1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCS3bll3X5-jHweJAU7JKwrLUw8wIEooPg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

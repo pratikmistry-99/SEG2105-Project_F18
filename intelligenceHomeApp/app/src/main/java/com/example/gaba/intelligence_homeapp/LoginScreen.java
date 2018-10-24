@@ -30,7 +30,12 @@ public class LoginScreen extends AppCompatActivity {
                 Intent intent = new Intent(LoginScreen.this,WelcomeScreen.class);
                 strUser = userName.getText().toString();
                 intent.putExtra("value", strUser);
-                startActivity(intent);
+
+                if (Users.getUser(strUser) != null){
+                    startActivity(intent);
+                }
+
+                
 
             }
         });

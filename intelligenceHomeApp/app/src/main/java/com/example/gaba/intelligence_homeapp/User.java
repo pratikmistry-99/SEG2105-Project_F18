@@ -19,5 +19,11 @@ public class User {
     public String getRole(){
         return role;
     }
+    public String getPassword(){
+        return password;
+    }
+    public String getUsername(){
+        return username;
+    }
 
 }

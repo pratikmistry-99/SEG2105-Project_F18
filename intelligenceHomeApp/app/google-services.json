@@ -23,6 +23,22 @@
           }
         },
         {
+          "client_id": "353086303084-psh3jfvt1211juuvjaemf1lelgg0a49t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gaba.intelligence_homeapp",
+            "certificate_hash": "f722f06870871d44d06acb049cdec600b73cbc49"
+          }
+        },
+        {
+          "client_id": "353086303084-ig0n1ed2cfcjkslu8o78ghaltr5jd0f2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gaba.intelligence_homeapp",
+            "certificate_hash": "35b54336e539d24733514efdfc0479f13a665461"
+          }
+        },
+        {
           "client_id": "353086303084-ladc1ns8og7eoh2cjo7v64m4v64tqir1.apps.googleusercontent.com",
           "client_type": 3
         }

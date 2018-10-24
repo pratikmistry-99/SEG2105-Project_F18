@@ -59,9 +59,6 @@ public class SignupScreen extends AppCompatActivity {
 
     }
 
-
-
-
     public void writeNewUser(View view) {
         addUser = (EditText) findViewById(R.id.addUser);
         addPassword = (EditText) findViewById(R.id.addPassword);

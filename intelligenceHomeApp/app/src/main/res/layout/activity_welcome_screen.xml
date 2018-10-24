@@ -15,13 +15,22 @@
             android:id="@+id/welcomeTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Hello!"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/roleTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="textView"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/userDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="value"
+            android:textSize="30sp" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

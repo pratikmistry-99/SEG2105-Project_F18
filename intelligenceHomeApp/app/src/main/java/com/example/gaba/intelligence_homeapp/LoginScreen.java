@@ -4,14 +4,36 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class LoginScreen extends AppCompatActivity {
+
+    EditText userName;
+    EditText pswrd;
+    Button loginButton;
+    String strUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+
+        loginButton = findViewById(R.id.loginBtn);
+        userName = findViewById(R.id.username);
+        pswrd = findViewById(R.id.password);
+
+        loginButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginScreen.this,WelcomeScreen.class);
+                strUser = userName.getText().toString();
+                intent.putExtra("value", strUser);
+                startActivity(intent);
+
+            }
+        });
     }
 
     public void signUp(View view){

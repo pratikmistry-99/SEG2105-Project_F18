@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -19,8 +20,14 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     public void signIn(View view){
+
+        String username = ((EditText)findViewById(R.id.username)).getText().toString();
+        String password = ((EditText)findViewById(R.id.password)).getText().toString();
+        // Add code to check credentials
+
         Intent intent = new Intent(getApplicationContext(), WelcomeScreen.class);
         startActivityForResult(intent,0);
+
     }
 
 }

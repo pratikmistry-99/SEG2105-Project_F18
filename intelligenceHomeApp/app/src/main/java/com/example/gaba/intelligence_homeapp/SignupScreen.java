@@ -30,16 +30,32 @@ public class SignupScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_screen);
         createAcc = (Button) findViewById(R.id.createAcc);
-/*
+
         createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                writeNewUser();
+                addUser = (EditText) findViewById(R.id.addUser);
+                addPassword = (EditText) findViewById(R.id.addPassword);
+                homeOwner = (RadioButton) findViewById(R.id.rb_HO);
+                serviceProvider = (RadioButton) findViewById(R.id.rb_SP);
+                role = "";
+
+                if (homeOwner.equals(true)){
+                    role = "Home Owner";
+                }
+                else if (serviceProvider.equals(true)) {
+                    role = "Service Provider";
+                }
+                user = new User(addUser.getText().toString(), addPassword.getText().toString(), role);
+                Users.addUser(user);
+                //
+                Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
+                startActivityForResult(intent,0);
             }
         });
 
 
-*/
+
 
     }
 
@@ -60,8 +76,10 @@ public class SignupScreen extends AppCompatActivity {
             role = "Service Provider";
         }
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("User");
         user = new User(addUser.getText().toString(), addPassword.getText().toString(), role);
+        /**             *****Firebase code***
+        mDatabase = FirebaseDatabase.getInstance().getReference("User");
+
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -78,7 +96,7 @@ public class SignupScreen extends AppCompatActivity {
 
             }
         });
-
+        */
 /**
         // Creating new user node, which returns the unique key value
         // new user node would be /users/$userid/

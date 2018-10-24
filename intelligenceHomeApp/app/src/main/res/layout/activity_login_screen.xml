@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
     tools:context=".LoginScreen">
 
     <EditText
@@ -60,10 +61,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="149dp"
-        android:layout_marginLeft="147dp"
-        android:layout_marginRight="149dp"
         android:layout_marginStart="147dp"
         android:layout_marginTop="13dp"
+        android:onClick="signIn"
         android:text="Log In"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

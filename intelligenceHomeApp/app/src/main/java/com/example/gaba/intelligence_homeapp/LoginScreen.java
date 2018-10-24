@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class LoginScreen extends AppCompatActivity {
 
     EditText userName;
     EditText pswrd;
     Button loginButton;
-    String strUser;
+    String strUser, strPass;
+    TextView txt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +32,17 @@ public class LoginScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginScreen.this,WelcomeScreen.class);
                 strUser = userName.getText().toString();
+                strPass = pswrd.getText().toString();
                 intent.putExtra("value", strUser);
 
-                if (Users.getUser(strUser) != null){
+                if (Users.getUser(strUser) != null & Users.getPass(strPass) != null){
                     startActivity(intent);
+                }else{
+                    txt = (TextView)findViewById(R.id.loginErrorTxt);
+                    txt.setText("Please Type in Valid Login Credentials");
                 }
 
-                
+
 
             }
         });

@@ -17,5 +17,12 @@ public class Users {
         }
         return null;
     }
+    public static User getPass(String password){
+        for (int i = 0; i< users.size(); i++){
+            if (password.equals(users.get(i).getPassword()))
+                return (User)users.get(i);
+        }
+        return null;
+    }
 
 }

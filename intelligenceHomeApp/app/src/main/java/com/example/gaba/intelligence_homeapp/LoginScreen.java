@@ -39,10 +39,18 @@ public class LoginScreen extends AppCompatActivity {
 
         if (user!=null && user.getPassword().toString().equals(pswrd.getText().toString())) {
             Intent intent = new Intent(getApplicationContext(),WelcomeScreen.class);
+
+            String nameValue = userName.getText().toString();
+            intent.putExtra("Name",nameValue);
+
+            String role = getIntent().getStringExtra("Role");
+            intent.putExtra("ROLE",role);
+
             startActivityForResult(intent,0);
+
         } else {
             TextView txt = findViewById(R.id.loginErrorTxt);
-            txt.setText("Please Type in Valid Login Credentials"/*+"," + user.getUsername()+","+userName.getText().toString()*/);
+            txt.setText("Please Type in Valid Login Credentials");
         }
     }
 

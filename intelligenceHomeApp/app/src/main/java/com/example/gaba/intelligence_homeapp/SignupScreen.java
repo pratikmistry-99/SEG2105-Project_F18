@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.firebase.database.*;
@@ -49,10 +50,10 @@ public class SignupScreen extends AppCompatActivity {
         role = "";
         TextView validateRole = findViewById(R.id.errorSignTxt);
 
-        if (homeOwner.equals(true)){
+        if (homeOwner.isChecked()){
             role = "Home Owner";
         }
-        else if (serviceProvider.equals(true)) {
+        else if (serviceProvider.isChecked()) {
             role = "Service Provider";
         }
         //Doesn't let you click on admin if an admin role was already fulfilled
@@ -61,6 +62,9 @@ public class SignupScreen extends AppCompatActivity {
         }
         user = new User(addUser.getText().toString(), addPassword.getText().toString(), role);
         //Users.addUser(user);
+
+        RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
+        final String roleUser = ((RadioButton)findViewById(rg.getCheckedRadioButtonId())).getText().toString();
 
 
         // TODO: add to database
@@ -87,6 +91,11 @@ public class SignupScreen extends AppCompatActivity {
             validateRole.setText("Please choose a valid user role above");
         }
 
+
+        /*
+        Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
+        intent.putExtra("Role",roleUser);
+        startActivityForResult(intent,0);*/
     }
 }
 

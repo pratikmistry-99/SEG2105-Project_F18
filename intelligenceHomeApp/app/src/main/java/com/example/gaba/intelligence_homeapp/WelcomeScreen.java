@@ -16,11 +16,14 @@ public class WelcomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
-        //userRoleDisplay = findViewById(R.id.userRoleDisplay);
-        //userNameDisplay = findViewById(R.id.userNameDisplay);
-        //str = getIntent().getExtras().getString("value");
-        //userNameDisplay.setText(str);
-        //userRoleDisplay.setText(Users.getUser(str).getRole());
+        userRoleDisplay = findViewById(R.id.roleTxt);
+        userNameDisplay = findViewById(R.id.userDisplay);
+
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        User user = dbHandler.findUser(getIntent().getStringExtra("Name"));
+        str = "Welcome "+user.getUsername()+"!";
+        userNameDisplay.setText(str);
+        userRoleDisplay.setText(user.getRole() + " Account");
 
     }
 }

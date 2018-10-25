@@ -23,25 +23,6 @@ public class LoginScreen extends AppCompatActivity {
         loginButton = findViewById(R.id.loginBtn);
         userName = findViewById(R.id.username);
         pswrd = findViewById(R.id.password);
-
-/*        loginButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginScreen.this,WelcomeScreen.class);
-                String strUser = userName.getText().toString();
-                String strPass = pswrd.getText().toString();
-                intent.putExtra("value", strUser);
-
-                if (Users.getUser(strUser) != null & Users.getPass(strPass) != null){
-                    startActivity(intent);
-                }else{
-                    TextView txt = findViewById(R.id.loginErrorTxt);
-                    txt.setText("Please Type in Valid Login Credentials");
-                }
-            }
-        });
-        */
     }
 
     public void signUp(View view){
@@ -54,11 +35,9 @@ public class LoginScreen extends AppCompatActivity {
 
         // TODO: get from Database
         MyDBHandler dbHandler = new MyDBHandler(this);
-        User user = dbHandler.findUser((String) pswrd.getText().toString());
+        User user = dbHandler.findUser((String) userName.getText().toString());
 
-        if (user!=null /*&& user.getUsername().toString().equals(userName.getText().toString())*/) {
-            //idView.setText(String.valueOf(user.getID()));
-            //skuBox.setText(String.valueOf(user.getSku()));
+        if (user!=null && user.getPassword().toString().equals(pswrd.getText().toString())) {
             Intent intent = new Intent(getApplicationContext(),WelcomeScreen.class);
             startActivityForResult(intent,0);
         } else {

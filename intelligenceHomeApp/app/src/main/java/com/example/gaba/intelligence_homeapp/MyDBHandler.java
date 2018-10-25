@@ -79,5 +79,31 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+
+    //Returns True if just a SINGLE Admin user is existing in the database
+    public boolean checkAdmin(String admin){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_ROLE + " = \"" + admin + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        User user = new User(); //Unnecessary
+
+        boolean result;
+        //cursor is at the row where "admin" value would be found
+        //but how to assure its the ONLY one??? and is my logic above correct?
+        if(cursor.moveToFirst()) {
+            result = true;
+
+        } else  {
+           result = false;
+        }
+        db.close();
+        return result;
+    }
+
+    public void deleteAll(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_USERS,null,null);
+    }
 }
 

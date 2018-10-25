@@ -24,7 +24,7 @@ public class LoginScreen extends AppCompatActivity {
         userName = findViewById(R.id.username);
         pswrd = findViewById(R.id.password);
 
-        loginButton.setOnClickListener(new View.OnClickListener(){
+/*        loginButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
@@ -41,6 +41,7 @@ public class LoginScreen extends AppCompatActivity {
                 }
             }
         });
+        */
     }
 
     public void signUp(View view){
@@ -49,15 +50,21 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     //Ended up having to override and make a onClick() method above inside the onCreate that basically does what signIn does
-    public void signIn(View view){
+    public void login (View view) {
 
-//        String username = ((EditText)findViewById(R.id.username)).getText().toString();
-//        String password = ((EditText)findViewById(R.id.password)).getText().toString();
-        // Add code to check credentials
+        // TODO: get from Database
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        User user = dbHandler.findUser((String) pswrd.getText().toString());
 
-//        Intent intent = new Intent(getApplicationContext(), WelcomeScreen.class);
-//        startActivityForResult(intent,0);
-
+        if (user!=null /*&& user.getUsername().toString().equals(userName.getText().toString())*/) {
+            //idView.setText(String.valueOf(user.getID()));
+            //skuBox.setText(String.valueOf(user.getSku()));
+            Intent intent = new Intent(getApplicationContext(),WelcomeScreen.class);
+            startActivityForResult(intent,0);
+        } else {
+            TextView txt = findViewById(R.id.loginErrorTxt);
+            txt.setText("Please Type in Valid Login Credentials"/*+"," + user.getUsername()+","+userName.getText().toString()*/);
+        }
     }
 
 }

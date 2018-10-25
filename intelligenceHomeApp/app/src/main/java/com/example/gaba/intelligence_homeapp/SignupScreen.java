@@ -30,7 +30,7 @@ public class SignupScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_screen);
         createAcc = (Button) findViewById(R.id.createAcc);
-
+/**
         createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,18 +48,28 @@ public class SignupScreen extends AppCompatActivity {
                 }
                 user = new User(addUser.getText().toString(), addPassword.getText().toString(), role);
                 Users.addUser(user);
+
+
+                // TODO: add to database
+                MyDBHandler dbHandler = new MyDBHandler(this);
+                dbHandler.addUser(user);
+                addUser.setText("");
+                addPassword.setText("");
+
+                //skuBox.setText("");
+
+
+
                 //
                 Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
                 startActivityForResult(intent,0);
             }
         });
-
-
-
-
+*/
     }
 
-    public void writeNewUser(View view) {
+    public void newUser (View view) {
+
         addUser = (EditText) findViewById(R.id.addUser);
         addPassword = (EditText) findViewById(R.id.addPassword);
         homeOwner = (RadioButton) findViewById(R.id.rb_HO);
@@ -72,8 +82,48 @@ public class SignupScreen extends AppCompatActivity {
         else if (serviceProvider.equals(true)) {
             role = "Service Provider";
         }
+        user = new User(addUser.getText().toString(), addPassword.getText().toString(), role);
+        //Users.addUser(user);
+
+
+        // TODO: add to database
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        dbHandler.addUser(user);
+        //dbHandler.deleteUser(user.getUsername());
+        addUser.setText("");
+        addPassword.setText("");
+
+        Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
+        startActivityForResult(intent,0);
+    }
+
+
+    public void writeNewUser(View view) {
+        addUser = (EditText) findViewById(R.id.addUser);
+        addPassword = (EditText) findViewById(R.id.addPassword);
+        homeOwner = (RadioButton) findViewById(R.id.rb_HO);
+        serviceProvider = (RadioButton) findViewById(R.id.rb_SP);
+        role = "";
+
+        if (homeOwner.equals(true)) {
+            role = "Home Owner";
+        } else if (serviceProvider.equals(true)) {
+            role = "Service Provider";
+        }
 
         user = new User(addUser.getText().toString(), addPassword.getText().toString(), role);
+    }
+
+
+
+
+
+
+
+
+
+
+
         /**             *****Firebase code***
         mDatabase = FirebaseDatabase.getInstance().getReference("User");
 
@@ -106,7 +156,6 @@ public class SignupScreen extends AppCompatActivity {
 
 */
         //myRef.setValue(user);
-    }
 /*
     public void login(View view){
         //writeNewUser();

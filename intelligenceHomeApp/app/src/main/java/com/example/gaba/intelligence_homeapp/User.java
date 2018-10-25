@@ -26,4 +26,12 @@ public class User {
         return username;
     }
 
+    public void setRole(String r){
+        role = r;
+    }
+    public void setPassword(String p){password = p;}
+    public void setUsername(String u){
+        username=u;
+    }
+
 }

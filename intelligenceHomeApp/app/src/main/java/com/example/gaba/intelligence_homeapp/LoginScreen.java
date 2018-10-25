@@ -13,8 +13,6 @@ public class LoginScreen extends AppCompatActivity {
     EditText userName;
     EditText pswrd;
     Button loginButton;
-    String strUser, strPass;
-    TextView txt;
 
 
     @Override
@@ -31,19 +29,16 @@ public class LoginScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginScreen.this,WelcomeScreen.class);
-                strUser = userName.getText().toString();
-                strPass = pswrd.getText().toString();
+                String strUser = userName.getText().toString();
+                String strPass = pswrd.getText().toString();
                 intent.putExtra("value", strUser);
 
                 if (Users.getUser(strUser) != null & Users.getPass(strPass) != null){
                     startActivity(intent);
                 }else{
-                    txt = (TextView)findViewById(R.id.loginErrorTxt);
+                    TextView txt = findViewById(R.id.loginErrorTxt);
                     txt.setText("Please Type in Valid Login Credentials");
                 }
-
-
-
             }
         });
     }
@@ -53,14 +48,15 @@ public class LoginScreen extends AppCompatActivity {
         startActivityForResult(intent,0);
     }
 
+    //Ended up having to override and make a onClick() method above inside the onCreate that basically does what signIn does
     public void signIn(View view){
 
-        String username = ((EditText)findViewById(R.id.username)).getText().toString();
-        String password = ((EditText)findViewById(R.id.password)).getText().toString();
+//        String username = ((EditText)findViewById(R.id.username)).getText().toString();
+//        String password = ((EditText)findViewById(R.id.password)).getText().toString();
         // Add code to check credentials
 
-        Intent intent = new Intent(getApplicationContext(), WelcomeScreen.class);
-        startActivityForResult(intent,0);
+//        Intent intent = new Intent(getApplicationContext(), WelcomeScreen.class);
+//        startActivityForResult(intent,0);
 
     }
 

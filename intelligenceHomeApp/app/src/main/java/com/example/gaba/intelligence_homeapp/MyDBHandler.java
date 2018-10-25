@@ -65,6 +65,24 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return user;
     }
 
+    public User findAdmin() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_ROLE + " = \"" + "Administrator" + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        User user = new User();
+
+        if(cursor.moveToFirst()) {
+            user.setUser_id(Integer.parseInt(cursor.getString(0)));
+            user.setUsername(cursor.getString(1));
+            user.setPassword(cursor.getString(2));
+            user.setRole(cursor.getString(3));
+        } else  {
+            user = null;
+        }
+        db.close();
+        return user;
+    }
+
     public boolean deleteUser(String username) {
         boolean result = false;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -95,7 +113,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             result = true;
 
         } else  {
-           result = false;
+            result = false;
         }
         db.close();
         return result;

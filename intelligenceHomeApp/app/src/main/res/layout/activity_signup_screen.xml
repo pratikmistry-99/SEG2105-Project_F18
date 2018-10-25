@@ -45,11 +45,11 @@
         android:id="@+id/createAcc"
         android:layout_width="125dp"
         android:layout_height="56dp"
-        android:layout_marginStart="130dp"
+        android:layout_marginEnd="129dp"
         android:layout_marginLeft="130dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="130dp"
-        android:layout_marginRight="130dp"
+        android:layout_marginRight="129dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="42dp"
         android:onClick="newUser"
         android:text="Create Account"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,6 +71,13 @@
         app:layout_constraintTop_toBottomOf="@+id/addPassword">
 
         <RadioButton
+            android:id="@+id/rb_AD"
+            android:layout_width="154dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Administrator" />
+
+        <RadioButton
             android:id="@+id/rb_HO"
             android:layout_width="154dp"
             android:layout_height="wrap_content"
@@ -84,28 +91,6 @@
             android:layout_weight="1"
             android:text="Service Provider" />
 
-        <RadioButton
-            android:id="@+id/rb_A"
-            android:layout_width="154dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Admin" />
     </RadioGroup>
-
-    <TextView
-        android:id="@+id/errorSignTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="163dp"
-        android:layout_marginLeft="163dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginRight="160dp"
-        android:layout_marginBottom="17dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintBottom_toTopOf="@+id/createAcc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 </android.support.constraint.ConstraintLayout>

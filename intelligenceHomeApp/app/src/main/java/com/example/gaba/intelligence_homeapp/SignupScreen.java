@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.firebase.database.*;
@@ -50,6 +51,9 @@ public class SignupScreen extends AppCompatActivity {
         user = new User(addUser.getText().toString(), addPassword.getText().toString(), role);
         //Users.addUser(user);
 
+        RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
+        final String roleUser = ((RadioButton)findViewById(rg.getCheckedRadioButtonId())).getText().toString();
+
 
         // TODO: add to database
         MyDBHandler dbHandler = new MyDBHandler(this);
@@ -59,6 +63,7 @@ public class SignupScreen extends AppCompatActivity {
         addPassword.setText("");
 
         Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
+        intent.putExtra("Role",roleUser);
         startActivityForResult(intent,0);
     }
 }

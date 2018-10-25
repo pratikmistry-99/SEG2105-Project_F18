@@ -42,10 +42,10 @@ public class SignupScreen extends AppCompatActivity {
         serviceProvider = (RadioButton) findViewById(R.id.rb_SP);
         role = "";
 
-        if (homeOwner.equals(true)){
+        if (homeOwner.isChecked()){
             role = "Home Owner";
         }
-        else if (serviceProvider.equals(true)) {
+        else if (serviceProvider.isChecked()) {
             role = "Service Provider";
         }
         user = new User(addUser.getText().toString(), addPassword.getText().toString(), role);
@@ -62,8 +62,9 @@ public class SignupScreen extends AppCompatActivity {
         addUser.setText("");
         addPassword.setText("");
 
+        /**
         Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
         intent.putExtra("Role",roleUser);
-        startActivityForResult(intent,0);
+        startActivityForResult(intent,0);*/
     }
 }

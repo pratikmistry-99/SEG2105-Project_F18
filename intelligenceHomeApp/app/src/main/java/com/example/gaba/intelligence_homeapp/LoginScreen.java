@@ -48,10 +48,9 @@ public class LoginScreen extends AppCompatActivity {
 
             startActivityForResult(intent,0);
 
-           // intent.putExtra("Role",)
         } else {
             TextView txt = findViewById(R.id.loginErrorTxt);
-            txt.setText("Please Type in Valid Login Credentials"/*+"," + user.getUsername()+","+userName.getText().toString()*/);
+            txt.setText("Please Type in Valid Login Credentials");
         }
     }
 

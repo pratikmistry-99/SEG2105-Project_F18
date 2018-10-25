@@ -19,9 +19,11 @@ public class WelcomeScreen extends AppCompatActivity {
         userRoleDisplay = findViewById(R.id.roleTxt);
         userNameDisplay = findViewById(R.id.userDisplay);
 
-        str = "Welcome "+getIntent().getStringExtra("Name");
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        User user = dbHandler.findUser(getIntent().getStringExtra("Name"));
+        str = "Welcome "+user.getUsername()+"!";
         userNameDisplay.setText(str);
-        userRoleDisplay.setText(getIntent().getStringExtra("ROLE"));
+        userRoleDisplay.setText(user.getRole() + " Account");
 
     }
 }

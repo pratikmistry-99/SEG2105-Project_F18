@@ -9,6 +9,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
     TextView userNameDisplay;
     TextView userRoleDisplay;
+    TextView adminRoleDisplay;
     String str;
     User user;
 
@@ -18,12 +19,20 @@ public class WelcomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_screen);
         userRoleDisplay = findViewById(R.id.roleTxt);
         userNameDisplay = findViewById(R.id.userDisplay);
+        adminRoleDisplay = findViewById(R.id.adminDisplay);
 
         MyDBHandler dbHandler = new MyDBHandler(this);
         User user = dbHandler.findUser(getIntent().getStringExtra("Name"));
         str = "Welcome "+user.getUsername()+"!";
         userNameDisplay.setText(str);
         userRoleDisplay.setText(user.getRole() + " Account");
+        String ad = "";
+        if (user.getRole().equals("Administrator")){
+            ad = dbHandler.getAllUsernames();
+            adminRoleDisplay.setText(ad);
+        }
+        else
+            adminRoleDisplay.setText("");
 
     }
 }

@@ -83,6 +83,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return user;
     }
 
+
     public boolean deleteUser(String username) {
         boolean result = false;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -122,6 +123,24 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public void deleteAll(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_USERS,null,null);
+    }
+
+
+    public String getAllUsernames(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * FROM " + TABLE_USERS;
+        Cursor cursor = db.rawQuery(query, null);
+        String result = "\n\nUser Accounts: ";
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                String name = cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME));
+                String role = cursor.getString(cursor.getColumnIndex(COLUMN_ROLE));
+                result += "\n"+ name + ": "+ role;
+                cursor.moveToNext();
+            }
+        }
+        db.close();
+        return result;
     }
 }
 

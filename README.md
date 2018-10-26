@@ -7,7 +7,7 @@ Students working on this project include:
 Gabrielle Naubert 300015305
 Saabiqa Chowdhury 8310026
 Pratik Mistry 300029312
-Rithik Sowdermett
+Rithik Sowdermett 300044941
 <<<<<<< HEAD
 Nikita Bliumkin 8752021
 []

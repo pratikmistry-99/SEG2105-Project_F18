@@ -9,8 +9,7 @@ Saabiqa Chowdhury 8310026
 Pratik Mistry 300029312
 Rithik Sowdermett 300044941
 <<<<<<< HEAD
-Nikita Bliumkin 8752021
-[]
+<<<<<<< HEAD
 =======
-Nikita Bliumkin
->>>>>>> a021fad9bf97ccfc1b3d564cfb8ad4b805b12302
+>>>>>>> 9360d4704311e3371c514b9fc69ceb880b90d9cf
+Nikita Bliumkin 8752021

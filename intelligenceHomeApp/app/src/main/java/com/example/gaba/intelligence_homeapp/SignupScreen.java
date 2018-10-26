@@ -26,7 +26,11 @@ public class SignupScreen extends AppCompatActivity {
     RadioButton admin;
     Button createAcc;
     String role;
-
+    /**
+     * Methods create an admin account if the account
+     * If admin account was already created throws exception
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +45,10 @@ public class SignupScreen extends AppCompatActivity {
         }
 
     }
-
+    /**
+     * Methods creates a new user account
+     * @param view View
+     */
     public void newUser (View view) {
 
         addUser = (EditText) findViewById(R.id.addUser);

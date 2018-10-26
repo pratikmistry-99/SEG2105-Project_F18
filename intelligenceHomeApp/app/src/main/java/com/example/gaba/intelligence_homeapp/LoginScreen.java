@@ -14,7 +14,10 @@ public class LoginScreen extends AppCompatActivity {
     EditText pswrd;
     Button loginButton;
 
-
+    /**
+     *
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +27,21 @@ public class LoginScreen extends AppCompatActivity {
         userName = findViewById(R.id.username);
         pswrd = findViewById(R.id.password);
     }
-
+    /**
+     * Method opens signup activity after User press button sign up
+     * @param view View
+     */
     public void signUp(View view){
         Intent intent = new Intent(getApplicationContext(),SignupScreen.class);
         startActivityForResult(intent,0);
     }
 
     //Ended up having to override and make a onClick() method above inside the onCreate that basically does what signIn does
+    /**
+     * Method checks User name and password and links it welcome page if infromation was found in database
+     * method throws mistake if information is invalid
+     * @param view View
+     */
     public void login (View view) {
 
         // TODO: get from Database

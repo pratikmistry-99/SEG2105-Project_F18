@@ -4,9 +4,8 @@ This is the shared repository for our Android Projectt: On-Demand Home Repair Se
 
 Students working on this project include:
 
-Gabrielle Naubert
+Gabrielle Naubert 300015305
 Saabiqa Chowdhury
 Pratik Mistry
 Rithik Sowdermett
 Nikita Bliumkin
-[]

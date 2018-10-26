@@ -6,6 +6,6 @@ Students working on this project include:
 
 Gabrielle Naubert 300015305
 Saabiqa Chowdhury
-Pratik Mistry
+Pratik Mistry 300029312
 Rithik Sowdermett
 Nikita Bliumkin

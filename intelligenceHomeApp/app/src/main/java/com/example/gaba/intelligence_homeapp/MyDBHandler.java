@@ -17,15 +17,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_ROLE = "role";
     /**
-     * Constuctor of class MyDBHandler
+     * Constructor of class MyDBHandler
      * @param context
      */
     public MyDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     /**
-     *
-     * @param db
+     * method create a data base table which is consist of 4 columns with information of user id, name, password and role
+     * @param db SQLiteDatabase
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -48,8 +48,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
     /**
-     *
-     * @param user
+     * method adds a new user to data base table
+     * @param user User
      */
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -61,9 +61,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
     /**
-     *
+     * method search for String user name in data base, and it returns the user's information if user exist
      * @param username
-     * @return
+     * @return user User / null
      */
     public User findUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -83,8 +83,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return user;
     }
     /**
-     *
-     * @return
+     * method search for String admin name in data base, and it returns the admin's information if user exist
+     * @return user User / null
      */
     public User findAdmin() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -105,9 +105,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
     /**
-     *
+     * method erases user information from data base (id, name, password, role)
      * @param username
-     * @return
+     * @return result Boolean
      */
     public boolean deleteUser(String username) {
         boolean result = false;
@@ -124,9 +124,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return result;
     }
     /**
-     *
+     * method checks if admin's account has been created already
      * @param admin
-     * @return
+     * @return result Boolean
      */
     //Returns True if just a SINGLE Admin user is existing in the database
     public boolean checkAdmin(String admin){
@@ -149,7 +149,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return result;
     }
     /**
-     *
+     * method erases database
      */
     public void deleteAll(){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -158,7 +158,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     /**
      *
-     * @return
+     * @return result String
      */
     public String getAllUsernames(){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -177,3 +177,4 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return result;
     }
 }
+

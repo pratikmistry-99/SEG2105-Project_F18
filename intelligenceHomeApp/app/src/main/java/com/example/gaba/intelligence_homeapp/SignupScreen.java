@@ -14,8 +14,7 @@ import com.google.firebase.database.*;
 
 
 public class SignupScreen extends AppCompatActivity {
-
-    DatabaseReference mDatabase;
+    
 
     User user;
 

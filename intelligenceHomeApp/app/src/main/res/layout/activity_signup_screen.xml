@@ -60,7 +60,7 @@
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="154dp"
-        android:layout_height="96dp"
+        android:layout_height="115dp"
         android:layout_marginEnd="115dp"
         android:layout_marginLeft="115dp"
         android:layout_marginRight="115dp"
@@ -71,17 +71,11 @@
         app:layout_constraintTop_toBottomOf="@+id/addPassword">
 
         <RadioButton
-            android:id="@+id/rb_AD"
-            android:layout_width="154dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Administrator" />
-
-        <RadioButton
             android:id="@+id/rb_HO"
             android:layout_width="154dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="true"
             android:text="Home Owner" />
 
         <RadioButton
@@ -90,6 +84,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Service Provider" />
+
+        <RadioButton
+            android:id="@+id/rb_AD"
+            android:layout_width="154dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Administrator" />
 
     </RadioGroup>
 

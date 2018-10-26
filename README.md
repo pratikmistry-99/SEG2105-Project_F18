@@ -8,9 +8,4 @@ Gabrielle Naubert 300015305
 Saabiqa Chowdhury 8310026
 Pratik Mistry 300029312
 Rithik Sowdermett 300044941
-<<<<<<< HEAD
 Nikita Bliumkin 8752021
-[]
-=======
-Nikita Bliumkin
->>>>>>> a021fad9bf97ccfc1b3d564cfb8ad4b805b12302

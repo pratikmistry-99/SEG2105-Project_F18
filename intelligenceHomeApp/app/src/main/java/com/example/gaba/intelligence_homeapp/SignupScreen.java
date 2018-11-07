@@ -8,9 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+//import android.widget.Toast;
 
-import com.google.firebase.database.*;
+//import com.google.firebase.database.*;
 
 
 public class SignupScreen extends AppCompatActivity {

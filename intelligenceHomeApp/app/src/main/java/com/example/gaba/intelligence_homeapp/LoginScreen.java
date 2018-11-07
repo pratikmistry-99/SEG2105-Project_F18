@@ -38,7 +38,7 @@ public class LoginScreen extends AppCompatActivity {
 
     //Ended up having to override and make a onClick() method above inside the onCreate that basically does what signIn does
     /**
-     * Method checks User name and password and links it welcome page if infromation was found in database
+     * Method checks User name and password and links it welcome page if information was found in database
      * method throws mistake if information is invalid
      * @param view View
      */
@@ -46,7 +46,7 @@ public class LoginScreen extends AppCompatActivity {
 
         // TODO: get from Database
         MyDBHandler dbHandler = new MyDBHandler(this);
-        User user = dbHandler.findUser((String) userName.getText().toString());
+        User user = dbHandler.findUser(userName.getText().toString());
 
         if (user!=null && user.getPassword().toString().equals(pswrd.getText().toString())) {
             Intent intent = new Intent(getApplicationContext(),WelcomeScreen.class);
@@ -60,8 +60,9 @@ public class LoginScreen extends AppCompatActivity {
             startActivityForResult(intent,0);
 
         } else {
-            TextView txt = findViewById(R.id.loginErrorTxt);
-            txt.setText("Please Type in Valid Login Credentials");
+            TextView err = findViewById(R.id.invalid);
+            err.setVisibility(View.VISIBLE);
+            pswrd.setText("");
         }
     }
 

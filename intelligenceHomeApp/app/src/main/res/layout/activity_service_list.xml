@@ -6,4 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ServiceList">
 
+    <ListView
+        style="@android:style/Widget.ListView.Menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </android.support.constraint.ConstraintLayout>

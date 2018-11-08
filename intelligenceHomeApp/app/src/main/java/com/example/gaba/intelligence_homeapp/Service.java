@@ -23,4 +23,8 @@ public class Service {
     public void setRate(int rate) {
         this.rate = rate;
     }
+
+    public String toString(){
+        return getName() + ", " + getRate() + "$/hour";
+    }
 }

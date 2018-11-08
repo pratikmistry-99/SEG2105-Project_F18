@@ -32,6 +32,7 @@ public class WelcomeScreen extends AppCompatActivity {
         if (user.getRole().equals("Administrator")){
             ad = dbHandler.getAllUsernames();
             adminRoleDisplay.setText(ad);
+            findViewById(R.id.servList).setVisibility(View.VISIBLE);
         }
         else
             adminRoleDisplay.setText("");

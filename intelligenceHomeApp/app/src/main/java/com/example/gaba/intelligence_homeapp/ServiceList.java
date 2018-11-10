@@ -86,18 +86,13 @@ public class ServiceList extends AppCompatActivity {
             }
         });
 
-            buttonDelete.setOnClickListener(new View.OnClickListener() {
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 deleteService(serviceName);
                 b.dismiss();
             }
-<<<<<<< HEAD
 
         });
-=======
-        */
-        //});
->>>>>>> 3066c86ae55a16d98cce2d5c31a99cc35c888431
     }
 
     private boolean deleteService(String name){
@@ -136,8 +131,6 @@ public class ServiceList extends AppCompatActivity {
 
         editRate.setText("");
         editService.setText("");
-        //Intent intent = new Intent(getApplicationContext(),ServiceList.class);
-        //startActivityForResult(intent,0);
     }
 
 

@@ -89,7 +89,7 @@ public class ServiceList extends AppCompatActivity {
                 b.dismiss();
             }
         */
-        });
+        //});
     }
 
     private boolean deleteService(String id){

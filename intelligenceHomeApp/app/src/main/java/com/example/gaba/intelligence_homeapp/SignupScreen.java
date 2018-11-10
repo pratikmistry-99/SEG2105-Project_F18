@@ -42,7 +42,7 @@ public class SignupScreen extends AppCompatActivity implements View.OnClickListe
                 } else if (addPassword.getText().toString() == "") {
                     passwordBag.setVisibility(passwordBag.VISIBLE);
                 } else {
-                    startActivity(new Intent(this, LoginScreen.class))
+                    startActivity(new Intent(this, LoginScreen.class));
                 }
 
                 break;

@@ -54,7 +54,7 @@ public class ServiceList extends AppCompatActivity {
                 String[] item = ((String) ((TextView) view).getText()).split(", ");
                 String n = item[0];
                 String r = item[1].split(" ")[0];
-                Toast.makeText(getApplicationContext(), n, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), n, Toast.LENGTH_SHORT).show();
                 showUpdateDeleteDialog(n, Double.parseDouble(r));
             }
         });
@@ -79,7 +79,6 @@ public class ServiceList extends AppCompatActivity {
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //String name = editTextService.getText().toString().trim();
                 double rate = Double.parseDouble(String.valueOf(updateRate.getText().toString()));
                 updateService(serviceName, rate);
                 b.dismiss();
@@ -113,24 +112,37 @@ public class ServiceList extends AppCompatActivity {
 
     public void addService(View view){
         String name = editService.getText().toString().trim();
-        double rate = Double.parseDouble(String.valueOf(editRate.getText().toString()));
-        if(!TextUtils.isEmpty(name)){
-            Toast.makeText(this,"Service added",Toast.LENGTH_LONG).show();
+        double rate = 0.0;
+        boolean validRate = true;
+        try {
+            rate = Double.parseDouble(String.valueOf(editRate.getText().toString()));
+        }
+        catch (Exception e){
+            validRate = false;
+            Toast.makeText(this,"Please enter a valid name and rate",Toast.LENGTH_LONG).show();
+        }
+        if(name.isEmpty() || !validRate){
+
+            finish();
+            Toast.makeText(this,"Please enter a valid Name and Rate",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getApplicationContext(),ServiceList.class);
+            startActivityForResult(intent,0);
         }
         else{
-            Toast.makeText(this,"Please enter a name",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Service added",Toast.LENGTH_LONG).show();
+
+            Service service1 = new Service(name,rate);
+            //TODO: Add the service to the database
+            dbHandler.addService(service1);
+            //dbHandler.clearAllTables();
+            serviceList = dbHandler.getAllServices();
+            adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceList);
+            listView.setAdapter(adapter);
+
+
+            editRate.setText("");
+            editService.setText("");
         }
-        Service service1 = new Service(name,rate);
-        //TODO: Add the service to the database
-        dbHandler.addService(service1);
-        //dbHandler.clearAllTables();
-        serviceList = dbHandler.getAllServices();
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceList);
-        listView.setAdapter(adapter);
-
-
-        editRate.setText("");
-        editService.setText("");
     }
 
 

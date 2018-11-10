@@ -8,14 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+//import android.widget.Toast;
 
-import com.google.firebase.database.*;
+//import com.google.firebase.database.*;
 
 
 public class SignupScreen extends AppCompatActivity {
-
-    DatabaseReference mDatabase;
+    
 
     User user;
 
@@ -73,8 +72,6 @@ public class SignupScreen extends AppCompatActivity {
         RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
         final String roleUser = ((RadioButton)findViewById(rg.getCheckedRadioButtonId())).getText().toString();
 
-
-        // TODO: add to database
         MyDBHandler dbHandler = new MyDBHandler(this);
         dbHandler.addUser(user);
         //dbHandler.deleteUser(user.getUsername());

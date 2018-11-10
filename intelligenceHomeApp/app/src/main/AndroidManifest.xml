@@ -17,7 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignupScreen" />
-        <activity android:name=".WelcomeScreen"></activity>
+        <activity android:name=".WelcomeScreen" />
+        <activity
+            android:name=".ServiceList"
+            android:label="@string/title_activity_service_list"></activity>
     </application>
 
 </manifest>

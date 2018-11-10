@@ -1,5 +1,5 @@
 # SEG2105-Project_F18
-
+repository link: https://github.com/GabNau/SEG2105-Project_F18.git
 This is the shared repository for our Android Projectt: On-Demand Home Repair Services App
 
 Students working on this project include:
@@ -11,8 +11,11 @@ Rithik Sowdermett 300044941
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 9360d4704311e3371c514b9fc69ceb880b90d9cf
 =======
 >>>>>>> 9360d4704311e3371c514b9fc69ceb880b90d9cf
+=======
+>>>>>>> e6ce66c8789f67e693ef5bfb49969fc73feb8ea9
 Nikita Bliumkin 8752021

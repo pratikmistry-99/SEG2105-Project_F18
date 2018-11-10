@@ -1,7 +1,9 @@
 package com.example.gaba.intelligence_homeapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -30,9 +32,15 @@ public class WelcomeScreen extends AppCompatActivity {
         if (user.getRole().equals("Administrator")){
             ad = dbHandler.getAllUsernames();
             adminRoleDisplay.setText(ad);
+            findViewById(R.id.servList).setVisibility(View.VISIBLE);
         }
         else
             adminRoleDisplay.setText("");
 
+    }
+
+    public void sList(View view){
+        Intent intent = new Intent(getApplicationContext(),ServiceList.class);
+        startActivityForResult(intent,0);
     }
 }

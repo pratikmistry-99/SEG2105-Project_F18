@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.*;
 
+// class creates a list view of all services, and allows admin to add, edit or delete services
 public class ServiceList extends AppCompatActivity {
 
     //MyDBHandler dbHandler = new MyDBHandler(this);
@@ -31,6 +32,7 @@ public class ServiceList extends AppCompatActivity {
     Button buttonAddService;
 
     @Override
+    // onCreate method
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_list);
@@ -60,6 +62,7 @@ public class ServiceList extends AppCompatActivity {
         });
     }
 
+    //  Method used to create a dialog box that it used to update and delete services
     private void showUpdateDeleteDialog(final String serviceName, final double serviceRate){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -94,6 +97,7 @@ public class ServiceList extends AppCompatActivity {
         });
     }
 
+    // Method used to delete a service from the database and list
     private boolean deleteService(String name){
         dbHandler.deleteService(name);
         serviceList = dbHandler.getAllServices();
@@ -102,6 +106,7 @@ public class ServiceList extends AppCompatActivity {
         return true;
     }
 
+    // Method used to update the service in the database and list
     private void updateService(String service, double rate){
         dbHandler.updateService(service, rate);
         serviceList = dbHandler.getAllServices();
@@ -110,6 +115,7 @@ public class ServiceList extends AppCompatActivity {
 
     }
 
+    // Method used to add a service in the database and list
     public void addService(View view){
         String name = editService.getText().toString().trim();
         double rate = 0.0;

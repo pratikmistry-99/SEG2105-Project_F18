@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-
+// class used to create the welcome screen once you log in
 public class WelcomeScreen extends AppCompatActivity {
 
     TextView userNameDisplay;
@@ -16,6 +16,7 @@ public class WelcomeScreen extends AppCompatActivity {
     User user;
 
     @Override
+    // onCreate method
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
@@ -39,6 +40,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
     }
 
+    // Method to start the activity
     public void sList(View view){
         Intent intent = new Intent(getApplicationContext(),ServiceList.class);
         startActivityForResult(intent,0);

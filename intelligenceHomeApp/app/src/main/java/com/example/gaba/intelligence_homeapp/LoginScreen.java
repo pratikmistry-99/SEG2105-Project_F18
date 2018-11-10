@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+// class used to create a login screen, to allow users and admin to login
 public class LoginScreen extends AppCompatActivity {
 
     EditText userName;
@@ -20,6 +21,7 @@ public class LoginScreen extends AppCompatActivity {
      * @param savedInstanceState Bundle
      */
     @Override
+    // onCreate method
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);

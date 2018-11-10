@@ -11,9 +11,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.google.firebase.database.*;
 
-
+// class that is used to create a sign-up screen, where you can create users and admin
 public class SignupScreen extends AppCompatActivity{
 
 
@@ -30,25 +29,7 @@ public class SignupScreen extends AppCompatActivity{
     TextView passwordBag;
     TextView generalBag;
 
-/*
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.createAcc:
-                if (addUser.getText().toString() == "" && addPassword.getText().toString() == "") {
-                    generalBag.setVisibility(generalBag.VISIBLE);
-                } else if (addUser.getText().toString() == "") {
-                    nameBag.setVisibility(nameBag.VISIBLE);
-                } else if (addPassword.getText().toString() == "") {
-                    passwordBag.setVisibility(passwordBag.VISIBLE);
-                } else {
-                    startActivity(new Intent(this, LoginScreen.class));
-                }
 
-                break;
-        }
-    }
-*/
     /**
      * Methods create an admin account if the account
      * If admin account was already created throws exception
@@ -107,20 +88,17 @@ public class SignupScreen extends AppCompatActivity{
                 role = "Administrator";
             }
             user = new User(addUser.getText().toString(), addPassword.getText().toString(), role);
-            //Users.addUser(user);
 
             RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
-            //final String roleUser = ((RadioButton) findViewById(rg.getCheckedRadioButtonId())).getText().toString();
 
             MyDBHandler dbHandler = new MyDBHandler(this);
             dbHandler.addUser(user);
-            //dbHandler.deleteUser(user.getUsername());
             addUser.setText("");
             addPassword.setText("");
 
 
             Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
-            //intent.putExtra("Role",roleUser);
+
             startActivityForResult(intent,0);
         }
     }

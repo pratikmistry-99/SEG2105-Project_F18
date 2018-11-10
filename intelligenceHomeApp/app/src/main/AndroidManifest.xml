@@ -22,6 +22,10 @@
             android:name=".ServiceList"
             android:label="@string/title_activity_service_list" />
         <activity android:name=".update_delete_dialog"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

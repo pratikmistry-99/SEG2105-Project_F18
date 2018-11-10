@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+//class used to create the SQLite database
 public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "int_elligence.db";
@@ -79,7 +80,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-
+    // returns an ArrayList of all services
     public ArrayList<Service> getAllServices(){
         ArrayList<Service> serviceList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -238,12 +239,14 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    // deletes the service from the database
     public void deleteService(String name) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_SERVICES, COLUMN_SERVICE_NAME + " = \"" + name + "\"", null);
         db.close();
     }
 
+    // updates the rate of the service from the database
     public void updateService(String name, double rate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

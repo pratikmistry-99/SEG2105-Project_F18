@@ -82,7 +82,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public ArrayList<Service> getServices(String service_name){
         ArrayList<Service> serviceList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "Select * FROM " + TABLE_SERVICES + " WHERE " + COLUMN_SERVICE_NAME + " = \"" + service_name + "\"";
+        String query = "Select * FROM " + TABLE_SERVICES;
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {

@@ -5,6 +5,11 @@ public class Service {
     private String name;
     private int rate;
 
+    public Service(){
+        name = null;
+        rate = 0;
+    }
+
     public Service(String name, int rate){
 
         this.name = name;
@@ -19,6 +24,8 @@ public class Service {
     public int getRate() {
         return rate;
     }
+
+    public void setName(String name){this.name = name;}
 
     public void setRate(int rate) {
         this.rate = rate;

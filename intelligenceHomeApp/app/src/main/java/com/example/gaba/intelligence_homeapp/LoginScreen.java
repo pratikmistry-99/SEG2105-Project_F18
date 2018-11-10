@@ -57,7 +57,7 @@ public class LoginScreen extends AppCompatActivity {
 
             String role = getIntent().getStringExtra("Role");
             intent.putExtra("ROLE",role);
-
+            finish();// this makes sure that the login screen activity ends before logging in.
             startActivityForResult(intent,0);
 
         } else {

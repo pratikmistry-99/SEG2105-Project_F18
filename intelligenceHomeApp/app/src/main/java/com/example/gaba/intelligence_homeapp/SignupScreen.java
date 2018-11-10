@@ -78,7 +78,7 @@ public class SignupScreen extends AppCompatActivity {
         addUser.setText("");
         addPassword.setText("");
 
-
+        finish();
         Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
         //intent.putExtra("Role",roleUser);
         startActivityForResult(intent,0);

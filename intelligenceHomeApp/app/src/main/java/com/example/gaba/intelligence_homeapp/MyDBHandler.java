@@ -11,8 +11,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 public class MyDBHandler extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 2;
-    private static final String DATABASE_NAME = "usersDB.db";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "int_elligence.db";
 
     //Table 1
     public static final String TABLE_USERS = "users";
@@ -65,6 +65,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion,
                           int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
         onCreate(db);
     }
 
@@ -79,7 +80,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<Service> getServices(){
+    public ArrayList<Service> getAllServices(){
         ArrayList<Service> serviceList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "Select * FROM " + TABLE_SERVICES;
@@ -203,9 +204,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
     /**
      * method erases database
      */
-    public void deleteAll(){
+    public void clearAllTables(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_USERS,null,null);
+        db.delete(TABLE_SERVICES,null,null);
+        db.close();
     }
 
     /**

@@ -32,6 +32,6 @@ public class Service {
     }
 
     public String toString(){
-        return getName() + ", " + getRate() + "$/hour";
+        return getName() + ", " + getRate() + " $/hour";
     }
 }

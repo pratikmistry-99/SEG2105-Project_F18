@@ -237,5 +237,21 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+
+    public void deleteService(String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_SERVICES, COLUMN_SERVICE_NAME + " = \"" + name + "\"", null);
+        db.close();
+    }
+
+    public void updateService(String name, double rate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_SERVICE_NAME, name);
+        values.put(COLUMN_SERVICE_RATE, rate);
+
+        db.update(TABLE_SERVICES,values,COLUMN_SERVICE_NAME + " = \"" + name + "\"", null);
+        db.close();
+    }
 }
 

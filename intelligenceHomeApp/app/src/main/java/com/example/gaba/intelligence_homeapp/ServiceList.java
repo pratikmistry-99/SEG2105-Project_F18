@@ -50,13 +50,17 @@ public class ServiceList extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                final String item = (String) parent.getItemAtPosition(position);
-                //Do something with the string
+                //Toast.makeText(getApplicationContext(), ((TextView) view).getText(),Toast.LENGTH_SHORT).show();
+                String[] item = ((String) ((TextView) view).getText()).split(", ");
+                String n = item[0];
+                String r = item[1].split(" ")[0];
+                Toast.makeText(getApplicationContext(), n, Toast.LENGTH_SHORT).show();
+                showUpdateDeleteDialog(n, Double.parseDouble(r));
             }
         });
     }
 
-    private void showUpdateDeleteDialog(final String serviceId, String serviceName){
+    private void showUpdateDeleteDialog(final String serviceName, final double serviceRate){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.activity_update_delete_dialog, null);
@@ -64,40 +68,46 @@ public class ServiceList extends AppCompatActivity {
 
         final EditText editTextService = (EditText) dialogView.findViewById(R.id.editService);
         final EditText editTextRate  = (EditText) dialogView.findViewById(R.id.editRate);
-        //final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateService);
-        //final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteService);
+        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateService);
+        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteService);
+        final EditText updateRate = (EditText) dialogView.findViewById(R.id.editHourlyRate);
 
         dialogBuilder.setTitle(serviceName);
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
-        /*buttonUpdate.setOnClickListener(new View.OnClickListener() {
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = editTextService.getText().toString().trim();
-                double rate = Double.parseDouble(String.valueOf(editTextRate.getText().toString()));
-                if (!TextUtils.isEmpty(name)) {
-                    updateService(serviceId, name, rate);
-                    b.dismiss();
-                }
+                //String name = editTextService.getText().toString().trim();
+                double rate = Double.parseDouble(String.valueOf(updateRate.getText().toString()));
+                updateService(serviceName, rate);
+                b.dismiss();
             }
         });
 
             buttonDelete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                deleteService(serviceId);
+                deleteService(serviceName);
                 b.dismiss();
             }
-        */
+
         });
     }
 
-    private boolean deleteService(String id){
-
+    private boolean deleteService(String name){
+        dbHandler.deleteService(name);
+        serviceList = dbHandler.getAllServices();
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceList);
+        listView.setAdapter(adapter);
         return true;
     }
 
-    private void updateService(String id, String service, double rate){
+    private void updateService(String service, double rate){
+        dbHandler.updateService(service, rate);
+        serviceList = dbHandler.getAllServices();
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceList);
+        listView.setAdapter(adapter);
 
     }
 
@@ -105,18 +115,16 @@ public class ServiceList extends AppCompatActivity {
         String name = editService.getText().toString().trim();
         double rate = Double.parseDouble(String.valueOf(editRate.getText().toString()));
         if(!TextUtils.isEmpty(name)){
-            Toast.makeText(this,"Product added",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Service added",Toast.LENGTH_LONG).show();
         }
         else{
             Toast.makeText(this,"Please enter a name",Toast.LENGTH_LONG).show();
         }
         Service service1 = new Service(name,rate);
-        //serviceList.add(service1);
         //TODO: Add the service to the database
         dbHandler.addService(service1);
         //dbHandler.clearAllTables();
         serviceList = dbHandler.getAllServices();
-        //finish();
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceList);
         listView.setAdapter(adapter);
 

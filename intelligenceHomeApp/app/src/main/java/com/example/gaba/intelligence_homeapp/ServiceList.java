@@ -3,8 +3,10 @@ package com.example.gaba.intelligence_homeapp;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -54,7 +56,44 @@ public class ServiceList extends AppCompatActivity {
         });
     }
 
+    private void showUpdateDeleteDialog(final String serviceId, String serviceName){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.activity_update_delete_dialog, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText editTextService = (EditText) dialogView.findViewById(R.id.editService);
+        final EditText editTextRate  = (EditText) dialogView.findViewById(R.id.editRate);
+        //final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateService);
+        //final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteService);
+
+        dialogBuilder.setTitle(serviceName);
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        /*buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = editTextService.getText().toString().trim();
+                double rate = Double.parseDouble(String.valueOf(editTextRate.getText().toString()));
+                if (!TextUtils.isEmpty(name)) {
+                    updateService(serviceId, name, rate);
+                    b.dismiss();
+                }
+            }
+        });
+
+            buttonDelete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                deleteService(serviceId);
+                b.dismiss();
+            }
+        */
+        });
+    }
+
     private boolean deleteService(String id){
+
         return true;
     }
 

@@ -113,6 +113,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_USERS, null, values);
         db.close();
     }
+
+//TODO: NEED TO ADD A DELETE METHOD
+    public void deleteUser(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+    }
+
     /**
      * method search for String user name in data base, and it returns the user's information if user exist
      * @param username

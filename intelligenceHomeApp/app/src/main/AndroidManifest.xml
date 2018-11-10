@@ -20,7 +20,8 @@
         <activity android:name=".WelcomeScreen" />
         <activity
             android:name=".ServiceList"
-            android:label="@string/title_activity_service_list"></activity>
+            android:label="@string/title_activity_service_list" />
+        <activity android:name=".update_delete_dialog"></activity>
     </application>
 
 </manifest>

@@ -92,5 +92,33 @@
             android:text="Administrator" />
 
     </RadioGroup>
+    <TextView
+        android:id="@+id/Empty_Pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="62dp"
+        android:layout_marginLeft="62dp"
+        android:layout_marginEnd="62dp"
+        android:layout_marginRight="62dp"
+        android:text="Please type your password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="486dp" />
+
+    <TextView
+        android:id="@+id/Empty_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please type your name"
+        tools:layout_editor_absoluteX="109dp"
+        tools:layout_editor_absoluteY="486dp" />
+
+    <TextView
+        android:id="@+id/Empty_All"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please type your information"
+        tools:layout_editor_absoluteX="90dp"
+        tools:layout_editor_absoluteY="486dp" />
 
 </android.support.constraint.ConstraintLayout>

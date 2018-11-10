@@ -18,14 +18,22 @@ public class ServiceList extends AppCompatActivity {
     final ArrayList<Service> serviceList = new ArrayList<>();
     ListView listView;
 
+    EditText editService;
+    EditText editRate;
+    Button buttonAddService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_list);
+        editService = (EditText) findViewById(R.id.editService);
+        editRate = (EditText) findViewById(R.id.editRate);
+        buttonAddService = (Button) findViewById(R.id.addButton);
         // Get ListView object from xml layout
         listView = findViewById(R.id.serv);
         //TODO: create service database
         //For each item in database, add to serviceList
+
 
         //Create an ArrayAdapter and Set it on the ListView
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceList);
@@ -40,6 +48,7 @@ public class ServiceList extends AppCompatActivity {
     }
 
     public void addService(Service service){
+
         serviceList.add(service);
     }
 

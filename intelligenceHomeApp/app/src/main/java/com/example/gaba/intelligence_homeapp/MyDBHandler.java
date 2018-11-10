@@ -49,7 +49,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String CREATE_SERVICES_TABLE = "CREATE TABLE " +
                 TABLE_SERVICES + "("
                 + COLUMN_SERVICE_ID + " INTEGER PRIMARY KEY,"+ COLUMN_SERVICE_NAME
-                + " TEXT," + COLUMN_SERVICE_RATE + " INTEGER" + ")";
+                + " TEXT," + COLUMN_SERVICE_RATE + " FLOAT" + ")";
         db.execSQL(CREATE_SERVICES_TABLE);
 
 
@@ -79,7 +79,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<Service> getServices(String service_name){
+    public ArrayList<Service> getServices(){
         ArrayList<Service> serviceList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "Select * FROM " + TABLE_SERVICES;
@@ -88,7 +88,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             while (!cursor.isAfterLast()) {
                 Service service = new Service();
                 service.setName(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICE_NAME)));
-                service.setRate(cursor.getInt(cursor.getColumnIndex(COLUMN_ROLE)));
+                service.setRate((double) cursor.getFloat(cursor.getColumnIndex(COLUMN_SERVICE_RATE)));
                 serviceList.add(service);
                 cursor.moveToNext();
             }

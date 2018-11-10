@@ -60,7 +60,7 @@ public class ServiceList extends AppCompatActivity {
 
     public void addService(){
         String name = editService.getText().toString().trim();
-        double rate = Double.parseDouble(String.valueOf(editRate.getText().toString());
+        double rate = Double.parseDouble(String.valueOf(editRate.getText().toString()));
         if(!TextUtils.isEmpty(name)){
             Toast.makeText(this,"Product added",Toast.LENGTH_LONG).show();
         }

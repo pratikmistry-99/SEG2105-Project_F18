@@ -8,14 +8,25 @@ import android.database.Cursor;
 
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "usersDB.db";
+
+    //Table 1
     public static final String TABLE_USERS = "users";
     public static final String COLUMN_USERID = "user_id";
     public static final String COLUMN_USERNAME = "username";
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_ROLE = "role";
+
+    //Table 2
+    public static final String TABLE_SERVICES = "services";
+    public static final String COLUMN_SERVICE_ID = "service_id";
+    public static final String COLUMN_SERVICE_NAME = "service_name";
+    public static final String COLUMN_SERVICE_RATE = "service_rate";
+
     /**
      * Constructor of class MyDBHandler
      * @param context
@@ -34,6 +45,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 + COLUMN_USERID + " INTEGER PRIMARY KEY,"+ COLUMN_USERNAME
                 + " TEXT," + COLUMN_PASSWORD + " TEXT," + COLUMN_ROLE + " TEXT" + ")";
         db.execSQL(CREATE_USERS_TABLE);
+
+        String CREATE_SERVICES_TABLE = "CREATE TABLE " +
+                TABLE_SERVICES + "("
+                + COLUMN_SERVICE_ID + " INTEGER PRIMARY KEY,"+ COLUMN_SERVICE_NAME
+                + " TEXT," + COLUMN_SERVICE_RATE + " INTEGER" + ")";
+        db.execSQL(CREATE_SERVICES_TABLE);
+
+
+
     }
     /**
      *
@@ -47,6 +67,38 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         onCreate(db);
     }
+
+    //adds new service
+    public void addService(Service service) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_SERVICE_NAME, service.getName());
+        values.put(COLUMN_SERVICE_RATE, service.getRate());
+        db.insert(TABLE_SERVICES, null, values);
+        db.close();
+    }
+
+
+    public ArrayList<Service> getServices(String service_name){
+        ArrayList<Service> serviceList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * FROM " + TABLE_SERVICES + " WHERE " + COLUMN_SERVICE_NAME + " = \"" + service_name + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                Service service = new Service();
+                service.setName(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICE_NAME)));
+                service.setRate(cursor.getInt(cursor.getColumnIndex(COLUMN_ROLE)));
+                serviceList.add(service);
+                cursor.moveToNext();
+            }
+        }
+
+        db.close();
+        return serviceList;
+
+    }
+
     /**
      * method adds a new user to data base table
      * @param user User

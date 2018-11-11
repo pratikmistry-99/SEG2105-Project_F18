@@ -216,7 +216,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.delete(TABLE_SERVICES,null,null);
         db.close();
     }
-
+    /**
+     *
+     * method erases all services from database
+     */
+    public void clearServiceListTables(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_SERVICES,null,null);
+        db.close();
+    }
     /**
      *
      * @return result String

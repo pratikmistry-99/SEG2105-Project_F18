@@ -115,7 +115,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-//TODO: NEED TO ADD A DELETE METHOD
     public void deleteUser(User user){
         SQLiteDatabase db = this.getWritableDatabase();
     }

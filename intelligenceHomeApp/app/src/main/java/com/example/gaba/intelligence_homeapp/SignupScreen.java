@@ -96,9 +96,8 @@ public class SignupScreen extends AppCompatActivity{
             addUser.setText("");
             addPassword.setText("");
 
-
+            finish();// this makes sure that the signup screen activity ends before logging in.
             Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
-
             startActivityForResult(intent,0);
         }
     }

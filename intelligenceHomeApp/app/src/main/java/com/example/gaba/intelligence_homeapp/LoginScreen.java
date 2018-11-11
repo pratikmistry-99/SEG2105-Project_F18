@@ -47,8 +47,6 @@ public class LoginScreen extends AppCompatActivity {
      */
     public void login (View view) {
 
-        // TODO: get from Database
-        //MyDBHandler dbHandler = new MyDBHandler(this);
         User user = dbHandler.findUser(userName.getText().toString());
 
         if (user!=null && user.getPassword().toString().equals(pswrd.getText().toString())) {

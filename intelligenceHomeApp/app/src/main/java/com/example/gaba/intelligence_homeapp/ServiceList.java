@@ -41,7 +41,6 @@ public class ServiceList extends AppCompatActivity {
         buttonAddService = (Button) findViewById(R.id.addButton);
         // Get ListView object from xml layout
         listView = findViewById(R.id.serv);
-        //TODO: create service database
         //For each item in database, add to serviceList
         dbHandler = new MyDBHandler(this);
         serviceList =  (dbHandler.getAllServices());
@@ -138,7 +137,6 @@ public class ServiceList extends AppCompatActivity {
             Toast.makeText(this,"Service added",Toast.LENGTH_LONG).show();
 
             Service service1 = new Service(name,rate);
-            //TODO: Add the service to the database
             dbHandler.addService(service1);
             //dbHandler.clearAllTables();
             serviceList = dbHandler.getAllServices();

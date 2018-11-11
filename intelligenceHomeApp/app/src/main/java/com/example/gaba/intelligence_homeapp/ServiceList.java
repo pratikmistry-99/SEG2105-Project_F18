@@ -97,7 +97,7 @@ public class ServiceList extends AppCompatActivity {
     }
 
     // Method used to delete a service from the database and list
-    private boolean deleteService(String name){
+    public boolean deleteService(String name){
         dbHandler.deleteService(name);
         serviceList = dbHandler.getAllServices();
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceList);
@@ -106,7 +106,7 @@ public class ServiceList extends AppCompatActivity {
     }
 
     // Method used to update the service in the database and list
-    private void updateService(String service, double rate){
+    public void updateService(String service, double rate){
         dbHandler.updateService(service, rate);
         serviceList = dbHandler.getAllServices();
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceList);

@@ -39,7 +39,7 @@
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textServ"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/addButton"
@@ -50,7 +50,7 @@
             android:id="@+id/serv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView"></ListView>
+            android:layout_below="@+id/textServ"></ListView>
 
     </RelativeLayout>
 

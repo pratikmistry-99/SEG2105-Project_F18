@@ -30,6 +30,7 @@ public class ServiceList extends AppCompatActivity {
     EditText editService;
     EditText editRate;
     Button buttonAddService;
+    String role;
 
     @Override
     // onCreate method
@@ -47,6 +48,13 @@ public class ServiceList extends AppCompatActivity {
         //Create an ArrayAdapter and Set it on the ListView
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceList);
         listView.setAdapter(adapter);
+        role = getIntent().getStringExtra("role");
+        if (!role.equals("Administrator")){
+            findViewById(R.id.editService).setVisibility(View.GONE);
+            findViewById(R.id.editRate).setVisibility(View.GONE);
+            findViewById(R.id.addButton).setVisibility(View.GONE);
+            findViewById(R.id.textServ).setVisibility(View.GONE);
+        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -56,7 +64,16 @@ public class ServiceList extends AppCompatActivity {
                 String n = item[0];
                 String r = item[1].split(" ")[0];
                 //Toast.makeText(getApplicationContext(), n, Toast.LENGTH_SHORT).show();
-                showUpdateDeleteDialog(n, Double.parseDouble(r));
+                if (role.equals("Administrator")){
+                    showUpdateDeleteDialog(n, Double.parseDouble(r));
+                }
+                else if (role.equals("Service Provider")){
+
+                }
+                else if (role.equals("Home Owner")){
+
+                }
+
             }
         });
     }

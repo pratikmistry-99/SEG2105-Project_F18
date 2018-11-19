@@ -14,6 +14,7 @@ public class WelcomeScreen extends AppCompatActivity {
     TextView adminRoleDisplay;
     String str;
     User user;
+    String role;
 
     @Override
     // onCreate method
@@ -29,20 +30,23 @@ public class WelcomeScreen extends AppCompatActivity {
         str = "Welcome "+user.getUsername()+"!";
         userNameDisplay.setText(str);
         userRoleDisplay.setText(user.getRole() + " Account");
+        role = user.getRole();
         String ad = "";
         if (user.getRole().equals("Administrator")){
             ad = dbHandler.getAllUsernames();
             adminRoleDisplay.setText(ad);
-            findViewById(R.id.servList).setVisibility(View.VISIBLE);
+
         }
         else
             adminRoleDisplay.setText("");
-
+        findViewById(R.id.servList).setVisibility(View.VISIBLE);
     }
 
     // Method to start the activity
     public void sList(View view){
+
         Intent intent = new Intent(getApplicationContext(),ServiceList.class);
+        intent.putExtra("role", role);
         startActivityForResult(intent,0);
     }
 }

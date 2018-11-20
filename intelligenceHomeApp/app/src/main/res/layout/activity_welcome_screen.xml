@@ -50,7 +50,7 @@
             android:text="Service Provider Profile"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <EditText
             android:id="@+id/editAddress"
@@ -60,7 +60,7 @@
             android:hint="Address"
             android:inputType="textPersonName"
             android:paddingTop="15dp"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <EditText
             android:id="@+id/editCompany"
@@ -69,7 +69,7 @@
             android:ems="10"
             android:hint="Company name"
             android:inputType="textPersonName"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <EditText
             android:id="@+id/editDesc"
@@ -78,7 +78,7 @@
             android:ems="10"
             android:hint="Description"
             android:inputType="textPersonName"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/txtLicensed"
@@ -88,11 +88,12 @@
             android:paddingTop="15dp"
             android:text="Licensed?"
             android:textSize="18sp"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:visibility="visible">
 
             <RadioButton
                 android:id="@+id/yesBtn"
@@ -100,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Yes"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <RadioButton
                 android:id="@+id/noBtn"
@@ -108,7 +109,20 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="No"
-                android:visibility="gone" />
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btnCreateProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginRight="150dp"
+                android:layout_marginTop="50dp"
+                android:layout_weight="1"
+                android:text="Create Profile"
+                android:visibility="visible"
+                tools:layout_editor_absoluteY="567dp" />
         </RadioGroup>
 
     </LinearLayout>

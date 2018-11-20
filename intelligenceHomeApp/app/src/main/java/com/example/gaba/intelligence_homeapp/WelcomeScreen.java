@@ -40,6 +40,16 @@ public class WelcomeScreen extends AppCompatActivity {
         else
             adminRoleDisplay.setText("");
         findViewById(R.id.servList).setVisibility(View.VISIBLE);
+
+        if(user.getRole().equals("Service Provider")){
+            findViewById(R.id.yesBtn).setVisibility(View.VISIBLE);
+            findViewById(R.id.noBtn).setVisibility(View.VISIBLE);
+            findViewById(R.id.editAddress).setVisibility(View.VISIBLE);
+            findViewById(R.id.editDesc).setVisibility(View.VISIBLE);
+            findViewById(R.id.editCompany).setVisibility(View.VISIBLE);
+            findViewById(R.id.txtLicensed).setVisibility(View.VISIBLE);
+            findViewById(R.id.txtProfile).setVisibility(View.VISIBLE);
+        }
     }
 
     // Method to start the activity

@@ -68,7 +68,7 @@ public class ServiceList extends AppCompatActivity {
                     showUpdateDeleteDialog(n, Double.parseDouble(r));
                 }
                 else if (role.equals("Service Provider")){
-
+                    showAddDeleteProviderDialog(n);
                 }
                 else if (role.equals("Home Owner")){
 
@@ -165,6 +165,39 @@ public class ServiceList extends AppCompatActivity {
             editService.setText("");
         }
     }
+
+
+    private void showAddDeleteProviderDialog(final String serviceName){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.activity_add_delete_providers, null);
+        dialogBuilder.setView(dialogView);
+
+        final Button buttonAdd = (Button) dialogView.findViewById(R.id.buttonAddProvider);
+        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteProvider);
+
+        dialogBuilder.setTitle(serviceName);
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //addProvider()
+                b.dismiss();
+            }
+        });
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                //deleteProvider()
+                b.dismiss();
+            }
+
+        });
+    }
+
+
 
 
 

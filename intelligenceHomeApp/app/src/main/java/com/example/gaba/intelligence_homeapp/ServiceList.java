@@ -30,6 +30,7 @@ public class ServiceList extends AppCompatActivity {
     EditText editService;
     EditText editRate;
     Button buttonAddService;
+    String username;
     String role;
 
     @Override
@@ -49,6 +50,7 @@ public class ServiceList extends AppCompatActivity {
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceList);
         listView.setAdapter(adapter);
         role = getIntent().getStringExtra("role");
+        username = getIntent().getStringExtra("username");
         if (!role.equals("Administrator")){
             findViewById(R.id.editService).setVisibility(View.GONE);
             findViewById(R.id.editRate).setVisibility(View.GONE);
@@ -68,7 +70,7 @@ public class ServiceList extends AppCompatActivity {
                     showUpdateDeleteDialog(n, Double.parseDouble(r));
                 }
                 else if (role.equals("Service Provider")){
-                    showAddDeleteProviderDialog(n);
+                    showAddDeleteProviderDialog(username, n);
                 }
                 else if (role.equals("Home Owner")){
 
@@ -167,7 +169,7 @@ public class ServiceList extends AppCompatActivity {
     }
 
 
-    private void showAddDeleteProviderDialog(final String serviceName){
+    private void showAddDeleteProviderDialog(final String username, final String serviceName){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.activity_add_delete_providers, null);
@@ -176,14 +178,15 @@ public class ServiceList extends AppCompatActivity {
         final Button buttonAdd = (Button) dialogView.findViewById(R.id.buttonAddProvider);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteProvider);
 
-        dialogBuilder.setTitle(serviceName);
+        dialogBuilder.setTitle("Service: " + serviceName);
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //addProvider()
+                //addProvider
+                dbHandler.addProviderToService(username, serviceName);
                 b.dismiss();
             }
         });
@@ -191,6 +194,7 @@ public class ServiceList extends AppCompatActivity {
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //deleteProvider()
+                dbHandler.deleteProviderToService(username, serviceName);
                 b.dismiss();
             }
 

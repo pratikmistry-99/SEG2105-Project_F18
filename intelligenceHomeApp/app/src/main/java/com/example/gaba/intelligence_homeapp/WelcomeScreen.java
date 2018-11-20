@@ -26,7 +26,7 @@ public class WelcomeScreen extends AppCompatActivity {
         adminRoleDisplay = findViewById(R.id.adminDisplay);
 
         MyDBHandler dbHandler = new MyDBHandler(this);
-        User user = dbHandler.findUser(getIntent().getStringExtra("Name"));
+        user = dbHandler.findUser(getIntent().getStringExtra("Name"));
         str = "Welcome "+user.getUsername()+"!";
         userNameDisplay.setText(str);
         userRoleDisplay.setText(user.getRole() + " Account");
@@ -57,6 +57,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(),ServiceList.class);
         intent.putExtra("role", role);
+        intent.putExtra("username", user.getUsername());
         startActivityForResult(intent,0);
     }
 }

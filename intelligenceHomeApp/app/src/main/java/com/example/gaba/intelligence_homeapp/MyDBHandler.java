@@ -7,13 +7,14 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 //class used to create the SQLite database
 public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "int_elligence.db";
+    private static final String DATABASE_NAME = "intEligence.db";
 
     //Table 1
     public static final String TABLE_USERS = "users";
@@ -27,6 +28,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_SERVICE_ID = "service_id";
     public static final String COLUMN_SERVICE_NAME = "service_name";
     public static final String COLUMN_SERVICE_RATE = "service_rate";
+
+    //Table 3
+    public static final String TABLE_SERVICE_PROVIDERS = "serviceProviders";
+    public static final String COLUMN_SERVICEID = "serviceid";
+    public static final String COLUMN_USER_ID = "userid";
+
 
     /**
      * Constructor of class MyDBHandler
@@ -54,6 +61,14 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_SERVICES_TABLE);
 
 
+        //TABLE 3 - used to store the many to many associations between users and services
+        String CREATE_SERVICES_PROVIDERS_TABLE = "CREATE TABLE " +
+                TABLE_SERVICE_PROVIDERS + "("
+                + COLUMN_USER_ID + " INTEGER,"+ COLUMN_SERVICEID
+                + " INTEGER, FOREIGN KEY(" + COLUMN_USER_ID + ") REFERENCES " + TABLE_USERS + "( " + COLUMN_USERID + ")"
+                + ", FOREIGN KEY(" + COLUMN_SERVICEID + ") REFERENCES " + TABLE_SERVICES + "( " + COLUMN_SERVICE_ID + ")" +")";
+        db.execSQL(CREATE_SERVICES_PROVIDERS_TABLE);
+
 
     }
     /**
@@ -67,7 +82,56 @@ public class MyDBHandler extends SQLiteOpenHelper {
                           int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDERS);
         onCreate(db);
+    }
+
+    //adds new service-provider association
+    public void addProviderToService(String username, String service) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int uId;
+        int sId;
+
+        String query1 = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = \"" + username + "\"";
+        Cursor cursor1 = db.rawQuery(query1, null);
+
+        String query2 = "Select * FROM " + TABLE_SERVICES + " WHERE " + COLUMN_SERVICE_NAME + " = \"" + service + "\"";
+        Cursor cursor2 = db.rawQuery(query2, null);
+
+        if(cursor1.moveToFirst() && cursor2.moveToFirst()) {
+            uId = Integer.parseInt(cursor1.getString(0));
+            sId = Integer.parseInt(cursor2.getString(0));
+
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_USER_ID, uId);
+            values.put(COLUMN_SERVICEID, sId);
+            db.insert(TABLE_SERVICE_PROVIDERS, null, values);
+            db.close();
+            //throw new NullPointerException(uId+" "+sId);
+        }
+
+    }
+
+    public void deleteProviderToService(String username, String service) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int uId;
+        int sId;
+
+        String query1 = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = \"" + username + "\"";
+        Cursor cursor1 = db.rawQuery(query1, null);
+
+        String query2 = "Select * FROM " + TABLE_SERVICES + " WHERE " + COLUMN_SERVICE_NAME + " = \"" + service + "\"";
+        Cursor cursor2 = db.rawQuery(query2, null);
+
+        if(cursor1.moveToFirst() && cursor2.moveToFirst()) {
+            uId = Integer.parseInt(cursor1.getString(0));
+            sId = Integer.parseInt(cursor2.getString(0));
+            db.delete(TABLE_SERVICE_PROVIDERS, COLUMN_USER_ID + " = \"" + uId + "\"" + ""
+                + " AND " + COLUMN_SERVICEID + " = \"" + sId + "\"", null);
+        }
+        else
+            throw new NullPointerException();
+        db.close();
     }
 
     //adds new service

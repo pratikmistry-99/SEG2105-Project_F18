@@ -50,7 +50,7 @@
             android:text="Service Provider Profile"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <EditText
             android:id="@+id/editAddress"
@@ -60,7 +60,7 @@
             android:hint="Address"
             android:inputType="textPersonName"
             android:paddingTop="15dp"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <EditText
             android:id="@+id/editCompany"
@@ -69,7 +69,7 @@
             android:ems="10"
             android:hint="Company name"
             android:inputType="textPersonName"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <EditText
             android:id="@+id/editDesc"
@@ -78,7 +78,7 @@
             android:ems="10"
             android:hint="Description"
             android:inputType="textPersonName"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txtLicensed"
@@ -88,41 +88,38 @@
             android:paddingTop="15dp"
             android:text="Licensed?"
             android:textSize="18sp"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <RadioGroup
+            android:id="@+id/rg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
+            android:visibility="invisible">
 
             <RadioButton
                 android:id="@+id/yesBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Yes"
-                android:visibility="visible" />
+                android:visibility="invisible" />
 
             <RadioButton
                 android:id="@+id/noBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="No"
-                android:visibility="visible" />
+                android:visibility="invisible" />
 
             <Button
-                android:id="@+id/btnCreateProfile"
+                android:id="@+id/btnAvail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="150dp"
-                android:layout_marginRight="150dp"
-                android:layout_marginTop="50dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Create Profile"
-                android:visibility="visible"
-                tools:layout_editor_absoluteY="567dp" />
+                android:text="Pick Availiability"
+                android:visibility="visible" />
+
         </RadioGroup>
 
     </LinearLayout>

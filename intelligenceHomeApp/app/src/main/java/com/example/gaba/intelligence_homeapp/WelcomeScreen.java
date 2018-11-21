@@ -15,7 +15,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 // class used to create the welcome screen once you log in
-public class WelcomeScreen extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+public class WelcomeScreen extends AppCompatActivity {
 
     TextView userNameDisplay;
     TextView userRoleDisplay;
@@ -23,11 +23,9 @@ public class WelcomeScreen extends AppCompatActivity implements DatePickerDialog
     String str;
     User user;
     String role;
-    Button pickAvail;
 
-    int year,month,day,hour1,minute1,hour2,minute2;
-    int dayF,hour1F,minute1F,hour2F,minute2F;
-    //String dayStr;
+
+
 
     @Override
     // onCreate method
@@ -65,20 +63,11 @@ public class WelcomeScreen extends AppCompatActivity implements DatePickerDialog
             findViewById(R.id.btnAvail).setVisibility(View.VISIBLE);
             findViewById(R.id.rg).setVisibility(View.VISIBLE);
         }
+        public void avail(View view) {
+            Intent intent = new Intent(getApplicationContext(), availiability.class);
+            startActivityForResult(intent, 0);
+        }
 
-        pickAvail = (Button) findViewById(R.id.btnAvail);
-
-        pickAvail.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-
-                Calendar c = Calendar.getInstance();
-                day = c.get(Calendar.DAY_OF_WEEK);
-                year = c.get(Calendar.MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(WelcomeScreen.this,WelcomeScreen.this,year,month,day);
-                datePickerDialog.show();
-
-            }
-        });
     }
 
     // Method to start the activity
@@ -89,7 +78,7 @@ public class WelcomeScreen extends AppCompatActivity implements DatePickerDialog
         intent.putExtra("username", user.getUsername());
         startActivityForResult(intent,0);
     }
-
+    /*
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         dayF = day;
@@ -113,4 +102,5 @@ public class WelcomeScreen extends AppCompatActivity implements DatePickerDialog
         hour1F = hourOfDay;
         minute1F = minute;
     }
+    */
 }

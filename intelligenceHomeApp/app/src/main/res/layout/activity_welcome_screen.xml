@@ -50,7 +50,7 @@
             android:text="Service Provider Profile"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
         <EditText
             android:id="@+id/editAddress"
@@ -60,7 +60,7 @@
             android:hint="Address"
             android:inputType="textPersonName"
             android:paddingTop="15dp"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
         <EditText
             android:id="@+id/editCompany"
@@ -69,7 +69,7 @@
             android:ems="10"
             android:hint="Company name"
             android:inputType="textPersonName"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
         <EditText
             android:id="@+id/editDesc"
@@ -78,7 +78,7 @@
             android:ems="10"
             android:hint="Description"
             android:inputType="textPersonName"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/txtLicensed"
@@ -88,13 +88,13 @@
             android:paddingTop="15dp"
             android:text="Licensed?"
             android:textSize="18sp"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
         <RadioGroup
             android:id="@+id/rg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="invisible">
+            android:visibility="visible">
 
             <RadioButton
                 android:id="@+id/yesBtn"
@@ -102,7 +102,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Yes"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <RadioButton
                 android:id="@+id/noBtn"
@@ -110,7 +110,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="No"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 android:id="@+id/btnAvail"

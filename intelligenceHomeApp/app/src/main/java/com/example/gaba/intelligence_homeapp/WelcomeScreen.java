@@ -9,6 +9,7 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -74,7 +75,21 @@ public class WelcomeScreen extends AppCompatActivity {
 
     public void availability(View view) {
         Intent intent = new Intent(getApplicationContext(), availiability.class);
+        intent.putExtra("username", user.getUsername());
+        intent.putExtra("company", user.getUsername());
+        intent.putExtra("address", user.getUsername());
+        intent.putExtra("description", user.getUsername());
+        intent.putExtra("license", user.getUsername());
         startActivityForResult(intent, 0);
+    }
+
+    public void createAvailability(View view){
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        EditText address = findViewById(R.id.editAddress);
+        EditText description  = findViewById(R.id.editDesc);
+        EditText company = findViewById(R.id.editCompany);
+
+        //dbHandler.addProfile(user.getUsername(), company.getText().toString(),address.getText().toString(), phoneNumber, );
     }
 
     // Method to start the activity

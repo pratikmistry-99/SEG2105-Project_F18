@@ -15,7 +15,12 @@ public class availiability extends AppCompatActivity {
     }
 
     public void saveBtn(View view){
-
+        //String getIntent().getStringExtra("role");
+        //String username = intent.putExtra("username", user.getUsername());
+        //String company = intent.putExtra("company", user.getUsername());
+        //String intent.putExtra("address", user.getUsername());
+        //intent.putExtra("description", user.getUsername());
+        //intent.putExtra("license", user.getUsername());
         finish();
     }
 

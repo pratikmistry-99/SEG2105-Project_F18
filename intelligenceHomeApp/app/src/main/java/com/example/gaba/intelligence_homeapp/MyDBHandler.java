@@ -38,7 +38,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
     //Table 4
     public static final String TABLE_SERVICE_PROVIDER_PROFILES = "serviceProvidersProfiles";
     public static final String COLUMN_PROFILE_ID = "p_id";
-    public static final String COLUMN_EMAIL = "email";
+    public static final String COLUMN_COMPANY = "company";
+    public static final String COLUMN_ADDRESS = "address";
     public static final String COLUMN_PHONE_NUMBER = "phone";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_LICENSE = "license";
@@ -84,7 +85,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         //TABLE 4 - stores the service providers
         String CREATE_PROFILES_TABLE = "CREATE TABLE " +
                 TABLE_SERVICE_PROVIDER_PROFILES + "("
-                + COLUMN_PROFILE_ID + " INTEGER PRIMARY KEY,"+ COLUMN_EMAIL + " TEXT,"
+                + COLUMN_PROFILE_ID + " INTEGER PRIMARY KEY,"+ COLUMN_COMPANY+" TEXT,"+COLUMN_ADDRESS + " TEXT,"
                 + COLUMN_PHONE_NUMBER + " INTEGER," + COLUMN_DESCRIPTION + " TEXT," + COLUMN_LICENSE + " TEXT,"
                 + COLUMN_AVAILABILITY + " TEXT"+")";
         db.execSQL(CREATE_PROFILES_TABLE);
@@ -108,7 +109,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void addProfile(String username, String email, long phoneNumber, String description, boolean isLicensed, String availability) throws Exception {
+    public void addProfile(String username, String company, String address, long phoneNumber, String description, boolean isLicensed, String availability) throws Exception {
         String license = "";
 
         if(isLicensed)
@@ -119,7 +120,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_EMAIL, email);
+        values.put(COLUMN_COMPANY, company);
+        values.put(COLUMN_ADDRESS, address);
         values.put(COLUMN_PHONE_NUMBER, phoneNumber);
         values.put(COLUMN_DESCRIPTION, description);
         values.put(COLUMN_LICENSE, license);

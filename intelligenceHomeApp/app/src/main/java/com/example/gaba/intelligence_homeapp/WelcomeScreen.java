@@ -53,8 +53,8 @@ public class WelcomeScreen extends AppCompatActivity implements DatePickerDialog
         else
             adminRoleDisplay.setText("");
         findViewById(R.id.servList).setVisibility(View.VISIBLE);
-
-        if(user.getRole().equals("Service Provider")){
+        boolean a = dbHandler.hasProfile(user.getUsername());
+        if(user.getRole().equals("Service Provider") && !a){
             findViewById(R.id.yesBtn).setVisibility(View.VISIBLE);
             findViewById(R.id.noBtn).setVisibility(View.VISIBLE);
             findViewById(R.id.editAddress).setVisibility(View.VISIBLE);

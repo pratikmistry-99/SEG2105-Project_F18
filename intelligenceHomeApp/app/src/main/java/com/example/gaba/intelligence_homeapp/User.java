@@ -6,6 +6,7 @@ public class User {
     private String username;
     private String password;
     private String role;
+    private boolean hasProfile = false;
     /**
      * Constructor of class User
      */
@@ -84,4 +85,11 @@ public class User {
         username=u;
     }
 
+    public boolean getHasProfile() {
+        return hasProfile;
+    }
+
+    public void setHasProfile(boolean b){
+        hasProfile=b;
+    }
 }

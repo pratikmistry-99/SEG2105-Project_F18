@@ -63,11 +63,13 @@ public class WelcomeScreen extends AppCompatActivity {
             findViewById(R.id.btnAvail).setVisibility(View.VISIBLE);
             findViewById(R.id.rg).setVisibility(View.VISIBLE);
         }
-        public void avail(View view) {
-            Intent intent = new Intent(getApplicationContext(), availiability.class);
-            startActivityForResult(intent, 0);
-        }
 
+
+    }
+
+    public void avail(View view) {
+        Intent intent = new Intent(getApplicationContext(), availiability.class);
+        startActivityForResult(intent, 0);
     }
 
     // Method to start the activity

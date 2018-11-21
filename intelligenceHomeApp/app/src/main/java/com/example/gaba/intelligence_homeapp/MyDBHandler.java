@@ -14,7 +14,7 @@ import java.util.ArrayList;
 //class used to create the SQLite database
 public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "intEligence.db";
+    private static final String DATABASE_NAME = "inteligence.db";
 
     //Table 1
     public static final String TABLE_USERS = "users";
@@ -22,6 +22,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_USERNAME = "username";
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_ROLE = "role";
+    public static final String COLUMN_PROVIDER_PROFILE_ID = "sp_id";
 
     //Table 2
     public static final String TABLE_SERVICES = "services";
@@ -33,6 +34,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String TABLE_SERVICE_PROVIDERS = "serviceProviders";
     public static final String COLUMN_SERVICEID = "serviceid";
     public static final String COLUMN_USER_ID = "userid";
+
+    //Table 4
+    public static final String TABLE_SERVICE_PROVIDER_PROFILES = "serviceProvidersProfiles";
+    public static final String COLUMN_PROFILE_ID = "p_id";
+    public static final String COLUMN_EMAIL = "email";
+    public static final String COLUMN_PHONE_NUMBER = "phone";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_LICENSE = "license";
+    public static final String COLUMN_AVAILABILITY = "availability";
 
 
     /**
@@ -51,7 +61,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String CREATE_USERS_TABLE = "CREATE TABLE " +
                 TABLE_USERS + "("
                 + COLUMN_USERID + " INTEGER PRIMARY KEY,"+ COLUMN_USERNAME
-                + " TEXT," + COLUMN_PASSWORD + " TEXT," + COLUMN_ROLE + " TEXT" + ")";
+                + " TEXT," + COLUMN_PASSWORD + " TEXT," + COLUMN_ROLE + " TEXT,"
+                + COLUMN_PROVIDER_PROFILE_ID + " INTEGER,"
+                + " FOREIGN KEY(" + COLUMN_PROVIDER_PROFILE_ID + ") REFERENCES " + TABLE_SERVICE_PROVIDER_PROFILES + "( " + COLUMN_PROFILE_ID + ")" +")";
         db.execSQL(CREATE_USERS_TABLE);
 
         String CREATE_SERVICES_TABLE = "CREATE TABLE " +
@@ -69,6 +81,14 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 + ", FOREIGN KEY(" + COLUMN_SERVICEID + ") REFERENCES " + TABLE_SERVICES + "( " + COLUMN_SERVICE_ID + ")" +")";
         db.execSQL(CREATE_SERVICES_PROVIDERS_TABLE);
 
+        //TABLE 4 - stores the service providers
+        String CREATE_PROFILES_TABLE = "CREATE TABLE " +
+                TABLE_SERVICE_PROVIDER_PROFILES + "("
+                + COLUMN_PROFILE_ID + " INTEGER PRIMARY KEY,"+ COLUMN_EMAIL + " TEXT,"
+                + COLUMN_PHONE_NUMBER + " INTEGER," + COLUMN_DESCRIPTION + " TEXT," + COLUMN_LICENSE + " TEXT,"
+                + COLUMN_AVAILABILITY + " TEXT"+")";
+        db.execSQL(CREATE_PROFILES_TABLE);
+
 
     }
     /**
@@ -83,9 +103,47 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_PROFILES);
         onCreate(db);
     }
 
+
+    public void addProfile(String username, String email, long phoneNumber, String description, boolean isLicensed, String availability) throws Exception {
+        String license = "";
+
+        if(isLicensed)
+            license = "YES";
+        else
+            license = "NO";
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_EMAIL, email);
+        values.put(COLUMN_PHONE_NUMBER, phoneNumber);
+        values.put(COLUMN_DESCRIPTION, description);
+        values.put(COLUMN_LICENSE, license);
+        values.put(COLUMN_AVAILABILITY, availability);
+
+        long id = db.insert(TABLE_SERVICE_PROVIDER_PROFILES, null, values);
+
+        if(id ==-1)
+            throw new Exception();
+
+        ContentValues values2 = new ContentValues();
+        values2.put(COLUMN_PROVIDER_PROFILE_ID, id);
+        db.update(TABLE_USERS, values2, COLUMN_USERNAME + " = \"" + username + "\"", null);
+        db.close();
+    }
+/*
+    public void updateAvailability(String availability){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_AVAILABILITY, availability);
+        db.update(TABLE_SERVICE_PROVIDER_PROFILES,values,COLUMN_SERVICE_NAME + " = \"" + name + "\"", null);
+        db.close();
+    }
+*/
     //adds new service-provider association
     public void addProviderToService(String username, String service) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -107,7 +165,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
             values.put(COLUMN_SERVICEID, sId);
             db.insert(TABLE_SERVICE_PROVIDERS, null, values);
             db.close();
-            //throw new NullPointerException(uId+" "+sId);
         }
 
     }

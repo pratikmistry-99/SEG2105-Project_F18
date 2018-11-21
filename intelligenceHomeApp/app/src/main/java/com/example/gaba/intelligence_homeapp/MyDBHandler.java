@@ -135,15 +135,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.update(TABLE_USERS, values2, COLUMN_USERNAME + " = \"" + username + "\"", null);
         db.close();
     }
-/*
-    public void updateAvailability(String availability){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_AVAILABILITY, availability);
-        db.update(TABLE_SERVICE_PROVIDER_PROFILES,values,COLUMN_SERVICE_NAME + " = \"" + name + "\"", null);
-        db.close();
-    }
-*/
+    /*
+        public void updateAvailability(String availability){
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_AVAILABILITY, availability);
+            db.update(TABLE_SERVICE_PROVIDER_PROFILES,values,COLUMN_SERVICE_NAME + " = \"" + name + "\"", null);
+            db.close();
+        }
+    */
     //adds new service-provider association
     public void addProviderToService(String username, String service) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -184,7 +184,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             uId = Integer.parseInt(cursor1.getString(0));
             sId = Integer.parseInt(cursor2.getString(0));
             db.delete(TABLE_SERVICE_PROVIDERS, COLUMN_USER_ID + " = \"" + uId + "\"" + ""
-                + " AND " + COLUMN_SERVICEID + " = \"" + sId + "\"", null);
+                    + " AND " + COLUMN_SERVICEID + " = \"" + sId + "\"", null);
         }
         else
             throw new NullPointerException();

@@ -62,8 +62,11 @@ public class WelcomeScreen extends AppCompatActivity {
             findViewById(R.id.editCompany).setVisibility(View.VISIBLE);
             findViewById(R.id.txtLicensed).setVisibility(View.VISIBLE);
             findViewById(R.id.txtProfile).setVisibility(View.VISIBLE);
-            findViewById(R.id.btnAvail).setVisibility(View.VISIBLE);
+            //findViewById(R.id.btnAvail).setVisibility(View.VISIBLE);
             findViewById(R.id.rg).setVisibility(View.VISIBLE);
+        }
+        else if (user.getRole().equals("Service Provider")){
+            findViewById(R.id.btnAvail).setVisibility(View.VISIBLE);
         }
 
 

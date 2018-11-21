@@ -15,7 +15,7 @@ public class availiability extends AppCompatActivity {
     }
 
     public void saveBtn(View view){
-        
+
         finish();
     }
 

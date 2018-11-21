@@ -23,6 +23,7 @@ public class WelcomeScreen extends AppCompatActivity {
     String str;
     User user;
     String role;
+    Button avail;
 
 
 
@@ -35,6 +36,7 @@ public class WelcomeScreen extends AppCompatActivity {
         userRoleDisplay = findViewById(R.id.roleTxt);
         userNameDisplay = findViewById(R.id.userDisplay);
         adminRoleDisplay = findViewById(R.id.adminDisplay);
+        avail = findViewById(R.id.btnAvail);
 
         MyDBHandler dbHandler = new MyDBHandler(this);
         user = dbHandler.findUser(getIntent().getStringExtra("Name"));
@@ -67,7 +69,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
     }
 
-    public void avail(View view) {
+    public void availability(View view) {
         Intent intent = new Intent(getApplicationContext(), availiability.class);
         startActivityForResult(intent, 0);
     }

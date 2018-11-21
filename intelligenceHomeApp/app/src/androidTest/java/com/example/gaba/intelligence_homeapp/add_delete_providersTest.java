@@ -44,7 +44,7 @@ public class add_delete_providersTest {
        
 
     }
-	@After
+
 	 public void CleanupTest() {
 		database.clearAllTables();
     }

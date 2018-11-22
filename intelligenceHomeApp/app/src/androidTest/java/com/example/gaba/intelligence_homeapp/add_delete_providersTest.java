@@ -15,36 +15,51 @@ import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 
-public class add_delete_providersTest {
+public class WelcomeScreenTest {
 	
 	@Rule
-	public ActivityTestRule<add_delete_providers>add_deleteTestRule = new ActivityTestRule<add_delete_providers>(add_delete_providers.class);
-    private add_delete_providers providers = null;
+	public ActivityTestRule<WelcomeScreen>WelcomeScreenTestRule = new ActivityTestRule<WelcomeScreen>(WelcomeScreen.class);
+	public ActivityTestRule<ServiceList>ServiceListTestRule = new ActivityTestRule<ServiceList>(ServiceList.class);
+	private WelcomeScreen providers = null;
     private MyDBHandler database=null;
-    private Button buttonAddProvider;
-    private Button buttonDeleteProvider;
+    private Button CreateProfile;
+    private TextView providerName;
+    private ServiceList slist = null;
+    
+
  
     
 	@Before
 	public void SetUp() {
-		providers = add_deleteTestRule.getActivity();	
+		providers = WelcomeScreen.getActivity();	
         database = new MyDBHandler(providers);
         database.clearAllTables();
+        slist = serviceListTestRule.getActivity();
 	}
     @Test
     @UiThreadTest
-    public void checkAddProvider() throws Exception  {
+    public void checkProvider() throws Exception  {
     	
+    	providerName  providers.findViewById(R.id.userDisplay); 
+    	String name = providerName.getText().toString();
+    	name = name.split(1);
+    	
+    	database.addProvidersToService();
+    	assertTrue(database.addProvidersToService(name,ServiceListTestRule))
+    
 
     }
     
     @Test
     @UiThreadTest
-    public void checkDeleteProvider() throws Exception  {
-       
-
+    public void checkServiceL() throws Exception  {
+    	providerName  providers.findViewById(R.id.userDisplay); 
+    	String name = providerName.getText().toString();
+    	name = name.split(1);
+    	slist.showAddDeleteProviderDialog();
+    	asseertTrue(slist.showAddDeleteProviderDialog(name,ServiceListTestRule));
     }
-
+	@After
 	 public void CleanupTest() {
 		database.clearAllTables();
     }

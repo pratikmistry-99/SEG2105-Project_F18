@@ -147,29 +147,37 @@ public class MyDBHandler extends SQLiteOpenHelper {
         }
     */
     //adds new service-provider association
-    public void addProviderToService(String username, String service) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        int uId;
-        int sId;
+    public boolean addProviderToService(String username, String service) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            int uId;
+            int sId;
 
-        String query1 = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = \"" + username + "\"";
-        Cursor cursor1 = db.rawQuery(query1, null);
+            String query1 = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = \"" + username + "\"";
+            Cursor cursor1 = db.rawQuery(query1, null);
 
-        String query2 = "Select * FROM " + TABLE_SERVICES + " WHERE " + COLUMN_SERVICE_NAME + " = \"" + service + "\"";
-        Cursor cursor2 = db.rawQuery(query2, null);
+            String query2 = "Select * FROM " + TABLE_SERVICES + " WHERE " + COLUMN_SERVICE_NAME + " = \"" + service + "\"";
+            Cursor cursor2 = db.rawQuery(query2, null);
 
-        if(cursor1.moveToFirst() && cursor2.moveToFirst()) {
-            uId = Integer.parseInt(cursor1.getString(0));
-            sId = Integer.parseInt(cursor2.getString(0));
+            if (cursor1.moveToFirst() && cursor2.moveToFirst()) {
+                uId = Integer.parseInt(cursor1.getString(0));
+                sId = Integer.parseInt(cursor2.getString(0));
 
-            ContentValues values = new ContentValues();
-            values.put(COLUMN_USER_ID, uId);
-            values.put(COLUMN_SERVICEID, sId);
-            db.insert(TABLE_SERVICE_PROVIDERS, null, values);
-            db.close();
+                ContentValues values = new ContentValues();
+                values.put(COLUMN_USER_ID, uId);
+                values.put(COLUMN_SERVICEID, sId);
+                db.insert(TABLE_SERVICE_PROVIDERS, null, values);
+                db.close();
+            }
         }
+        catch(Exception e){
+            return false;
+        }
+        return true;
 
     }
+
+
 
     public void deleteProviderToService(String username, String service) {
         SQLiteDatabase db = this.getWritableDatabase();

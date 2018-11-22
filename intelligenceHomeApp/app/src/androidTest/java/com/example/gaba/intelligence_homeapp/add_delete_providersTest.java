@@ -6,12 +6,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 
@@ -31,21 +33,21 @@ public class WelcomeScreenTest {
     
 	@Before
 	public void SetUp() {
-		providers = WelcomeScreen.getActivity();	
+		providers = WelcomeScreenTestRule.getActivity();
         database = new MyDBHandler(providers);
         database.clearAllTables();
-        slist = serviceListTestRule.getActivity();
+        slist = ServiceListTestRule.getActivity();
 	}
     @Test
     @UiThreadTest
     public void checkProvider() throws Exception  {
     	
-    	providerName  providers.findViewById(R.id.userDisplay); 
+    	providerName  =providers.findViewById(R.id.userDisplay);
     	String name = providerName.getText().toString();
     	name = name.split(1);
     	
-    	database.addProvidersToService();
-    	assertTrue(database.addProvidersToService(name,ServiceListTestRule))
+    	//database.addProviderToService();
+    	assertTrue(database.addProviderToService(name,ServiceListTestRule))
     
 
     }
@@ -53,11 +55,11 @@ public class WelcomeScreenTest {
     @Test
     @UiThreadTest
     public void checkServiceL() throws Exception  {
-    	providerName  providers.findViewById(R.id.userDisplay); 
+    	providerName = providers.findViewById(R.id.userDisplay);
     	String name = providerName.getText().toString();
     	name = name.split(1);
     	slist.showAddDeleteProviderDialog();
-    	asseertTrue(slist.showAddDeleteProviderDialog(name,ServiceListTestRule));
+    	assertTrue(slist.showAddDeleteProviderDialog(name,ServiceListTestRule));
     }
 	@After
 	 public void CleanupTest() {

@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/holo_blue_dark"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/roleTxt"
@@ -88,20 +90,10 @@
             android:inputType="textPersonName"
             android:visibility="visible" />
 
-        <TextView
-            android:id="@+id/txtLicensed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingTop="15dp"
-            android:text="Licensed?"
-            android:textSize="18sp"
-            android:visibility="visible" />
-
         <RadioGroup
             android:id="@+id/rg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="visible">
 
             <RadioButton
@@ -109,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Yes"
+                android:text="Licenced"
                 android:visibility="visible" />
 
             <RadioButton
@@ -117,7 +109,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="No"
+                android:text="Not Licensed"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btnCreateProf"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="createProfile"
+                android:text="Create Profile"
                 android:visibility="visible" />
 
             <Button
@@ -129,14 +130,7 @@
                 android:text="Pick Availiability"
                 android:visibility="visible" />
 
-            <Button
-                android:id="@+id/btnCreateProf"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick=""
-                android:text="Create Profile"
-                android:visibility="visible" />
+
 
         </RadioGroup>
 

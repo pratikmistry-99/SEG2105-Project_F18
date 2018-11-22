@@ -56,20 +56,33 @@ public class WelcomeScreen extends AppCompatActivity {
             adminRoleDisplay.setText("");
         findViewById(R.id.servList).setVisibility(View.VISIBLE);
         boolean a = dbHandler.hasProfile(user.getUsername());
-        if(user.getRole().equals("Service Provider") && !a){
+        if(user.getRole().equals("Service Provider") && a){
             findViewById(R.id.yesBtn).setVisibility(View.VISIBLE);
             findViewById(R.id.noBtn).setVisibility(View.VISIBLE);
-            findViewById(R.id.noBtn).
-                    findViewById(R.id.editAddress).setVisibility(View.VISIBLE);
+            findViewById(R.id.noBtn).setVisibility(View.VISIBLE);
+            findViewById(R.id.editAddress).setVisibility(View.VISIBLE);
             findViewById(R.id.editDesc).setVisibility(View.VISIBLE);
             findViewById(R.id.editCompany).setVisibility(View.VISIBLE);
-            findViewById(R.id.txtLicensed).setVisibility(View.VISIBLE);
             findViewById(R.id.txtProfile).setVisibility(View.VISIBLE);
-            //findViewById(R.id.btnAvail).setVisibility(View.VISIBLE);
+            findViewById(R.id.btnAvail).setVisibility(View.GONE);
             findViewById(R.id.rg).setVisibility(View.VISIBLE);
         }
         else if (user.getRole().equals("Service Provider")){
+            findViewById(R.id.yesBtn).setVisibility(View.GONE);
+            findViewById(R.id.noBtn).setVisibility(View.GONE);
+            findViewById(R.id.noBtn).setVisibility(View.GONE);
+            findViewById(R.id.editAddress).setVisibility(View.GONE);
+            findViewById(R.id.editDesc).setVisibility(View.GONE);
+            findViewById(R.id.editCompany).setVisibility(View.GONE);
+            findViewById(R.id.txtProfile).setVisibility(View.GONE);
+            findViewById(R.id.editPhone).setVisibility(View.GONE);
+            //findViewById(R.id.btnAvail).setVisibility(View.GONE);
+            findViewById(R.id.rg).setVisibility(View.VISIBLE);
+            findViewById(R.id.noBtn).setVisibility(View.GONE);
+            findViewById(R.id.yesBtn).setVisibility(View.GONE);
+            findViewById(R.id.btnCreateProf).setVisibility(View.GONE);
             findViewById(R.id.btnAvail).setVisibility(View.VISIBLE);
+
         }
 
 
@@ -78,27 +91,38 @@ public class WelcomeScreen extends AppCompatActivity {
     public void availability(View view) {
         Intent intent = new Intent(getApplicationContext(), availiability.class);
         intent.putExtra("username", user.getUsername());
-        intent.putExtra("company", user.getUsername());
-        intent.putExtra("address", user.getUsername());
-        intent.putExtra("description", user.getUsername());
-        intent.putExtra("license", user.getUsername());
         startActivityForResult(intent, 0);
     }
 
-    public void createAvailability(View view){
+    public void createProfile(View view) throws Exception{
         MyDBHandler dbHandler = new MyDBHandler(this);
         EditText address = findViewById(R.id.editAddress);
         EditText description  = findViewById(R.id.editDesc);
         EditText company = findViewById(R.id.editCompany);
+        EditText phone = findViewById(R.id.editPhone);
 
 
-        String license = "NO";
+        boolean license = false;
         ((RadioButton)findViewById(R.id.noBtn)).setChecked(true);
         if(((RadioButton)findViewById(R.id.yesBtn)).isChecked()){
-            license = "YES";
+            license = true;
         }
 
-        dbHandler.addProfile(user.getUsername(), company.getText().toString(),address.getText().toString(), phone.getText().toString(),description.getText().toString(),license, av);
+        dbHandler.addProfile(user.getUsername(), company.getText().toString(),address.getText().toString(), Long.parseLong(phone.getText().toString()),description.getText().toString(),license, "");
+
+        findViewById(R.id.yesBtn).setEnabled(false);
+        findViewById(R.id.noBtn).setEnabled(false);
+        findViewById(R.id.noBtn).setEnabled(false);
+        findViewById(R.id.editAddress).setEnabled(false);
+        findViewById(R.id.editDesc).setEnabled(false);
+        findViewById(R.id.editCompany).setEnabled(false);
+        findViewById(R.id.txtProfile).setEnabled(false);
+        findViewById(R.id.editPhone).setEnabled(false);
+        findViewById(R.id.rg).setEnabled(false);
+        findViewById(R.id.btnCreateProf).setVisibility(View.GONE);
+        findViewById(R.id.btnAvail).setVisibility(View.VISIBLE);
+
+
     }
 
     // Method to start the activity

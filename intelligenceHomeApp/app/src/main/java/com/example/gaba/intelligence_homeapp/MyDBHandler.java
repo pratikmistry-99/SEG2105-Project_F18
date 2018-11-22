@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 //class used to create the SQLite database
 public class MyDBHandler extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "inteligence.db";
+    private static final int DATABASE_VERSION = 2;
+    private static final String DATABASE_NAME = "seg_home_app.db";
 
     //Table 1
     public static final String TABLE_USERS = "users";
@@ -125,7 +125,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_PHONE_NUMBER, phoneNumber);
         values.put(COLUMN_DESCRIPTION, description);
         values.put(COLUMN_LICENSE, license);
-        values.put(COLUMN_AVAILABILITY, availability);
+        if(!availability.equals("")){
+            values.put(COLUMN_AVAILABILITY, availability);
+        }
+
 
         long id = db.insert(TABLE_SERVICE_PROVIDER_PROFILES, null, values);
 
@@ -403,11 +406,52 @@ public class MyDBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
             int a = cursor.getInt(cursor.getColumnIndex(COLUMN_PROVIDER_PROFILE_ID));
-            if(a > 0)
+            if(a >=0)
                 b = true;
         }
         db.close();
         return b;
+    }
+
+    public boolean updateAvailability(String username, String availability){
+        try{
+            SQLiteDatabase db = this.getReadableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_AVAILABILITY, availability);
+
+            int a =-1;
+            String query = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = \"" + username + "\"";
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                a = cursor.getInt(cursor.getColumnIndex(COLUMN_PROVIDER_PROFILE_ID));
+
+            }
+            db = this.getWritableDatabase();
+            db.update(TABLE_SERVICE_PROVIDER_PROFILES,values,COLUMN_PROFILE_ID + " = \"" + a + "\"", null);
+            db.close();
+        }
+        catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+
+    public String getAvailabilities(String username){
+        String a = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = \"" + username + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            int i = cursor.getInt(cursor.getColumnIndex(COLUMN_PROVIDER_PROFILE_ID));
+            String query2 = "Select * FROM " + TABLE_SERVICE_PROVIDER_PROFILES + " WHERE " + COLUMN_PROFILE_ID + " = \"" + i + "\"";
+            Cursor cursor2 = db.rawQuery(query2, null);
+            if (cursor2.moveToFirst())
+                a = cursor2.getString(cursor2.getColumnIndex(COLUMN_AVAILABILITY));
+
+        }
+        db.close();
+        return a;
     }
 }
 

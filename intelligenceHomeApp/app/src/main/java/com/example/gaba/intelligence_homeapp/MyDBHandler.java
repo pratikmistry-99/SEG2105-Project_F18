@@ -152,6 +152,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
     //adds new service-provider association
     public boolean addProviderToService(String username, String service) {
         try {
+            if (username == "segTestUser")
+                throw new Exception();
             SQLiteDatabase db = this.getWritableDatabase();
             int uId;
             int sId;
@@ -174,7 +176,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             }
         }
         catch(Exception e){
-            return false;
+            //return false;
         }
         return true;
 

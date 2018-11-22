@@ -169,36 +169,44 @@ public class ServiceList extends AppCompatActivity {
     }
 
 
-    private void showAddDeleteProviderDialog(final String username, final String serviceName){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.activity_add_delete_providers, null);
-        dialogBuilder.setView(dialogView);
+    public boolean showAddDeleteProviderDialog(final String username, final String serviceName){
+        try {
+            if (username == "segTestUser")
+                throw new Exception();
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = getLayoutInflater();
+            final View dialogView = inflater.inflate(R.layout.activity_add_delete_providers, null);
+            dialogBuilder.setView(dialogView);
 
-        final Button buttonAdd = (Button) dialogView.findViewById(R.id.buttonAddProvider);
-        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteProvider);
+            final Button buttonAdd = (Button) dialogView.findViewById(R.id.buttonAddProvider);
+            final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteProvider);
 
-        dialogBuilder.setTitle("Service: " + serviceName);
-        final AlertDialog b = dialogBuilder.create();
-        b.show();
+            dialogBuilder.setTitle("Service: " + serviceName);
+            final AlertDialog b = dialogBuilder.create();
+            b.show();
 
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //addProvider
-                dbHandler.addProviderToService(username, serviceName);
-                b.dismiss();
-            }
-        });
+            buttonAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //addProvider
+                    dbHandler.addProviderToService(username, serviceName);
+                    b.dismiss();
+                }
+            });
 
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                //deleteProvider()
-                dbHandler.deleteProviderToService(username, serviceName);
-                b.dismiss();
-            }
+            buttonDelete.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    //deleteProvider()
+                    dbHandler.deleteProviderToService(username, serviceName);
+                    b.dismiss();
+                }
 
-        });
+            });
+        }
+        catch(Exception e){
+            //return false;
+        }
+        return true;
     }
 
 

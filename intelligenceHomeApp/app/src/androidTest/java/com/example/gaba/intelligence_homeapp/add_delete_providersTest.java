@@ -17,11 +17,11 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 
-public class WelcomeScreenTest {
+public class add_delete_providersTest {
 	
 	@Rule
-	public ActivityTestRule<WelcomeScreen>WelcomeScreenTestRule = new ActivityTestRule<WelcomeScreen>(WelcomeScreen.class);
-	public ActivityTestRule<ServiceList>ServiceListTestRule = new ActivityTestRule<ServiceList>(ServiceList.class);
+	//public ActivityTestRule<WelcomeScreen>WelcomeScreenTestRule = new ActivityTestRule<WelcomeScreen>(WelcomeScreen.class);
+	//public ActivityTestRule<ServiceList>ServiceListTestRule = new ActivityTestRule<ServiceList>(ServiceList.class);
 	private WelcomeScreen providers = null;
     private MyDBHandler database=null;
     private Button CreateProfile;
@@ -33,21 +33,21 @@ public class WelcomeScreenTest {
     
 	@Before
 	public void SetUp() {
-		providers = WelcomeScreenTestRule.getActivity();
-        database = new MyDBHandler(providers);
+		//providers = WelcomeScreenTestRule.getActivity();
+        //database = new MyDBHandler(providers);
         database.clearAllTables();
-        slist = ServiceListTestRule.getActivity();
+        //slist = ServiceListTestRule.getActivity();
 	}
     @Test
     @UiThreadTest
     public void checkProvider() throws Exception  {
     	
-    	providerName  =providers.findViewById(R.id.userDisplay);
-    	String name = providerName.getText().toString();
-    	name = name.split(1);
+    	//providerName  =providers.findViewById(R.id.userDisplay);
+    	String name = "segTestUser";//providerName.getText().toString();
+		String service = "clean";
     	
     	//database.addProviderToService();
-    	assertTrue(database.addProviderToService(name,ServiceListTestRule))
+    	assertTrue(database.addProviderToService(name,service));
     
 
     }
@@ -55,11 +55,11 @@ public class WelcomeScreenTest {
     @Test
     @UiThreadTest
     public void checkServiceL() throws Exception  {
-    	providerName = providers.findViewById(R.id.userDisplay);
-    	String name = providerName.getText().toString();
-    	name = name.split(1);
-    	slist.showAddDeleteProviderDialog();
-    	assertTrue(slist.showAddDeleteProviderDialog(name,ServiceListTestRule));
+    	//providerName = providers.findViewById(R.id.userDisplay);
+		String name = "segTestUser";//providerName.getText().toString();
+		String service = "clean";
+    	//slist.showAddDeleteProviderDialog(name, service);
+    	assertTrue(slist.showAddDeleteProviderDialog(name,service));
     }
 	@After
 	 public void CleanupTest() {

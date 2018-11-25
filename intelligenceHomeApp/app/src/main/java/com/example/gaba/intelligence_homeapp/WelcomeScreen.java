@@ -1,5 +1,6 @@
 package com.example.gaba.intelligence_homeapp;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -16,17 +17,26 @@ import android.widget.TimePicker;
 
 import java.util.Calendar;
 
+import static android.view.View.VISIBLE;
+
 // class used to create the welcome screen once you log in
 public class WelcomeScreen extends AppCompatActivity {
 
     TextView userNameDisplay;
     TextView userRoleDisplay;
     TextView adminRoleDisplay;
+    TextView emptyCredentialsAlert;
     String str;
     User user;
     String role;
     Button avail;
-
+    Button createProf;
+    RadioButton licenseTrue;
+    RadioButton licenseFalse;
+    EditText address;
+    EditText description;
+    EditText company;
+    EditText phone;
 
 
 
@@ -39,6 +49,10 @@ public class WelcomeScreen extends AppCompatActivity {
         userNameDisplay = findViewById(R.id.userDisplay);
         adminRoleDisplay = findViewById(R.id.adminDisplay);
         avail = findViewById(R.id.btnAvail);
+        createProf = findViewById(R.id.btnCreateProf);
+        licenseFalse = findViewById(R.id.noBtn);
+        licenseTrue = findViewById(R.id.yesBtn);
+        emptyCredentialsAlert = findViewById(R.id.EmptyProfileAlert);
 
         MyDBHandler dbHandler = new MyDBHandler(this);
         user = dbHandler.findUser(getIntent().getStringExtra("Name"));
@@ -60,20 +74,21 @@ public class WelcomeScreen extends AppCompatActivity {
         }
         else
             adminRoleDisplay.setText("");
-        findViewById(R.id.servList).setVisibility(View.VISIBLE);
+        findViewById(R.id.servList).setVisibility(VISIBLE);
         boolean a = dbHandler.hasProfile(user.getUsername());
         if(user.getRole().equals("Service Provider") && a){
-            findViewById(R.id.yesBtn).setVisibility(View.VISIBLE);
-            findViewById(R.id.noBtn).setVisibility(View.VISIBLE);
-            findViewById(R.id.noBtn).setVisibility(View.VISIBLE);
-            findViewById(R.id.editAddress).setVisibility(View.VISIBLE);
-            findViewById(R.id.editDesc).setVisibility(View.VISIBLE);
-            findViewById(R.id.editCompany).setVisibility(View.VISIBLE);
-            findViewById(R.id.txtProfile).setVisibility(View.VISIBLE);
+            findViewById(R.id.yesBtn).setVisibility(VISIBLE);
+            findViewById(R.id.noBtn).setVisibility(VISIBLE);
+            findViewById(R.id.noBtn).setVisibility(VISIBLE);
+            findViewById(R.id.editAddress).setVisibility(VISIBLE);
+            findViewById(R.id.editDesc).setVisibility(VISIBLE);
+            findViewById(R.id.editCompany).setVisibility(VISIBLE);
+            findViewById(R.id.txtProfile).setVisibility(VISIBLE);
             findViewById(R.id.btnAvail).setVisibility(View.GONE);
-            findViewById(R.id.rg).setVisibility(View.VISIBLE);
+            findViewById(R.id.rg).setVisibility(VISIBLE);
         }
-        else if (user.getRole().equals("Home Owner")){        //This used to say Service Provider but i think this was a meant to be Home Owner. Correct me if Im wrong
+        /**Below used to say Service Provider but i think this was a meant to be Home Owner-so i changed it. Correct me if Im wrong */
+        else if (user.getRole().equals("Home Owner")){
             findViewById(R.id.yesBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
@@ -83,14 +98,13 @@ public class WelcomeScreen extends AppCompatActivity {
             findViewById(R.id.txtProfile).setVisibility(View.GONE);
             findViewById(R.id.editPhone).setVisibility(View.GONE);
             //findViewById(R.id.btnAvail).setVisibility(View.GONE);
-            findViewById(R.id.rg).setVisibility(View.VISIBLE);
+            findViewById(R.id.rg).setVisibility(VISIBLE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
             findViewById(R.id.yesBtn).setVisibility(View.GONE);
             findViewById(R.id.btnCreateProf).setVisibility(View.GONE);
-            findViewById(R.id.btnAvail).setVisibility(View.VISIBLE);
+            findViewById(R.id.btnAvail).setVisibility(VISIBLE);
 
         }
-
 
     }
 
@@ -104,21 +118,23 @@ public class WelcomeScreen extends AppCompatActivity {
     public void createProfile(View view) throws Exception{
         MyDBHandler dbHandler = new MyDBHandler(this);
         //TO DO: Check to make sure that the following are not null
-
-
-        EditText address = findViewById(R.id.editAddress);
-        EditText description  = findViewById(R.id.editDesc);
-        EditText company = findViewById(R.id.editCompany);
-        EditText phone = findViewById(R.id.editPhone);
-
-
+        address = findViewById(R.id.editAddress);
+        description = findViewById(R.id.editDesc);
+        company = findViewById(R.id.editCompany);
+        phone = findViewById(R.id.editPhone);
         boolean license = false;
-        ((RadioButton)findViewById(R.id.noBtn)).setChecked(true);
-        if(((RadioButton)findViewById(R.id.yesBtn)).isChecked()){
+        if (licenseTrue.isChecked()){
             license = true;
+        }else{
+            license = false;
         }
 
-        dbHandler.addProfile(user.getUsername(), company.getText().toString(),address.getText().toString(), Long.parseLong(phone.getText().toString()),description.getText().toString(),license, "");
+        /** CHECK if Boxes are empty- if not then addProfile*/
+       try{
+           dbHandler.addProfile(user.getUsername(),company.getText().toString(),address.getText().toString(),Long.parseLong(phone.getText().toString()),description.getText().toString(), license, "");
+       }catch (Exception e){
+           emptyCredentialsAlert.setText("ALERT. Please fill out ALL boxes appropriately!");
+       }
 
         findViewById(R.id.yesBtn).setEnabled(false);
         findViewById(R.id.noBtn).setEnabled(false);
@@ -130,7 +146,7 @@ public class WelcomeScreen extends AppCompatActivity {
         findViewById(R.id.editPhone).setEnabled(false);
         findViewById(R.id.rg).setEnabled(false);
         findViewById(R.id.btnCreateProf).setVisibility(View.GONE);
-        findViewById(R.id.btnAvail).setVisibility(View.VISIBLE);
+        findViewById(R.id.btnAvail).setVisibility(VISIBLE);
 
 
     }

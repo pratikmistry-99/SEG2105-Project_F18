@@ -9,10 +9,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
         android:background="@android:color/holo_blue_dark"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/roleTxt"
@@ -129,7 +133,6 @@
                 android:onClick="availability"
                 android:text="Pick Availiability"
                 android:visibility="visible" />
-
 
 
         </RadioGroup>

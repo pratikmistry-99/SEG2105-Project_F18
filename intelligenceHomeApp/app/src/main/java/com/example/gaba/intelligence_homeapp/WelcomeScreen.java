@@ -42,6 +42,8 @@ public class WelcomeScreen extends AppCompatActivity {
 
         MyDBHandler dbHandler = new MyDBHandler(this);
         user = dbHandler.findUser(getIntent().getStringExtra("Name"));
+
+        //States Users Name and info on the Welcome Screen, if blank/null, throws an exception and simply states Welcome
         try {
             str = "Welcome " + user.getUsername() + "!";
         }catch(Exception e){
@@ -71,7 +73,7 @@ public class WelcomeScreen extends AppCompatActivity {
             findViewById(R.id.btnAvail).setVisibility(View.GONE);
             findViewById(R.id.rg).setVisibility(View.VISIBLE);
         }
-        else if (user.getRole().equals("Service Provider")){
+        else if (user.getRole().equals("Home Owner")){        //This used to say Service Provider but i think this was a meant to be Home Owner. Correct me if Im wrong
             findViewById(R.id.yesBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
@@ -98,8 +100,12 @@ public class WelcomeScreen extends AppCompatActivity {
         startActivityForResult(intent, 0);
     }
 
+
     public void createProfile(View view) throws Exception{
         MyDBHandler dbHandler = new MyDBHandler(this);
+        //TO DO: Check to make sure that the following are not null
+
+
         EditText address = findViewById(R.id.editAddress);
         EditText description  = findViewById(R.id.editDesc);
         EditText company = findViewById(R.id.editCompany);

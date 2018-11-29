@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#64b7fa"
+        android:layout_height="103dp"
+        android:background="@drawable/artboard1"
         android:orientation="vertical">
 
 

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/artboard1"
     tools:context=".ServiceList">
 
     <RelativeLayout
         android:id="@+id/service_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_blue_light"
         android:backgroundTint="@android:color/holo_blue_light"
         tools:context="mgarzon.createbest.productcatalog.MainActivity">
 

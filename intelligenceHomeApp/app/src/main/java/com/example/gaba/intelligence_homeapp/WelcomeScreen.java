@@ -70,6 +70,17 @@ public class WelcomeScreen extends AppCompatActivity {
         if (user.getRole().equals("Administrator")){
             ad = dbHandler.getAllUsernames();
             adminRoleDisplay.setText(ad);
+            findViewById(R.id.yesBtn).setVisibility(View.GONE);
+            findViewById(R.id.noBtn).setVisibility(View.GONE);
+            findViewById(R.id.noBtn).setVisibility(View.GONE);
+            findViewById(R.id.editAddress).setVisibility(View.GONE);
+            findViewById(R.id.editDesc).setVisibility(View.GONE);
+            findViewById(R.id.editCompany).setVisibility(View.GONE);
+            findViewById(R.id.txtProfile).setVisibility(View.GONE);
+            findViewById(R.id.btnAvail).setVisibility(View.GONE);
+            findViewById(R.id.rg).setVisibility(View.GONE);
+            findViewById(R.id.btnCreateProf).setVisibility(View.GONE);
+            findViewById(R.id.editPhone).setVisibility(View.GONE);
 
         }
         else
@@ -102,7 +113,8 @@ public class WelcomeScreen extends AppCompatActivity {
             findViewById(R.id.noBtn).setVisibility(View.GONE);
             findViewById(R.id.yesBtn).setVisibility(View.GONE);
             findViewById(R.id.btnCreateProf).setVisibility(View.GONE);
-            findViewById(R.id.btnAvail).setVisibility(VISIBLE);
+            findViewById(R.id.btnAvail).setVisibility(View.GONE);
+
 
         }
 

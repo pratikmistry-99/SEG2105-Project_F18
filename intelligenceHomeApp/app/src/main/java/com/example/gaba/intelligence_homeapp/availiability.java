@@ -9,31 +9,32 @@ import android.widget.EditText;
 
 public class availiability extends AppCompatActivity {
 
-    EditText mon;
+    //TODO : Reimplement this class
+    /*EditText mon;
     EditText tue;
     EditText wed;
     EditText thu;
     EditText fri;
     EditText sat;
-    EditText sun;
+    EditText sun;*/
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_availiability);
-        mon = findViewById(R.id.Monday);
+        /*mon = findViewById(R.id.Monday);
         tue = findViewById(R.id.Tuesday);
         wed = findViewById(R.id.Wednesday);
         thu = findViewById(R.id.Thursday);
         fri = findViewById(R.id.Friday);
         sat = findViewById(R.id.Saturday);
-        sun = findViewById(R.id.Sunday);
+        sun = findViewById(R.id.Sunday);*/
 
         String[] availabilities;
         MyDBHandler dbHandler = new MyDBHandler(this);
         String av = dbHandler.getAvailabilities(getIntent().getStringExtra("username"));
-
+        /*
         if (av != null) {
             availabilities = av.split("/");
             if (availabilities.length == 7) {
@@ -46,16 +47,16 @@ public class availiability extends AppCompatActivity {
                 sun.setText(availabilities[6]);
 
             }
-        }
+        }*/
 
     }
 
     public void saveBtn(View view){
-        String availability = mon.getText().toString()+" / "+tue.getText().toString()+" / "+wed.getText().toString()+" / "+thu.getText().toString()+" / "+fri.getText().toString()+" / "+sat.getText().toString()+" / "+sun.getText().toString();
+        /*String availability = mon.getText().toString()+" / "+tue.getText().toString()+" / "+wed.getText().toString()+" / "+thu.getText().toString()+" / "+fri.getText().toString()+" / "+sat.getText().toString()+" / "+sun.getText().toString();
         MyDBHandler dbHandler = new MyDBHandler(this);
         String username = getIntent().getStringExtra("username");
         dbHandler.updateAvailability(username, availability);
-        finish();
+        finish();*/
     }
 
 }

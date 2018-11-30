@@ -6,6 +6,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -147,4 +148,29 @@ public class SignupScreenTest {
         assertEquals("Administrator", u.getRole());
 
     }
+    /** Tests to make sure only one account can be made per Username,
+     * and that one cannot use the same username for even a different role */
+    @Test
+    @UiThreadTest
+    public void checkForUniqueUserNames(){
+        signUpHomeOwnerTest();
+
+        text = sScreen.findViewById(R.id.addUser);
+        text.setText("user1");
+        String name = text.getText().toString();
+        text = sScreen.findViewById(R.id.addPassword);
+        text.setText("blah");
+        String pass = text.getText().toString();
+
+        rGroup = sScreen.findViewById(R.id.radioGroup);
+        serviceProvider = sScreen.findViewById(R.id.rb_SP);
+        serviceProvider.setChecked(true);
+
+        cAccountButton = sScreen.findViewById(R.id.createAcc);
+        cAccountButton.performClick();
+        assertEquals(true,sScreen.usernameError);
+
+
+    }
+
 }

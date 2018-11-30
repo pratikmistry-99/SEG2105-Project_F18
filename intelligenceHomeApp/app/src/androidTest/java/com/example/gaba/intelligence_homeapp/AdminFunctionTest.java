@@ -22,8 +22,8 @@ import static org.junit.Assert.assertTrue;
 public class AdminFunctionTest {
 
     @Rule
-    public ActivityTestRule<ServiceList> serviceListTestRule = new ActivityTestRule<ServiceList>(ServiceList.class);
-    public ActivityTestRule<update_delete_dialog> deleteDialogTestRule = new ActivityTestRule<update_delete_dialog>(update_delete_dialog.class);
+    public ActivityTestRule<ServiceList> slistTestRule = new ActivityTestRule<ServiceList>(ServiceList.class);
+    public ActivityTestRule<update_delete_dialog> dDialogTestRule = new ActivityTestRule<update_delete_dialog>(update_delete_dialog.class);
     private update_delete_dialog dDialog = null;
     private ServiceList slist = null;
     private TextView serviceName;
@@ -37,11 +37,11 @@ public class AdminFunctionTest {
     //clears database of all services and double checks that the serviceDatabase is clear
     @Before
     public void SetupTest()  {
-        slist = serviceListTestRule.getActivity();
-        dDialog = deleteDialogTestRule.getActivity();
+        slist = slistTestRule.getActivity();
+        dDialog = dDialogTestRule.getActivity();
         database = new MyDBHandler(slist);
         database.clearServiceListTables();
-        assertTrue(database.getAllServices().isEmpty());
+        assertTrue( database.getAllServices().isEmpty());
     }
 
     //clears Database from what was added in test

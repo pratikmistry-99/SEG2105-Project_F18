@@ -14,7 +14,7 @@ import java.util.ArrayList;
 //class used to create the SQLite database
 public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "seg_project_f18.db";
+    private static final String DATABASE_NAME = "int_eligence_homeApp.db";
 
     //Table 1
     public static final String TABLE_USERS = "users";
@@ -103,7 +103,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String CREATE_REVIEWS_TABLE = "CREATE TABLE " +
                 TABLE_SERVICE_PROVIDER_REVIEWS + "("
                 + COLUMN_USER_KEY + " INTEGER,"+ COLUMN_RATING+" INTEGER,"+COLUMN_COMMENT + " TEXT" +")";
-        db.execSQL(CREATE_PROFILES_TABLE);
+        db.execSQL(CREATE_REVIEWS_TABLE);
 
     }
     /**
@@ -119,6 +119,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_PROFILES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_REVIEWS);
         onCreate(db);
     }
 
@@ -142,7 +143,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         if(!availability.equals("")){
             values.put(COLUMN_AVAILABILITY, availability);
         }
-        //values.put(COLUMN_RATING, 0.0);
+        values.put(COLUMN_AVG_RATING, 0.0);
 
         long id = db.insert(TABLE_SERVICE_PROVIDER_PROFILES, null, values);
 

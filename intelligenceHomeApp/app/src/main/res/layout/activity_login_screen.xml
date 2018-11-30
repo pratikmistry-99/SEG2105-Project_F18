@@ -9,12 +9,16 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="368dp"
+        android:layout_height="150dp"
         android:layout_margin="100dp"
-        app:srcCompat="@drawable/logo"
-        tools:layout_editor_absoluteX="102dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/username"

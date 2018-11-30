@@ -48,7 +48,7 @@ public class LoginScreen extends AppCompatActivity {
     public void login (View view) {
 
         User user = dbHandler.findUser(userName.getText().toString());
-
+        //findViewById(R.id.imageView).setVisibility(View.GONE);
         if (user!=null && user.getPassword().toString().equals(pswrd.getText().toString())) {
             Intent intent = new Intent(getApplicationContext(),WelcomeScreen.class);
 

@@ -408,8 +408,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
             int a = cursor.getInt(cursor.getColumnIndex(COLUMN_PROVIDER_PROFILE_ID));
+            System.out.println(a);
             if(a >=0)
                 b = true;
+            System.out.println(b);
         }
         db.close();
         return b;

@@ -50,21 +50,21 @@ public class availiability extends AppCompatActivity {
         if (av != null) {
             availabilities = av.split("//");
             if (availabilities.length == 7) {
-                mon_f.setText(availabilities[0].trim().split("-")[0].trim());
-                tue_f.setText(availabilities[1].trim().split("-")[0].trim());
-                wed_f.setText(availabilities[2].trim().split("-")[0].trim());
-                thu_f.setText(availabilities[3].trim().split("-")[0].trim());
-                fri_f.setText(availabilities[4].trim().split("-")[0].trim());
-                sat_f.setText(availabilities[5].trim().split("-")[0].trim());
-                sun_f.setText(availabilities[6].trim().split("-")[0].trim());
+                mon_f.setText(availabilities[0].split("-")[0].trim());
+                tue_f.setText(availabilities[1].split("-")[0].trim());
+                wed_f.setText(availabilities[2].split("-")[0].trim());
+                thu_f.setText(availabilities[3].split("-")[0].trim());
+                fri_f.setText(availabilities[4].split("-")[0].trim());
+                sat_f.setText(availabilities[5].split("-")[0].trim());
+                sun_f.setText(availabilities[6].split("-")[0].trim());
 
-                mon_t.setText(availabilities[0].trim().split("-")[1].trim());
-                tue_t.setText(availabilities[1].trim().split("-")[1].trim());
-                wed_t.setText(availabilities[2].trim().split("-")[1].trim());
-                thu_t.setText(availabilities[3].trim().split("-")[1].trim());
-                fri_t.setText(availabilities[4].trim().split("-")[1].trim());
-                sat_t.setText(availabilities[5].trim().split("-")[1].trim());
-                sun_t.setText(availabilities[6].trim().split("-")[1].trim());
+                mon_t.setText(availabilities[0].split("-")[1].trim());
+                tue_t.setText(availabilities[1].split("-")[1].trim());
+                wed_t.setText(availabilities[2].split("-")[1].trim());
+                thu_t.setText(availabilities[3].split("-")[1].trim());
+                fri_t.setText(availabilities[4].split("-")[1].trim());
+                sat_t.setText(availabilities[5].split("-")[1].trim());
+                sun_t.setText(availabilities[6].split("-")[1].trim());
 
             }
         }

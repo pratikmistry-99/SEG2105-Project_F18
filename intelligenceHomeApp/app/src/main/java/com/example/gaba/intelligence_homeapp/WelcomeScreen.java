@@ -99,6 +99,24 @@ public class WelcomeScreen extends AppCompatActivity {
             findViewById(R.id.rg).setVisibility(VISIBLE);
         }
         /**Below used to say Service Provider but i think this was a meant to be Home Owner-so i changed it. Correct me if Im wrong */
+        else if(user.getRole().equals("Service Provider") && hasProfile){
+            findViewById(R.id.yesBtn).setVisibility(View.GONE);
+            findViewById(R.id.noBtn).setVisibility(View.GONE);
+            findViewById(R.id.noBtn).setVisibility(View.GONE);
+            findViewById(R.id.editAddress).setVisibility(View.GONE);
+            findViewById(R.id.editDesc).setVisibility(View.GONE);
+            findViewById(R.id.editCompany).setVisibility(View.GONE);
+            findViewById(R.id.txtProfile).setVisibility(View.GONE);
+            findViewById(R.id.editPhone).setVisibility(View.GONE);
+            //findViewById(R.id.btnAvail).setVisibility(View.GONE);
+            findViewById(R.id.rg).setVisibility(VISIBLE);
+            findViewById(R.id.noBtn).setVisibility(View.GONE);
+            findViewById(R.id.yesBtn).setVisibility(View.GONE);
+            findViewById(R.id.btnCreateProf).setVisibility(View.GONE);
+            findViewById(R.id.btnAvail).setVisibility(View.VISIBLE);
+
+
+        }
         else if (user.getRole().equals("Home Owner")){
             findViewById(R.id.yesBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);

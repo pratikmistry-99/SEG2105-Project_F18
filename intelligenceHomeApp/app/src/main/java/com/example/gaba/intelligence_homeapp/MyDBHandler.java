@@ -479,11 +479,3 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return a;
     }
 }
- /* public static final String TABLE_SERVICE_PROVIDER_PROFILES = "serviceProvidersProfiles";
-    public static final String COLUMN_PROFILE_ID = "p_id";
-    public static final String COLUMN_COMPANY = "company";
-    public static final String COLUMN_ADDRESS = "address";
-    public static final String COLUMN_PHONE_NUMBER = "phone";
-    public static final String COLUMN_DESCRIPTION = "description";
-    public static final String COLUMN_LICENSE = "license";
-    public static final String COLUMN_AVAILABILITY = "availability";*/

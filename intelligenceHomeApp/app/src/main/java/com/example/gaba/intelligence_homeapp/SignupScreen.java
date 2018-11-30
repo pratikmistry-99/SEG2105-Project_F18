@@ -29,6 +29,8 @@ public class SignupScreen extends AppCompatActivity{
     TextView passwordBag;
     TextView generalBag;
 
+    boolean usernameError;
+
 
     /**
      * Methods create an admin account if the account
@@ -52,10 +54,10 @@ public class SignupScreen extends AppCompatActivity{
         MyDBHandler dbHandler = new MyDBHandler(this);
 
         if (dbHandler.findAdmin() != null) {
-            admin.setEnabled(false);
+            admin.setVisibility(View.GONE);
             admin.setText("Administrator (already exists)");
         }
-
+        usernameError = false;
     }
 
     /**
@@ -70,7 +72,7 @@ public class SignupScreen extends AppCompatActivity{
         homeOwner = (RadioButton) findViewById(R.id.rb_HO);
         serviceProvider = (RadioButton) findViewById(R.id.rb_SP);
         //admin = (RadioButton) findViewById(R.id.rb_AD);
-        if(addUser.getText().toString().length()==0 || addPassword.getText().toString().length()==0){
+        if((addUser.getText().toString().length()==0 || addPassword.getText().toString().length()==0)&&!usernameError){
             finish();
             Intent intent = new Intent(getApplicationContext(),SignupScreen.class);
             Toast.makeText(getApplicationContext(), "Please fill all fields!",Toast.LENGTH_SHORT).show();
@@ -78,6 +80,7 @@ public class SignupScreen extends AppCompatActivity{
         }
         else
         {
+            usernameError = false;
             role = "";
 
             if (homeOwner.isChecked()) {
@@ -91,14 +94,28 @@ public class SignupScreen extends AppCompatActivity{
 
             RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
 
-            MyDBHandler dbHandler = new MyDBHandler(this);
-            dbHandler.addUser(user);
-            addUser.setText("");
-            addPassword.setText("");
 
-            finish();// this makes sure that the signup screen activity ends before logging in.
-            Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
-            startActivityForResult(intent,0);
+            MyDBHandler dbHandler = new MyDBHandler(this);
+            if(dbHandler.findUser(user.getUsername())==null)
+            {
+                dbHandler.addUser(user);
+                addUser.setText("");
+                addPassword.setText("");
+
+                finish();// this makes sure that the signup screen activity ends before logging in.
+                Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
+                startActivityForResult(intent,0);
+            }
+            else
+            {
+                addUser.setText("");
+                addPassword.setText("");
+                Toast.makeText(getApplicationContext(), "This Username Already Exists!",Toast.LENGTH_SHORT).show();
+                usernameError = true;
+                finish();
+                Intent intent = new Intent(getApplicationContext(),SignupScreen.class);
+                startActivityForResult(intent,0);
+            }
         }
     }
 

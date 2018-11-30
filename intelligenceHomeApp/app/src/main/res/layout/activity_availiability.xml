@@ -39,7 +39,7 @@
                 android:text="     Monday" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/mf"
                 android:layout_width="28dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -55,7 +55,7 @@
                 android:text="h00" />
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/mt"
                 android:layout_width="38dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -84,7 +84,7 @@
                 android:text="     Tuesday" />
 
             <EditText
-                android:id="@+id/editText9"
+                android:id="@+id/tuf"
                 android:layout_width="28dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -100,7 +100,7 @@
                 android:text="h00" />
 
             <EditText
-                android:id="@+id/editText10"
+                android:id="@+id/tut"
                 android:layout_width="38dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -130,7 +130,7 @@
                 android:text="     Wednesday" />
 
             <EditText
-                android:id="@+id/editText13"
+                android:id="@+id/wf"
                 android:layout_width="28dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -146,7 +146,7 @@
                 android:text="h00" />
 
             <EditText
-                android:id="@+id/editText14"
+                android:id="@+id/wt"
                 android:layout_width="38dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -176,7 +176,7 @@
                 android:text="     Thursday" />
 
             <EditText
-                android:id="@+id/editText21"
+                android:id="@+id/thf"
                 android:layout_width="28dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -192,7 +192,7 @@
                 android:text="h00" />
 
             <EditText
-                android:id="@+id/editText22"
+                android:id="@+id/tht"
                 android:layout_width="38dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -221,7 +221,7 @@
                 android:text="     Friday" />
 
             <EditText
-                android:id="@+id/editText23"
+                android:id="@+id/ff"
                 android:layout_width="28dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -237,7 +237,7 @@
                 android:text="h00" />
 
             <EditText
-                android:id="@+id/editText24"
+                android:id="@+id/ft"
                 android:layout_width="38dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -266,7 +266,7 @@
                 android:text="     Saturday" />
 
             <EditText
-                android:id="@+id/editText25"
+                android:id="@+id/saf"
                 android:layout_width="28dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -282,7 +282,7 @@
                 android:text="h00" />
 
             <EditText
-                android:id="@+id/editText26"
+                android:id="@+id/sat"
                 android:layout_width="38dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -311,7 +311,7 @@
                 android:text="     Sunday" />
 
             <EditText
-                android:id="@+id/editText27"
+                android:id="@+id/suf"
                 android:layout_width="28dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -327,7 +327,7 @@
                 android:text="h00" />
 
             <EditText
-                android:id="@+id/editText28"
+                android:id="@+id/sut"
                 android:layout_width="38dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

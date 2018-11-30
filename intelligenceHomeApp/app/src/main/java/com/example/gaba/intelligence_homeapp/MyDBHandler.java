@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 //class used to create the SQLite database
 public class MyDBHandler extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 2;
-    private static final String DATABASE_NAME = "seg_home_app.db";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "seg_project_f18.db";
 
     //Table 1
     public static final String TABLE_USERS = "users";
@@ -404,7 +404,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public boolean hasProfile(String username){
         boolean b = false;
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = \"" + username + "\"";
+        String query = "Select * FROM " + TABLE_USERS + ", "+TABLE_SERVICE_PROVIDER_PROFILES +" WHERE " + COLUMN_USERNAME + " = \"" + username + "\"";
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
             int a = cursor.getInt(cursor.getColumnIndex(COLUMN_PROVIDER_PROFILE_ID));

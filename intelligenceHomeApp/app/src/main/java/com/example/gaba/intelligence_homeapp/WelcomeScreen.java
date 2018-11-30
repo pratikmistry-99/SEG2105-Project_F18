@@ -86,8 +86,8 @@ public class WelcomeScreen extends AppCompatActivity {
         else
             adminRoleDisplay.setText("");
         findViewById(R.id.servList).setVisibility(VISIBLE);
-        boolean a = dbHandler.hasProfile(user.getUsername());
-        if(user.getRole().equals("Service Provider") && a){
+        boolean hasProfile = dbHandler.hasProfile(user.getUsername());
+        if(user.getRole().equals("Service Provider") && !hasProfile){
             findViewById(R.id.yesBtn).setVisibility(VISIBLE);
             findViewById(R.id.noBtn).setVisibility(VISIBLE);
             findViewById(R.id.noBtn).setVisibility(VISIBLE);

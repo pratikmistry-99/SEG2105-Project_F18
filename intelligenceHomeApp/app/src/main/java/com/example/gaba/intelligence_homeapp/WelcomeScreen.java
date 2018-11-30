@@ -114,7 +114,8 @@ public class WelcomeScreen extends AppCompatActivity {
             findViewById(R.id.yesBtn).setVisibility(View.GONE);
             findViewById(R.id.btnCreateProf).setVisibility(View.GONE);
             findViewById(R.id.btnAvail).setVisibility(View.VISIBLE);
-
+            String temp = dbHandler.getServiceProviderInfo(user.getUsername());
+            adminRoleDisplay.setText(temp);
 
         }
         else if (user.getRole().equals("Home Owner")){

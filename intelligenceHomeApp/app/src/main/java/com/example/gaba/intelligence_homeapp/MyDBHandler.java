@@ -457,5 +457,33 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
         return a;
     }
-}
 
+    public String getServiceProviderInfo(String username){
+        String a = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = \"" + username + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            int i = cursor.getInt(cursor.getColumnIndex(COLUMN_PROVIDER_PROFILE_ID));
+            String query2 = "Select * FROM " + TABLE_SERVICE_PROVIDER_PROFILES + " WHERE " + COLUMN_PROFILE_ID + " = \"" + i + "\"";
+            Cursor cursor2 = db.rawQuery(query2, null);
+            if (cursor2.moveToFirst())
+                a += "\n----------------------------------------\n   Service Provider Profile\n----------------------------------------\n   Company: "+cursor2.getString(cursor2.getColumnIndex(COLUMN_COMPANY));
+                a += "\n   Address: "+cursor2.getString(cursor2.getColumnIndex(COLUMN_ADDRESS));
+                a += "\n   Phone Number:  "+cursor2.getString(cursor2.getColumnIndex(COLUMN_PHONE_NUMBER));
+                a += "\n   Description:  "+cursor2.getString(cursor2.getColumnIndex(COLUMN_DESCRIPTION));
+                a += "\n   License: "+cursor2.getString(cursor2.getColumnIndex(COLUMN_LICENSE));
+
+        }
+        db.close();
+        return a;
+    }
+}
+ /* public static final String TABLE_SERVICE_PROVIDER_PROFILES = "serviceProvidersProfiles";
+    public static final String COLUMN_PROFILE_ID = "p_id";
+    public static final String COLUMN_COMPANY = "company";
+    public static final String COLUMN_ADDRESS = "address";
+    public static final String COLUMN_PHONE_NUMBER = "phone";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_LICENSE = "license";
+    public static final String COLUMN_AVAILABILITY = "availability";*/

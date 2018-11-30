@@ -44,6 +44,13 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_LICENSE = "license";
     public static final String COLUMN_AVAILABILITY = "availability";
+    public static final String COLUMN_AVG_RATING = "avg_rating";
+
+    //Table 5
+    public static final String TABLE_SERVICE_PROVIDER_REVIEWS = "serviceProvidersReviews";
+    public static final String COLUMN_USER_KEY = "user_key";
+    public static final String COLUMN_RATING = "rating";
+    public static final String COLUMN_COMMENT = "num_of_ratings";
 
 
     /**
@@ -59,6 +66,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // TABLE 1
         String CREATE_USERS_TABLE = "CREATE TABLE " +
                 TABLE_USERS + "("
                 + COLUMN_USERID + " INTEGER PRIMARY KEY,"+ COLUMN_USERNAME
@@ -67,6 +75,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 + " FOREIGN KEY(" + COLUMN_PROVIDER_PROFILE_ID + ") REFERENCES " + TABLE_SERVICE_PROVIDER_PROFILES + "( " + COLUMN_PROFILE_ID + ")" +")";
         db.execSQL(CREATE_USERS_TABLE);
 
+        // TABLE 2
         String CREATE_SERVICES_TABLE = "CREATE TABLE " +
                 TABLE_SERVICES + "("
                 + COLUMN_SERVICE_ID + " INTEGER PRIMARY KEY,"+ COLUMN_SERVICE_NAME
@@ -82,14 +91,19 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 + ", FOREIGN KEY(" + COLUMN_SERVICEID + ") REFERENCES " + TABLE_SERVICES + "( " + COLUMN_SERVICE_ID + ")" +")";
         db.execSQL(CREATE_SERVICES_PROVIDERS_TABLE);
 
-        //TABLE 4 - stores the service providers
+        //TABLE 4 - stores the service providers' profile
         String CREATE_PROFILES_TABLE = "CREATE TABLE " +
                 TABLE_SERVICE_PROVIDER_PROFILES + "("
                 + COLUMN_PROFILE_ID + " INTEGER PRIMARY KEY,"+ COLUMN_COMPANY+" TEXT,"+COLUMN_ADDRESS + " TEXT,"
                 + COLUMN_PHONE_NUMBER + " INTEGER," + COLUMN_DESCRIPTION + " TEXT," + COLUMN_LICENSE + " TEXT,"
-                + COLUMN_AVAILABILITY + " TEXT"+")";
+                + COLUMN_AVAILABILITY + " TEXT,"+COLUMN_AVG_RATING + " FLOAT"+")";
         db.execSQL(CREATE_PROFILES_TABLE);
 
+        //TABLE 5 - stores the service providers ratings
+        String CREATE_REVIEWS_TABLE = "CREATE TABLE " +
+                TABLE_SERVICE_PROVIDER_REVIEWS + "("
+                + COLUMN_USER_KEY + " INTEGER,"+ COLUMN_RATING+" INTEGER,"+COLUMN_COMMENT + " TEXT" +")";
+        db.execSQL(CREATE_PROFILES_TABLE);
 
     }
     /**
@@ -128,7 +142,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         if(!availability.equals("")){
             values.put(COLUMN_AVAILABILITY, availability);
         }
-
+        //values.put(COLUMN_RATING, 0.0);
 
         long id = db.insert(TABLE_SERVICE_PROVIDER_PROFILES, null, values);
 
@@ -468,14 +482,56 @@ public class MyDBHandler extends SQLiteOpenHelper {
             String query2 = "Select * FROM " + TABLE_SERVICE_PROVIDER_PROFILES + " WHERE " + COLUMN_PROFILE_ID + " = \"" + i + "\"";
             Cursor cursor2 = db.rawQuery(query2, null);
             if (cursor2.moveToFirst())
-                a += "\n----------------------------------------\n   Service Provider Profile\n----------------------------------------\n   Company: "+cursor2.getString(cursor2.getColumnIndex(COLUMN_COMPANY));
+                a += "\n  --------------------------------------\n   Service Provider Profile\n  --------------------------------------\n   Company: "+cursor2.getString(cursor2.getColumnIndex(COLUMN_COMPANY));
                 a += "\n   Address: "+cursor2.getString(cursor2.getColumnIndex(COLUMN_ADDRESS));
                 a += "\n   Phone Number:  "+cursor2.getString(cursor2.getColumnIndex(COLUMN_PHONE_NUMBER));
                 a += "\n   Description:  "+cursor2.getString(cursor2.getColumnIndex(COLUMN_DESCRIPTION));
                 a += "\n   License: "+cursor2.getString(cursor2.getColumnIndex(COLUMN_LICENSE));
+                a += "\n   Rating: "+cursor2.getString(cursor2.getColumnIndex(COLUMN_AVG_RATING));
 
         }
         db.close();
         return a;
     }
+
+    public void addReview(String username, int rating, String comment){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        int id;
+        double currRating = 0;
+        String query = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = \"" + username + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            id = cursor.getInt(cursor.getColumnIndex(COLUMN_USERID));
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_USER_KEY, id);
+            values.put(COLUMN_RATING, rating);
+            values.put(COLUMN_COMMENT, comment);
+
+            int i = cursor.getInt(cursor.getColumnIndex(COLUMN_PROVIDER_PROFILE_ID));
+            String query2 = "Select * FROM " + TABLE_SERVICE_PROVIDER_REVIEWS + " WHERE " + COLUMN_USER_KEY + " = \"" + id + "\"";
+            Cursor cursor2 = db.rawQuery(query2, null);
+            int countRatings = cursor2.getCount();
+
+            query2 = "Select * FROM " + TABLE_SERVICE_PROVIDER_PROFILES + " WHERE " + COLUMN_PROFILE_ID + " = \"" + i + "\"";
+            cursor2 = db.rawQuery(query2, null);
+            if(cursor2.moveToFirst()) {
+                currRating = cursor2.getDouble(cursor2.getColumnIndex(COLUMN_AVG_RATING));
+            }
+
+            ContentValues values2 = new ContentValues();
+            double avgRating = (currRating*countRatings+rating)/(countRatings+1);
+            values2.put(COLUMN_AVG_RATING, avgRating);
+            db = this.getWritableDatabase();
+            db.insert(TABLE_SERVICE_PROVIDER_REVIEWS, null, values);
+            db.update(TABLE_SERVICE_PROVIDER_PROFILES,values2,COLUMN_PROFILE_ID + " = \"" + i + "\"", null);
+
+
+        }
+
+        db.close();
+    }
+
+
+
 }

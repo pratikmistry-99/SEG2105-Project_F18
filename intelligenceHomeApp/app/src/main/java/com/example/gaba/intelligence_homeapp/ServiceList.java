@@ -73,11 +73,16 @@ public class ServiceList extends AppCompatActivity {
                     showAddDeleteProviderDialog(username, n);
                 }
                 else if (role.equals("Home Owner")){
-
+                    showServiceProviders(n);// n = service name
                 }
 
             }
         });
+    }
+
+    //TODO: implement the activity to show service providers for the selected service
+    private void showServiceProviders(final String serviceName) {
+
     }
 
     //  Method used to create a dialog box that it used to update and delete services

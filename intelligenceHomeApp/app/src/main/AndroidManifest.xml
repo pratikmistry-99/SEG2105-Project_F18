@@ -28,6 +28,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".availiability"></activity>
+        <activity android:name=".Service_providers_list"></activity>
     </application>
 
 </manifest>

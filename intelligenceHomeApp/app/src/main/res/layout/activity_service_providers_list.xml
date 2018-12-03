@@ -5,37 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/artboard1"
-    tools:context=".ServiceList">
+    tools:context=".Service_providers_list">
 
     <RelativeLayout
-        android:id="@+id/service_list"
+        android:id="@+id/service_providers_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:backgroundTint="@android:color/holo_blue_light"
-        tools:context="mgarzon.createbest.productcatalog.MainActivity">
-
-        <EditText
-            android:id="@+id/editService"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter service" />
-
-        <EditText
-            android:id="@+id/editRate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/editService"
-            android:hint="Enter rate" />
+        tools:context="mgarzon.createbest.productcatalog.MainActivity"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <Button
-            android:id="@+id/btnAddService"
+            android:id="@+id/pickTimes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editRate"
-            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:onClick="addService"
-            android:text="Add" />
+            android:text="Pick Times" />
 
 
         <TextView
@@ -43,15 +34,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/btnAddService"
-            android:text="Services"
+            android:text="Service Providers Found"
             android:textAlignment="center" />
 
         <ListView
-            android:id="@+id/serv"
+            android:id="@+id/servProv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textServ"></ListView>
+            android:layout_height="498dp"
+            android:layout_alignParentBottom="true"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="74dp"></ListView>
 
     </RelativeLayout>
+
 
 </android.support.constraint.ConstraintLayout>

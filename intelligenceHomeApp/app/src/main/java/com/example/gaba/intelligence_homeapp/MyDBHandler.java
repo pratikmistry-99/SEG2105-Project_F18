@@ -534,5 +534,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
 
-
+    public ArrayList<User> getServiceProviders(String serviceName) {
+        return new ArrayList<User>();
+    }
 }

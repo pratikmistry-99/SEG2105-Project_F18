@@ -1,11 +1,9 @@
 package com.example.gaba.intelligence_homeapp;
 
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,7 +38,7 @@ public class ServiceList extends AppCompatActivity {
         setContentView(R.layout.activity_service_list);
         editService = (EditText) findViewById(R.id.editService);
         editRate = (EditText) findViewById(R.id.editRate);
-        buttonAddService = (Button) findViewById(R.id.addButton);
+        buttonAddService = (Button) findViewById(R.id.btnAddService);
         // Get ListView object from xml layout
         listView = findViewById(R.id.serv);
         //For each item in database, add to serviceList
@@ -54,7 +52,7 @@ public class ServiceList extends AppCompatActivity {
         if (!role.equals("Administrator")){
             findViewById(R.id.editService).setVisibility(View.GONE);
             findViewById(R.id.editRate).setVisibility(View.GONE);
-            findViewById(R.id.addButton).setVisibility(View.GONE);
+            findViewById(R.id.btnAddService).setVisibility(View.GONE);
             findViewById(R.id.textServ).setVisibility(View.GONE);
         }
 
@@ -73,7 +71,11 @@ public class ServiceList extends AppCompatActivity {
                     showAddDeleteProviderDialog(username, n);
                 }
                 else if (role.equals("Home Owner")){
-                    showServiceProviders(n);// n = service name
+                    //showServiceProviders(n);// n = service name
+                    Intent intent2 = new Intent(getApplicationContext(),Service_providers_list.class);
+                    intent2.putExtra("serviceName", n);
+                    startActivityForResult(intent2,0);
+
                 }
 
             }

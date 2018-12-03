@@ -105,6 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:checked="false"
                 android:text="Licenced"
                 android:visibility="visible" />
 
@@ -113,6 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:checked="true"
                 android:text="Not Licensed"
                 android:visibility="visible" />
 

@@ -196,7 +196,10 @@ public class ServiceList extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     //addProvider
-                    dbHandler.addProviderToService(username, serviceName);
+                    if (!dbHandler.addProviderToService(username, serviceName))
+                        Toast.makeText(getApplicationContext(),"Already registered to this service",Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(getApplicationContext(),"Registered to service",Toast.LENGTH_LONG).show();
                     b.dismiss();
                 }
             });
@@ -205,13 +208,14 @@ public class ServiceList extends AppCompatActivity {
                 public void onClick(View view) {
                     //deleteProvider()
                     dbHandler.deleteProviderToService(username, serviceName);
+                    Toast.makeText(getApplicationContext(),"Unregistered from service",Toast.LENGTH_LONG).show();
                     b.dismiss();
                 }
 
             });
         }
         catch(Exception e){
-            //return false;
+            return false;
         }
         return true;
     }

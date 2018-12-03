@@ -166,9 +166,15 @@ public class MyDBHandler extends SQLiteOpenHelper {
     */
     //adds new service-provider association
     public boolean addProviderToService(String username, String service) {
-        try {
-            if (username == "segTestUser")
-                throw new Exception();
+        ArrayList<User> serviceProviders = getServiceProviders(service);
+        boolean alreadyAdded = false;
+        for(int i =0 ; i < serviceProviders.size(); i++)
+        {
+            if(serviceProviders.get(i).getUsername().equals(username))
+                alreadyAdded = true;
+        }
+        if(!alreadyAdded){
+
             SQLiteDatabase db = this.getWritableDatabase();
             int uId;
             int sId;
@@ -189,12 +195,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 db.insert(TABLE_SERVICE_PROVIDERS, null, values);
                 db.close();
             }
-        }
-        catch(Exception e){
-            //return false;
-        }
-        return true;
 
+            return true;
+        }
+        return false;
     }
 
 

@@ -16,7 +16,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:onClick="selectTime"
         android:text="Pick Times"
         app:layout_constraintBottom_toTopOf="@+id/service_providers_list"
         app:layout_constraintEnd_toEndOf="parent"

@@ -29,6 +29,7 @@
 
         <activity android:name=".availiability"></activity>
         <activity android:name=".Service_providers_list"></activity>
+        <activity android:name=".ViewBookRate_ServiceProvider"></activity>
     </application>
 
 </manifest>

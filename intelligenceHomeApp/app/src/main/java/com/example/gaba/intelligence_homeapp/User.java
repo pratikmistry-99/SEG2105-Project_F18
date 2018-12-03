@@ -92,4 +92,8 @@ public class User {
     public void setHasProfile(boolean b){
         hasProfile=b;
     }
+
+    public String toString(){
+        return username;
+    }
 }

@@ -535,6 +535,69 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
 
     public ArrayList<User> getServiceProviders(String serviceName) {
-        return new ArrayList<User>();
+        ArrayList<User> providers = new ArrayList<User>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        int s_id = -1;
+        ArrayList<Integer> u_id = new ArrayList<>();
+
+        // table services
+        String query = "Select * FROM " + TABLE_SERVICES + " WHERE " + COLUMN_SERVICE_NAME + " = \"" + serviceName + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            s_id = cursor.getInt(cursor.getColumnIndex(COLUMN_SERVICE_ID));
+            System.out.println("s_id = "+s_id);
+            /*while(!cursor.isAfterLast()){
+                u_id.add(cursor.getInt(cursor.getColumnIndex(COLUMN_US)));
+            }*/
+
+        }
+
+        //table serviceProviders
+        String query2 = "Select * FROM " + TABLE_SERVICE_PROVIDERS + " WHERE " + COLUMN_SERVICEID + " = \"" + s_id + "\"";
+        Cursor cursor2 = db.rawQuery(query2, null);
+        if(cursor2.moveToFirst()){
+            while(!cursor2.isAfterLast()){
+                u_id.add(cursor2.getInt(cursor2.getColumnIndex(COLUMN_USER_ID)));
+                System.out.println("u_id = "+cursor2.getInt(cursor2.getColumnIndex(COLUMN_USER_ID)));
+                cursor2.moveToNext();
+            }
+        }
+
+        //table users
+        for(int i = 0; i < u_id.size(); i++){
+            String query3 = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERID + " = \"" + u_id.get(i) + "\"";
+            Cursor cursor3 = db.rawQuery(query3, null);
+            if (cursor3.moveToFirst()){
+                String username, password, role;
+                username = cursor3.getString(cursor3.getColumnIndex(COLUMN_USERNAME));
+                password = cursor3.getString(cursor3.getColumnIndex(COLUMN_PASSWORD));
+                role = cursor3.getString(cursor3.getColumnIndex(COLUMN_ROLE));
+                User user = new User(username, password, role);
+                System.out.println(user);
+                providers.add(user);
+            }
+        }
+
+        return providers;
     }
 }
+/*
+    //Table 1
+    public static final String TABLE_USERS = "users";
+    public static final String COLUMN_USERID = "user_id";
+    public static final String COLUMN_USERNAME = "username";
+    public static final String COLUMN_PASSWORD = "password";
+    public static final String COLUMN_ROLE = "role";
+    public static final String COLUMN_PROVIDER_PROFILE_ID = "sp_id";
+
+    //Table 2
+    public static final String TABLE_SERVICES = "services";
+    public static final String COLUMN_SERVICE_ID = "service_id";
+    public static final String COLUMN_SERVICE_NAME = "service_name";
+    public static final String COLUMN_SERVICE_RATE = "service_rate";
+
+    //Table 3
+    public static final String TABLE_SERVICE_PROVIDERS = "serviceProviders";
+    public static final String COLUMN_SERVICEID = "serviceid";
+    public static final String COLUMN_USER_ID = "userid";
+    */

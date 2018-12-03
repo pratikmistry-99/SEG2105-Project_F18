@@ -7,26 +7,35 @@
     android:background="@drawable/artboard1"
     tools:context=".Service_providers_list">
 
+    <Button
+        android:id="@+id/pickTimes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:onClick="selectTime"
+        android:text="Pick Times"
+        app:layout_constraintBottom_toTopOf="@+id/service_providers_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RelativeLayout
         android:id="@+id/service_providers_list"
-        android:layout_width="match_parent"
+        android:layout_width="381dp"
         android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="70dp"
         android:backgroundTint="@android:color/holo_blue_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:context="mgarzon.createbest.productcatalog.MainActivity"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
-
-        <Button
-            android:id="@+id/pickTimes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:onClick="addService"
-            android:text="Pick Times" />
+        tools:layout_editor_absoluteX="0dp">
 
 
         <TextView
@@ -40,11 +49,7 @@
         <ListView
             android:id="@+id/servProv"
             android:layout_width="match_parent"
-            android:layout_height="498dp"
-            android:layout_alignParentBottom="true"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="74dp"></ListView>
+            android:layout_height="506dp"></ListView>
 
     </RelativeLayout>
 

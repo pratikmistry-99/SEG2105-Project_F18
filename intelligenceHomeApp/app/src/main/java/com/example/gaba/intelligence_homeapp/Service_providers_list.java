@@ -32,16 +32,16 @@ public class Service_providers_list extends AppCompatActivity{
         //Create an ArrayAdapter and Set it on the ListView
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceProvidersList);
         listView.setAdapter(adapter);
-        btnPickTimes.setOnClickListener(new View.OnClickListener() {
+        /*btnPickTimes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectTime();
             }
-        });
+        });*/
 
     }
 
-    public void selectTime(){
+    public void selectTime(View view){
 
     }
 

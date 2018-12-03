@@ -29,6 +29,7 @@ public class WelcomeScreen extends AppCompatActivity {
     String str;
     User user;
     String role;
+    Button serv_list;
     Button avail;
     Button createProf;
     RadioButton licenseTrue;
@@ -52,6 +53,7 @@ public class WelcomeScreen extends AppCompatActivity {
         createProf = findViewById(R.id.btnCreateProf);
         licenseFalse = findViewById(R.id.noBtn);
         licenseTrue = findViewById(R.id.yesBtn);
+        serv_list = findViewById(R.id.servList);
         emptyCredentialsAlert = findViewById(R.id.EmptyProfileAlert);
 
         MyDBHandler dbHandler = new MyDBHandler(this);
@@ -68,6 +70,7 @@ public class WelcomeScreen extends AppCompatActivity {
         role = user.getRole();
         String ad = "";
         if (user.getRole().equals("Administrator")){
+            serv_list.setVisibility(VISIBLE);
             ad = dbHandler.getAllUsernames();
             adminRoleDisplay.setText(ad);
             findViewById(R.id.yesBtn).setVisibility(View.GONE);
@@ -85,9 +88,10 @@ public class WelcomeScreen extends AppCompatActivity {
         }
         else
             adminRoleDisplay.setText("");
-        findViewById(R.id.servList).setVisibility(VISIBLE);
+
         boolean hasProfile = dbHandler.hasProfile(user.getUsername());
         if(user.getRole().equals("Service Provider") && !hasProfile){
+            serv_list.setVisibility(View.GONE);
             findViewById(R.id.yesBtn).setVisibility(VISIBLE);
             findViewById(R.id.noBtn).setVisibility(VISIBLE);
             findViewById(R.id.noBtn).setVisibility(VISIBLE);
@@ -100,6 +104,7 @@ public class WelcomeScreen extends AppCompatActivity {
         }
         /**Below used to say Service Provider but i think this was a meant to be Home Owner-so i changed it. Correct me if Im wrong */
         else if(user.getRole().equals("Service Provider") && hasProfile){
+            serv_list.setVisibility(VISIBLE);
             findViewById(R.id.yesBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
@@ -119,6 +124,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
         }
         else if (user.getRole().equals("Home Owner")){
+            serv_list.setVisibility(VISIBLE);
             findViewById(R.id.yesBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
@@ -179,6 +185,8 @@ public class WelcomeScreen extends AppCompatActivity {
         findViewById(R.id.btnCreateProf).setVisibility(View.GONE);
         findViewById(R.id.btnAvail).setVisibility(VISIBLE);
 
+        finish();
+        startActivityForResult(getIntent(),0);
 
     }
 

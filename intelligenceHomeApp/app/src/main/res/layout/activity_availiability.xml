@@ -45,7 +45,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Start"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -61,7 +61,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="End"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -90,7 +90,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Start"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -106,7 +106,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="End"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -136,7 +136,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Start"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -152,7 +152,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="End"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView23"
@@ -182,7 +182,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Start"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView34"
@@ -198,7 +198,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="End"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView35"
@@ -227,7 +227,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Start"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView37"
@@ -243,7 +243,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="End"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView38"
@@ -272,7 +272,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Start"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView40"
@@ -288,7 +288,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="End"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView41"
@@ -317,7 +317,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Start"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView43"
@@ -333,7 +333,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="End"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/textView44"

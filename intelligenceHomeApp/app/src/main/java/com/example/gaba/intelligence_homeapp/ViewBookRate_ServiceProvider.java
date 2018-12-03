@@ -1,5 +1,6 @@
 package com.example.gaba.intelligence_homeapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -67,7 +68,9 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
     }
 
     public void rate(View view){
-
+        Intent intent = new Intent(getApplicationContext(), rateProvider.class);
+        intent.putExtra("username", username);
+        startActivityForResult(intent, 0);
     }
 
 }

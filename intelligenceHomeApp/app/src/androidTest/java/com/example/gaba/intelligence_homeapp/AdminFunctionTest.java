@@ -1,5 +1,6 @@
 package com.example.gaba.intelligence_homeapp;
 
+import android.content.Intent;
 import android.support.test.annotation.UiThreadTest;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
@@ -22,29 +23,42 @@ import static org.junit.Assert.assertTrue;
 public class AdminFunctionTest {
 
     @Rule
-    public ActivityTestRule<ServiceList> slistTestRule = new ActivityTestRule<ServiceList>(ServiceList.class);
-    public ActivityTestRule<update_delete_dialog> dDialogTestRule = new ActivityTestRule<update_delete_dialog>(update_delete_dialog.class);
-    private update_delete_dialog dDialog = null;
-    private ServiceList slist = null;
+    public ActivityTestRule<ServiceList> slistTestRule = new ActivityTestRule<ServiceList>(ServiceList.class, true, true)
+    {
+        @Override
+        protected Intent getActivityIntent()
+        {
+            Intent intent = new Intent();
+            intent.putExtra("username","Admin");
+            intent.putExtra("role","Administrator");
+            return intent;
+        }
+    };
+    private ServiceList slist;
+    private MyDBHandler database = null;
+
+//    public ActivityTestRule<update_delete_dialog> dDialogTestRule = new ActivityTestRule<update_delete_dialog>(update_delete_dialog.class);
+//    private update_delete_dialog dDialog = null;
+
     private TextView serviceName;
     private TextView hourlyRate;
     private Button addButton;
     private Button updateButton, deleteButton;
-    private MyDBHandler database=null;
-
+//
     private String TestService = "Harvey Cleaners";
 
-    //clears database of all services and double checks that the serviceDatabase is clear
+    /** clears database of all services and double checks that the serviceDatabase is clear */
     @Before
     public void SetupTest()  {
         slist = slistTestRule.getActivity();
-        dDialog = dDialogTestRule.getActivity();
         database = new MyDBHandler(slist);
+
+//        dDialog = dDialogTestRule.getActivity();
         database.clearServiceListTables();
         assertTrue( database.getAllServices().isEmpty());
     }
 
-    //clears Database from what was added in test
+    /** clears Database from what was added in test */
     @After
     public void CleanupTest() {
         database.clearServiceListTables();
@@ -53,7 +67,7 @@ public class AdminFunctionTest {
     @Test
     @UiThreadTest
     public void checkAddService() throws Exception  {
-        // TO DO: add service name, and add service hourly rate
+        assertEquals(1,1);
         assertNotNull(slist.findViewById(R.id.editService));
         serviceName = slist.findViewById(R.id.editService);
         serviceName.setText(TestService);
@@ -88,17 +102,18 @@ public class AdminFunctionTest {
     }
 
     /** Fails for some reason, not sure yet. Commented out for now*/
-//    @Test
-//    @UiThreadTest
-//    public void checkDeleteService() throws Exception{
-//        checkAddService();
-//        //tried to test like other functions, but ran into nullpoint error because the activity wasn't created yet.
-//        //since I test OUR logic for the delete function, this is sufficient
-//        slist.deleteService(TestService);
-//        //since we check in setup that the database is empty, after adding a service, it should be empty once again
-//        assertTrue(database.getAllServices().isEmpty());
-//
-//    }
+    @Test
+    @UiThreadTest
+    public void checkDeleteService() throws Exception{
+        checkAddService();
+        //tried to test like other functions, but ran into nullpoint error because the activity wasn't created yet.
+        //since I test OUR logic for the delete function, this is sufficient
+        slist.deleteService(TestService);
+        //since we check in setup that the database is empty, after adding a service, it should be empty once again
+        assertTrue(database.getAllServices().isEmpty());
+
+    }
+
 
 
 }

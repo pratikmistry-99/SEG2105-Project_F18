@@ -26,8 +26,8 @@ public class Service_providers_list extends AppCompatActivity{
     String serviceName;
     String username;
 
-    SeekBar minSeekBar;
-    SeekBar maxSeekBar;
+    EditText minRating;
+    EditText maxRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,8 @@ public class Service_providers_list extends AppCompatActivity{
         setContentView(R.layout.activity_service_providers_list);
         serviceName = getIntent().getStringExtra("serviceName");
         btnPickTimes = (Button) findViewById(R.id.pickTimes);
-        minSeekBar = findViewById(R.id.barMin);
-        maxSeekBar = findViewById(R.id.barMax);
+        minRating = findViewById(R.id.editMax);
+        maxRating = findViewById(R.id.editMin);
         // Get ListView object from xml layout
         listView = findViewById(R.id.servProv);
         //For each item in database, add to serviceList
@@ -91,8 +91,8 @@ public class Service_providers_list extends AppCompatActivity{
         btnSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //Need to make a method that makes a list based on the given rating and displays it
-                final int min = minSeekBar.getProgress(); //Program crashed here, maybe add editText instead of seekBar?
-                final int max = maxSeekBar.getProgress();
+                final int min = Integer.parseInt(minRating.getText().toString()); //Program crashed here, maybe add editText instead of seekBar?
+                final int max = Integer.parseInt(maxRating.getText().toString());
 
                ArrayList<User> temp= dbHandler.getServiceProviders(serviceName,min,max);
                //adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, temp);

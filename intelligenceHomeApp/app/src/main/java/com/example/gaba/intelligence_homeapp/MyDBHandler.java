@@ -489,7 +489,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             String query2 = "Select * FROM " + TABLE_SERVICE_PROVIDER_PROFILES + " WHERE " + COLUMN_PROFILE_ID + " = \"" + i + "\"";
             Cursor cursor2 = db.rawQuery(query2, null);
             if (cursor2.moveToFirst())
-                a += "\n----------------------------------------\n Service Provider Profile\n----------------------------------------\n   Company: "+cursor2.getString(cursor2.getColumnIndex(COLUMN_COMPANY));
+                a += "\n----------------------------------------\n Service Provider Profile\n----------------------------------------\n  Company: "+cursor2.getString(cursor2.getColumnIndex(COLUMN_COMPANY));
                 a += "\n  Address: "+cursor2.getString(cursor2.getColumnIndex(COLUMN_ADDRESS));
                 a += "\n  Phone Number:  "+cursor2.getString(cursor2.getColumnIndex(COLUMN_PHONE_NUMBER));
                 a += "\n  Description:  "+cursor2.getString(cursor2.getColumnIndex(COLUMN_DESCRIPTION));

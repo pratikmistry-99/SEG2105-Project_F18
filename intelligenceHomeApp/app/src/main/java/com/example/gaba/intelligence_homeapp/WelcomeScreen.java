@@ -71,6 +71,10 @@ public class WelcomeScreen extends AppCompatActivity {
             user = new User("Bob","password","Service Provider");
             dbHandler.addUser(user);
         }
+//        else if(){
+//            user = new User("Billy","password","Home Owner");
+//            dbHandler.addUser(user);
+//        }
 
         userNameDisplay.setText(str);
         userRoleDisplay.setText(user.getRole() + " Account");

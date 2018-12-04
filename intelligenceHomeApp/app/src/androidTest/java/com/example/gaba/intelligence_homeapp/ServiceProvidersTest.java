@@ -72,26 +72,28 @@ public class ServiceProvidersTest {
 
         textInput = sProvider.findViewById(R.id.editPhone);
         textInput.setText("613 000 0000");
-        long phoneNum = Long.parseLong(textInput.getText().toString());
+        //long phoneNum = Long.parseLong(textInput.getText().toString());
 
         licensing = sProvider.findViewById(R.id.yesBtn);
         licensing.setChecked(true);
         Boolean license = licensing.isChecked();
+
         createProfile = sProvider.findViewById(R.id.btnCreateProf);
         createProfile.performClick();
+
         User u = database.findUser("Bob");
 //        database.addProfile(u.getUsername(),company,address,phoneNum,description,license,"");
         assertEquals("Bob", u.getUsername());
        //assertEquals(true, database.hasProfile("Bob"));
     }
 
-//    /** Checks to make sure when an account/user is deleted, their profile is gone as well*/
-//   @Test
-//   @UiThreadTest
-//   public void checkForNoProfile(){
-//        assertEquals(false, database.hasProfile("Bob"));
-//   }
-//
+    /** Checks to make sure when an account/user is deleted, their profile is gone as well*/
+   @Test
+   @UiThreadTest
+   public void checkForNoProfile(){
+        assertEquals(false, database.hasProfile("Bob"));
+   }
+
 //   @Test
 //   @UiThreadTest
 //   public void checkAddAvailabilityButton(){

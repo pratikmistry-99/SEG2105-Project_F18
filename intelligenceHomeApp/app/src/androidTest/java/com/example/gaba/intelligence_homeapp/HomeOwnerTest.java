@@ -59,7 +59,7 @@ public class HomeOwnerTest {
 
     @AfterClass
     public static void cleanUpAfter(){
-       //Clear all tables
+//       Clear all tables
 //        MyDBHandler database = new MyDBHandler();
 //        database.clearAllTables();
     }

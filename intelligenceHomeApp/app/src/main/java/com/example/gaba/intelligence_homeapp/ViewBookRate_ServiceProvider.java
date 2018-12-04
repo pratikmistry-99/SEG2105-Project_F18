@@ -50,6 +50,30 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
 
         String av = dbHandler.getAvailabilities(username);
 
+
+        if(mon_rb.getText().toString().trim().equals("-"))
+            mon_rb.setVisibility(View.GONE);
+
+        if(tue_rb.getText().toString().trim().equals("-"))
+            tue_rb.setVisibility(View.GONE);
+
+        if(wed_rb.getText().toString().trim().equals("-"))
+            wed_rb.setVisibility(View.GONE);
+
+        if(thu_rb.getText().toString().trim().equals("-"))
+            thu_rb.setVisibility(View.GONE);
+
+        if(fri_rb.getText().toString().trim().equals("-"))
+            fri_rb.setVisibility(View.GONE);
+
+        if(sat_rb.getText().toString().trim().equals("-"))
+            sat_rb.setVisibility(View.GONE);
+
+        if(sun_rb.getText().toString().trim().equals("-"))
+            sun_rb.setVisibility(View.GONE);
+
+
+
         if (av != null) {
             availabilities = av.split("//");
             if (availabilities.length == 7) {
@@ -63,8 +87,10 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
 
             }
         }
-
-
+        else{
+            ((TextView) findViewById(R.id.profileInfo)).setText(((TextView) findViewById(R.id.profileInfo)).getText().toString() + "\n ** Not specified availiability **");
+            findViewById(R.id.timePicker).setVisibility(View.GONE);
+        }
     }
 
     public void book(View view){

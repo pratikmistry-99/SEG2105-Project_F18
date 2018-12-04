@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="Service Provider Info"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="30sp" />
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/profileInfo"

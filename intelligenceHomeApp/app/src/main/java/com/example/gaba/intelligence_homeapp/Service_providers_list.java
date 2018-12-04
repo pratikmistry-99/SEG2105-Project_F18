@@ -91,7 +91,7 @@ public class Service_providers_list extends AppCompatActivity{
         btnSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //Need to make a method that makes a list based on the given rating and displays it
-                final int min = Integer.parseInt(minRating.getText().toString()); //Program crashed here, maybe add editText instead of seekBar?
+                final int min = Integer.parseInt(minRating.getText().toString());
                 final int max = Integer.parseInt(maxRating.getText().toString());
 
                ArrayList<User> temp= dbHandler.getServiceProviders(serviceName,min,max);

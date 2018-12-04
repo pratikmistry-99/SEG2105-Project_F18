@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -26,12 +27,11 @@ public class ServiceProvidersTest {
    // public User user = new User("Bob", "password", "Service Provider");
     public ActivityTestRule<WelcomeScreen> sProviderTestRule = new ActivityTestRule<WelcomeScreen>(WelcomeScreen.class)
     {
-        @Override
-        protected void beforeActivityLaunched()
-        {
-            User user = new User("Bob","password","Service Provider");
-            database.addUser(user);
-        }
+//        @Override
+//        protected void beforeActivityLaunched()
+//        {
+//            userSetUp();
+//        }
 
         @Override
         protected Intent getActivityIntent()
@@ -51,6 +51,12 @@ public class ServiceProvidersTest {
     private TextView textInput, userNameDisplay, userRoleDisplay;
     private RadioGroup rGroup;
 
+    @BeforeClass
+    public static void setUpBefore(){
+        User user = new User("Bob","password","Service Provider");
+        MyDBHandler database = new MyDBHandler(user);
+        database.addUser(user);
+    }
 
     @Before
     public void setUp(){

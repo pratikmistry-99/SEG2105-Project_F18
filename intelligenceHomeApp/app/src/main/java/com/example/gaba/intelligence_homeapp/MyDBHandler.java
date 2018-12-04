@@ -52,6 +52,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_RATING = "rating";
     public static final String COLUMN_COMMENT = "num_of_ratings";
 
+    //Table 6
+    public static final String TABLE_BOOKINGS = "bookings";
+    public static final String COLUMN_BOOKING_ID = "booking_id";
+    public static final String COLUMN_HOMEOWNER = "homeOwner";
+    public static final String COLUMN_SERVICE_PROVIDER = "service_provider";
+    public static final String COLUMN_TIME = "time_slot";
 
     /**
      * Constructor of class MyDBHandler
@@ -105,7 +111,14 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 + COLUMN_USER_KEY + " INTEGER,"+ COLUMN_RATING+" INTEGER,"+COLUMN_COMMENT + " TEXT" +")";
         db.execSQL(CREATE_REVIEWS_TABLE);
 
+        //Table 6 - stores all bookings
+        String CREATE_BOOKINGS_TABLE = "CREATE TABLE " +
+                TABLE_BOOKINGS + "("
+                + COLUMN_BOOKING_ID + " INTEGER PRIMARY KEY,"+ COLUMN_HOMEOWNER+" TEXT,"+COLUMN_SERVICE_PROVIDER + " TEXT,"
+                +COLUMN_TIME+" TEXT"+")";
+        db.execSQL(CREATE_BOOKINGS_TABLE);
     }
+
     /**
      *
      * @param db
@@ -113,15 +126,28 @@ public class MyDBHandler extends SQLiteOpenHelper {
      * @param newVersion
      */
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion,
-                          int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_PROFILES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE_PROVIDER_REVIEWS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BOOKINGS);
         onCreate(db);
     }
+
+
+    public void addBooking(String homeowner, String serviceProvider, String time){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_HOMEOWNER, homeowner);
+        values.put(COLUMN_SERVICE_PROVIDER, serviceProvider);
+        values.put(COLUMN_TIME, time);
+
+        db.insert(TABLE_BOOKINGS, null, values);
+        db.close();
+    }
+
 
 
     public void addProfile(String username, String company, String address, long phoneNumber, String description, boolean isLicensed, String availability) throws Exception {
@@ -586,6 +612,38 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         return providers;
     }
+
+    public ArrayList<User> getServiceProviders(String serviceName, int min, int max) {
+        ArrayList<User> providers = getServiceProviders(serviceName);
+        ArrayList<User> provider_with_ratingContraint = new ArrayList<User>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        for(int i =0 ; i<providers.size(); i++){
+            User u = providers.get(i);
+            int p_id = getUserPK(u.getUsername());
+            if(p_id>=0){
+                String query = "Select * FROM " + TABLE_SERVICE_PROVIDER_PROFILES + " WHERE " + COLUMN_PROFILE_ID + " = \"" + p_id + "\"";
+                Cursor cursor = db.rawQuery(query, null);
+                if (cursor.moveToFirst()) {
+                    double rating = cursor.getInt(cursor.getColumnIndex(COLUMN_AVG_RATING));
+                    if (rating>=min && rating<= max)
+                        provider_with_ratingContraint.add(u);
+                }
+            }
+        }
+
+        return provider_with_ratingContraint;
+    }
+
+    public int getUserPK(String username){
+        int i = -1;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = \"" + username + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            i = cursor.getInt(cursor.getColumnIndex(COLUMN_USERID));
+        }
+        return i;
+    }
 }
 /*
     //Table 1
@@ -606,4 +664,28 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String TABLE_SERVICE_PROVIDERS = "serviceProviders";
     public static final String COLUMN_SERVICEID = "serviceid";
     public static final String COLUMN_USER_ID = "userid";
+
+    //Table 4
+    public static final String TABLE_SERVICE_PROVIDER_PROFILES = "serviceProvidersProfiles";
+    public static final String COLUMN_PROFILE_ID = "p_id";
+    public static final String COLUMN_COMPANY = "company";
+    public static final String COLUMN_ADDRESS = "address";
+    public static final String COLUMN_PHONE_NUMBER = "phone";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_LICENSE = "license";
+    public static final String COLUMN_AVAILABILITY = "availability";
+    public static final String COLUMN_AVG_RATING = "avg_rating";
+
+    //Table 5
+    public static final String TABLE_SERVICE_PROVIDER_REVIEWS = "serviceProvidersReviews";
+    public static final String COLUMN_USER_KEY = "user_key";
+    public static final String COLUMN_RATING = "rating";
+    public static final String COLUMN_COMMENT = "num_of_ratings";
+
+    //Table 6
+    public static final String TABLE_BOOKINGS = "bookings";
+    public static final String COLUMN_BOOKING_ID = "booking_id";
+    public static final String COLUMN_HOMEOWNER = "homeOwner";
+    public static final String COLUMN_SERVICE_PROVIDER = "service_provider";
+    public static final String COLUMN_TIME = "time_slot";
     */

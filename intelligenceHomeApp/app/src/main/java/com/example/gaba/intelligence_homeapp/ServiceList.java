@@ -74,6 +74,7 @@ public class ServiceList extends AppCompatActivity {
                     //showServiceProviders(n);// n = service name
                     Intent intent2 = new Intent(getApplicationContext(),Service_providers_list.class);
                     intent2.putExtra("serviceName", n);
+                    intent2.putExtra("username", n);
                     startActivityForResult(intent2,0);
 
                 }

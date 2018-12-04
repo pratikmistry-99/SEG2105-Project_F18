@@ -8,8 +8,9 @@
     tools:context="com.example.gaba.intelligence_homeapp.rating_select_dialog">
 
     <LinearLayout
+        android:id="@+id/LL"
         android:layout_width="match_parent"
-        android:layout_height="103dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="12dp"
         android:layout_marginLeft="12dp"
@@ -23,12 +24,34 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <EditText
-            android:id="@+id/editRating"
+        <TextView
+            android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Rating"
-            android:inputType="numberDecimal" />
+            android:text="Minimum Rating" />
+
+        <SeekBar
+            android:id="@+id/barMin"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:max="5"
+            android:progress="1" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Maximum Rating"
+            android:textSize="14sp" />
+
+        <SeekBar
+            android:id="@+id/barMax"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:max="5"
+            android:progress="5" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,12 +26,17 @@ public class Service_providers_list extends AppCompatActivity{
     String serviceName;
     String username;
 
+    SeekBar minSeekBar;
+    SeekBar maxSeekBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_providers_list);
         serviceName = getIntent().getStringExtra("serviceName");
         btnPickTimes = (Button) findViewById(R.id.pickTimes);
+        minSeekBar = findViewById(R.id.barMin);
+        maxSeekBar = findViewById(R.id.barMax);
         // Get ListView object from xml layout
         listView = findViewById(R.id.servProv);
         //For each item in database, add to serviceList
@@ -48,6 +54,7 @@ public class Service_providers_list extends AppCompatActivity{
                 Intent intent = new Intent(getApplicationContext(), ViewBookRate_ServiceProvider.class);
                 intent.putExtra("serviceName", serviceName);
                 intent.putExtra("username", username);
+                intent.putExtra("accountOwner", getIntent().getStringExtra("username"));
                 startActivityForResult(intent, 0);
 
             }
@@ -72,18 +79,25 @@ public class Service_providers_list extends AppCompatActivity{
         dialogBuilder.setView(dialogView);
 
         final Button btnSearch = (Button) dialogView.findViewById(R.id.btnSearch);
-        final EditText editRating = (EditText) dialogView.findViewById(R.id.editRating);
 
         dialogBuilder.setTitle("Rating Search");
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
+
+
+        //(findViewById(R.id.LL)).setVisibility(View.VISIBLE);
+        //((SeekBar)findViewById(R.id.seekBar2)).setVisibility(View.VISIBLE);
         btnSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //Need to make a method that makes a list based on the given rating and displays it
+                final int min = (int)minSeekBar.getProgress();
+                final int max = (int)maxSeekBar.getProgress();
+                ArrayList<User> temp= dbHandler.getServiceProviders(serviceName,min,max);
+                //adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, temp);
+                listView.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, temp));
                 b.dismiss();
             }
-
         });
     }
 

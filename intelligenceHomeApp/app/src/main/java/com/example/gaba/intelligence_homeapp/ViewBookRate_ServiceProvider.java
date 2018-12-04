@@ -22,6 +22,8 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
 
     Button bookBtn;
     Button rateBtn;
+
+    String[] availabilities;
     
     @Override
     // onCreate method
@@ -46,7 +48,7 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
         sat_rb = findViewById(R.id.satAv);
         sun_rb = findViewById(R.id.sunAv);
 
-        String[] availabilities;
+
 
         String av = dbHandler.getAvailabilities(username);
 
@@ -94,7 +96,24 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
     }
 
     public void book(View view){
+        MyDBHandler dbHandler = new MyDBHandler(getApplicationContext());
+        String time = "";
+        if (mon_rb.isChecked())
+            time = "Monday // " + availabilities[0].trim();
+        else if (tue_rb.isChecked())
+            time = "Tuesday // " + availabilities[1].trim();
+        else if (wed_rb.isChecked())
+            time = "Wednesday // " + availabilities[2].trim();
+        else if (thu_rb.isChecked())
+            time = "Thursday // " + availabilities[3].trim();
+        else if (fri_rb.isChecked())
+            time = "Friday // " + availabilities[4].trim();
+        else if (sat_rb.isChecked())
+            time = "Saturday // " + availabilities[5].trim();
+        else if (sun_rb.isChecked())
+            time = "Sunday // " + availabilities[6].trim();
 
+        dbHandler.addBooking(getIntent().getStringExtra("accountOwner"),username, time);
     }
 
     public void rate(View view){

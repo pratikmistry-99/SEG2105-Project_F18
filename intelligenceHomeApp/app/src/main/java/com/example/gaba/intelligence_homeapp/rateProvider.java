@@ -1,15 +1,18 @@
 package com.example.gaba.intelligence_homeapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class rateProvider extends AppCompatActivity {
 
     String username;
+    String serviceName;
     SeekBar rating;
     EditText comment;
 
@@ -23,6 +26,7 @@ public class rateProvider extends AppCompatActivity {
         setContentView(R.layout.activity_rate_provider);
 
         username = getIntent().getStringExtra("username");
+        serviceName = getIntent().getStringExtra("serviceName");
         rating = findViewById(R.id.seekBar);
         comment = findViewById(R.id.comment);
 
@@ -34,6 +38,13 @@ public class rateProvider extends AppCompatActivity {
         MyDBHandler dbHandler = new MyDBHandler(this);
         dbHandler.addReview(username,review_rating,review_comment);
         Toast.makeText(getApplicationContext(),"Submitted. Thank you!",Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(getApplicationContext(), ViewBookRate_ServiceProvider.class);
+        intent.putExtra("username", username);
+        intent.putExtra("serviceName", serviceName);
+        intent.putExtra("accountOwner", getIntent().getStringExtra("accountOwner"));
         finish();
+        startActivityForResult(intent, 0);
+
     }
 }

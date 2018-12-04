@@ -117,8 +117,12 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
     }
 
     public void rate(View view){
+
         Intent intent = new Intent(getApplicationContext(), rateProvider.class);
         intent.putExtra("username", username);
+        intent.putExtra("serviceName", serviceName);
+        intent.putExtra("accountOwner", getIntent().getStringExtra("accountOwner"));
+        finish();
         startActivityForResult(intent, 0);
     }
 

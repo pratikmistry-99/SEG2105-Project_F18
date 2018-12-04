@@ -4,105 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/artboard1">
 
-    <LinearLayout
-        android:id="@+id/profilePage"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="14dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginRight="14dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:clipToPadding="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarDefaultDelayBeforeFade="@android:integer/config_longAnimTime"
+        android:scrollbarSize="30dp"
+        android:scrollbarStyle="insideInset"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView3"
+        <LinearLayout
+            android:id="@+id/profilePage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Service Provider Info"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="30sp" />
+            android:layout_height="fill_parent"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/profileInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:text="ProfileInfo"
-            android:textSize="18sp" />
-
-        <RadioGroup
-            android:id="@+id/timePicker"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RadioButton
-                android:id="@+id/monAv"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Monday: " />
+                android:text="Service Provider Info"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="30sp" />
 
-            <RadioButton
-                android:id="@+id/tueAv"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/profileInfo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Tuesday: " />
+                android:autoText="false"
+                android:text="ProfileInfo"
+                android:textSize="18sp" />
 
-            <RadioButton
-                android:id="@+id/wedAv"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/timePicker"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/monAv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Monday: " />
+
+                <RadioButton
+                    android:id="@+id/tueAv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Tuesday: " />
+
+                <RadioButton
+                    android:id="@+id/wedAv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Wednesday:" />
+
+                <RadioButton
+                    android:id="@+id/thuAv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Thursday: " />
+
+                <RadioButton
+                    android:id="@+id/friAv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Friday: " />
+
+                <RadioButton
+                    android:id="@+id/satAv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Saturday: " />
+
+                <RadioButton
+                    android:id="@+id/sunAv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Sunday: " />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnBook"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Wednesday:" />
+                android:text="Book" />
 
-            <RadioButton
-                android:id="@+id/thuAv"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btnRate"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Thursday: " />
+                android:onClick="rate"
+                android:text="Rate" />
+        </LinearLayout>
+    </ScrollView>
 
-            <RadioButton
-                android:id="@+id/friAv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Friday: " />
-
-            <RadioButton
-                android:id="@+id/satAv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Saturday: " />
-
-            <RadioButton
-                android:id="@+id/sunAv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Sunday: " />
-        </RadioGroup>
-
-        <Button
-            android:id="@+id/btnBook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Book" />
-
-        <Button
-            android:id="@+id/btnRate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="rate"
-            android:text="Rate" />
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

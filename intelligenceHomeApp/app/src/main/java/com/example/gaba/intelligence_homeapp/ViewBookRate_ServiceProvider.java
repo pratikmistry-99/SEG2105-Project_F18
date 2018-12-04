@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 public class ViewBookRate_ServiceProvider extends AppCompatActivity{
     String serviceName;
@@ -30,6 +31,9 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
 
         serviceName = getIntent().getStringExtra("serviceName");
         username = getIntent().getStringExtra("username");
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        ((TextView)findViewById(R.id.profileInfo)).setText("Name: "+username+dbHandler.getServiceProviderInfo(username));
+
 
         bookBtn = findViewById(R.id.btnBook);
         rateBtn = findViewById(R.id.btnRate);
@@ -43,7 +47,7 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
         sun_rb = findViewById(R.id.sunAv);
 
         String[] availabilities;
-        MyDBHandler dbHandler = new MyDBHandler(this);
+
         String av = dbHandler.getAvailabilities(username);
 
         if (av != null) {

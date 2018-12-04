@@ -1,5 +1,6 @@
 package com.example.gaba.intelligence_homeapp;
 
+import android.content.Intent;
 import android.support.test.annotation.UiThreadTest;
 import android.support.test.rule.ActivityTestRule;
 import android.util.Log;
@@ -22,118 +23,89 @@ import static org.junit.Assert.assertThat;
 public class ServiceProvidersTest {
 
     @Rule
-    public ActivityTestRule<SignupScreen>sScreenTestRule = new ActivityTestRule<SignupScreen>(SignupScreen.class);
-    private SignupScreen sScreen = null;
-    public ActivityTestRule<WelcomeScreen> sProviderTestRule = new ActivityTestRule<>(WelcomeScreen.class);
+   // public User user = new User("Bob", "password", "Service Provider");
+    public ActivityTestRule<WelcomeScreen> sProviderTestRule = new ActivityTestRule<WelcomeScreen>(WelcomeScreen.class)
+    {
+        @Override
+        protected void beforeActivityLaunched()
+        {
+            User user = new User("Bob","password","Service Provider");
+            database.addUser(user);
+        }
+
+        @Override
+        protected Intent getActivityIntent()
+        {
+            Intent intent = new Intent();
+            intent.putExtra("username","Bob");
+            intent.putExtra("role","Service Provider");
+            return intent;
+        }
+
+    };
     private WelcomeScreen sProvider = null;
-    private EditText address, company, phoneNum, description;
-    private RadioButton license, noLicense;
-    private Button createProfile, selectAvail;
     private MyDBHandler database = null;
 
-    private TextView text;
+    private RadioButton licensing;
+    private Button createProfile, selectAvail;
+    private TextView textInput, userNameDisplay, userRoleDisplay;
     private RadioGroup rGroup;
-    private RadioButton serviceProvider;
-    private Button cAccountButton;
-
-    public ActivityTestRule<LoginScreen>loginTestRule = new ActivityTestRule<>(LoginScreen.class);
-    private LoginScreen login = null;
-    private Button log;
-
-
-
 
 
     @Before
     public void setUp(){
-        sScreen = sScreenTestRule.getActivity();
         sProvider = sProviderTestRule.getActivity();
-        login = loginTestRule.getActivity();
-        database = new MyDBHandler(sScreen);
-        database.clearAllTables();
+        database = new MyDBHandler(sProvider);
+        //database.clearServiceListTables();
     }
 
     @Test
     @UiThreadTest
-    public void checkCreateProfile() throws Exception{
-       //First assure a serviceProvider user is created
-        text = sScreen.findViewById(R.id.addUser);
-        text.setText("usersp");
-        String name = text.getText().toString();
-        assertEquals(1,1);
+    public void checkProfileCreation(){
+        assertNotNull(sProvider.findViewById(R.id.editAddress));
+        textInput = sProvider.findViewById(R.id.editAddress);
+        textInput.setText("800 King Edward");
 
-        text = sScreen.findViewById(R.id.addPassword);
-        text.setText("passwordsp");
-        String pass = text.getText().toString();
+        textInput = sProvider.findViewById(R.id.editDesc);
+        textInput.setText("To assure students do not drown in their studies. We are not Insurance.");
 
-        rGroup = sScreen.findViewById(R.id.radioGroup);
-        serviceProvider = sScreen.findViewById(R.id.rb_SP);
-        serviceProvider.setChecked(true);
+        textInput = sProvider.findViewById(R.id.editCompany);
+        textInput.setText("Student Assurance");
 
-        cAccountButton = sScreen.findViewById(R.id.createAcc);
-        cAccountButton.performClick();
+        textInput = sProvider.findViewById(R.id.editPhone);
+        textInput.setText("613 000 0000");
 
-        assertEquals(true, database.addProviderToService(name, pass));
-        //Login with above to Assure Welcome is for SProvider?
-//        text = login.findViewById(R.id.username);
-//        text.setText("usersp");
-//        //String userName = text.getText().toString();
-//        text = login.findViewById(R.id.password);
-//        text.setText("passwordsp");
-//        //String pswd = text.getText().toString();
-//
-//        log = login.findViewById(R.id.loginBtn);
-//        log.performClick();
+        licensing = sProvider.findViewById(R.id.yesBtn);
+        licensing.setChecked(true);
 
-        //Next, text functionality of the WelcomePage for this User
-//        text = sProvider.findViewById(R.id.editAddress);
-//        text.setText("800 King Edward");
-//        String addr = text.getText().toString();
-//
-//        text = sProvider.findViewById(R.id.editCompany);
-//        text.setText("uOttawa  ");
-//        String comp = text.getText().toString();
-//
-//        text = sProvider.findViewById(R.id.editPhone);
-//        text.setText("613 000 0000");
-//        String num = text.getText().toString();
-//
-//        text = sProvider.findViewById(R.id.editDesc);
-//        text.setText("BLAH blah blah");
-//        String descrip = text.getText().toString();
-//
-//        rGroup = sProvider.findViewById(R.id.radioGroup);
-//        license = sProvider.findViewById(R.id.yesBtn);
-//        license.setChecked(true);
+        createProfile = sProvider.findViewById(R.id.btnCreateProf);
+        createProfile.performClick();
 
-//        cAccountButton = sProvider.findViewById(R.id.btnCreateProf);
-//        cAccountButton.performClick();
-
-//        cAccountButton = sProvider.findViewById(R.id.btnCreateProf);
-//        cAccountButton.performClick();
-
-        assertEquals(1,1);
+        User u = database.findUser("Bob");
+        assertEquals("Bob", u.getUsername());
+        assertEquals(true, u.getHasProfile());
     }
 
-   @Test
-   @UiThreadTest
-   public void checkForNoProfile(){
-        assertEquals(false, database.hasProfile("usersp"));
-
-   }
-
+//    /** Checks to make sure when an account/user is deleted, their profile is gone as well*/
 //   @Test
 //   @UiThreadTest
-//   public void  checkAddAvailability(){
-//
+//   public void checkForNoProfile(){
+//        assertEquals(false, database.hasProfile("Bob"));
 //   }
-
-    @Test
-    @UiThreadTest
-    public void validateAvailEntries(){
-        //TODO: Add a profile and subsequent availability to one slot
-        //TODO: Then check to make sure number is a digit (make sure this actually is done in our group)
-        //Due to errors running WelcomeScreen Activity, i could not yet test run these test classes
-        assertEquals(5, 5);
-    }
+//
+//   @Test
+//   @UiThreadTest
+//   public void checkAddAvailability(){
+//        selectAvail = sProviders.findViewById(R.id.avail);
+//        selectAvail.isClicked();
+//   }
+//
+//    @Test
+//    @UiThreadTest
+//    public void validateAvailEntries(){
+//        //TODO: Add a profile and subsequent availability to one slot
+//        //TODO: Then check to make sure number is a digit (make sure this actually is done in our group)
+//        //Due to errors running WelcomeScreen Activity, i could not yet test run these test classes
+//        assertEquals(5, 5);
+//    }
 }

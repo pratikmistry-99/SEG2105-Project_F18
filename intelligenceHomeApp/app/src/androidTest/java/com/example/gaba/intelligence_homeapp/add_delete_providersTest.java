@@ -43,7 +43,7 @@ public class add_delete_providersTest {
     public void checkProvider() throws Exception  {
 
 	    assertEquals(1,1);
-//    	//providerName  =providers.findViewById(R.id.userDisplay);
+//    	//providerName  = providers.findViewById(R.id.userDisplay);
 //    	String name = "segTestUser";//providerName.getText().toString();
 //		String service = "clean";
 //

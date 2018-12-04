@@ -2,7 +2,7 @@ package com.example.gaba.intelligence_homeapp;
 
 import android.support.v7.app.AppCompatActivity;
 
-public class User {
+public class User extends AppCompatActivity{
 
     private int user_id;
     private String username;

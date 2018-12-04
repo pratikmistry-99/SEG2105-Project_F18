@@ -134,11 +134,14 @@ public class ServiceList extends AppCompatActivity {
 
     // Method used to update the service in the database and list
     public void updateService(String service, double rate){
-        dbHandler.updateService(service, rate);
-        serviceList = dbHandler.getAllServices();
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceList);
-        listView.setAdapter(adapter);
+        try {
+            dbHandler.updateService(service, rate);
+            serviceList = dbHandler.getAllServices();
+            adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, serviceList);
+            listView.setAdapter(adapter);
+        }catch(Exception e){
 
+        }
     }
 
     // Method used to add a service in the database and list

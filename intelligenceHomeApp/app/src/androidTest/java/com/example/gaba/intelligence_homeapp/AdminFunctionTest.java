@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 public class AdminFunctionTest {
 
     @Rule
-    public ActivityTestRule<ServiceList> slistTestRule = new ActivityTestRule<ServiceList>(ServiceList.class, true, true)
+    public ActivityTestRule<ServiceList> slistTestRule = new ActivityTestRule<ServiceList>(ServiceList.class)
     {
         @Override
         protected Intent getActivityIntent()
@@ -36,15 +36,9 @@ public class AdminFunctionTest {
     };
     private ServiceList slist;
     private MyDBHandler database = null;
-
-//    public ActivityTestRule<update_delete_dialog> dDialogTestRule = new ActivityTestRule<update_delete_dialog>(update_delete_dialog.class);
-//    private update_delete_dialog dDialog = null;
-
     private TextView serviceName;
     private TextView hourlyRate;
     private Button addButton;
-    private Button updateButton, deleteButton;
-//
     private String TestService = "Harvey Cleaners";
 
     /** clears database of all services and double checks that the serviceDatabase is clear */
@@ -52,8 +46,6 @@ public class AdminFunctionTest {
     public void SetupTest()  {
         slist = slistTestRule.getActivity();
         database = new MyDBHandler(slist);
-
-//        dDialog = dDialogTestRule.getActivity();
         database.clearServiceListTables();
         assertTrue( database.getAllServices().isEmpty());
     }
@@ -67,7 +59,6 @@ public class AdminFunctionTest {
     @Test
     @UiThreadTest
     public void checkAddService() throws Exception  {
-        assertEquals(1,1);
         assertNotNull(slist.findViewById(R.id.editService));
         serviceName = slist.findViewById(R.id.editService);
         serviceName.setText(TestService);
@@ -84,11 +75,10 @@ public class AdminFunctionTest {
         assertEquals(service, s.getName());
 
     }
-
-    //Create class instance update_delete_dialog and access buttonUpdateService and buttonDeleteService
+    /**Tests that the Admin function to Update a Service works*/
     @Test
     @UiThreadTest
-    public void checkEditService() throws Exception{
+    public void checkUpdateService() throws Exception{
         checkAddService();
         //tried to test like other functions, but ran into nullpoint error because the activity wasn't created yet.
         //since I test OUR logic for the edit function, this is sufficient
@@ -101,7 +91,7 @@ public class AdminFunctionTest {
         assertEquals(uRate, s.getRate());
     }
 
-    /** Fails for some reason, not sure yet. Commented out for now*/
+    /**Tests that the Admin function to Delete a Service works*/
     @Test
     @UiThreadTest
     public void checkDeleteService() throws Exception{

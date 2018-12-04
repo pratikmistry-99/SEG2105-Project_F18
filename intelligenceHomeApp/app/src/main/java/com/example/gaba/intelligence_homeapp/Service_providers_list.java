@@ -26,8 +26,11 @@ public class Service_providers_list extends AppCompatActivity{
     String serviceName;
     String username;
 
-    EditText minRating;
-    EditText maxRating;
+    SeekBar minRating;
+    SeekBar maxRating;
+
+    int minFilter = 0;
+    int maxFilter = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +38,8 @@ public class Service_providers_list extends AppCompatActivity{
         setContentView(R.layout.activity_service_providers_list);
         serviceName = getIntent().getStringExtra("serviceName");
         btnPickTimes = (Button) findViewById(R.id.pickTimes);
-        minRating = (EditText) findViewById(R.id.editMax);
-        maxRating = (EditText) findViewById(R.id.editMin);
+        minRating = (SeekBar) findViewById(R.id.barMin);
+        maxRating = (SeekBar) findViewById(R.id.barMax);
         // Get ListView object from xml layout
         listView = findViewById(R.id.servProv);
         //For each item in database, add to serviceList
@@ -69,9 +72,29 @@ public class Service_providers_list extends AppCompatActivity{
     }
 
     public void viewRating(View view){
-        showRatingSelectDialog();
+
+        //showRatingSelectDialog();
+        findViewById(R.id.filter_options).setVisibility(View.GONE);
+        findViewById(R.id.service_providers_list).setVisibility(View.GONE);
+        findViewById(R.id.rating_options).setVisibility(View.VISIBLE);
+
+
+    }
+    public void updateRatingFilter(View view){
+        minFilter = minRating.getProgress();
+        maxFilter = maxRating.getProgress();
+
+        ArrayList<User> temp= dbHandler.getServiceProviders(serviceName,minFilter,maxFilter);
+        adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, temp);
+        listView.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, temp));
+
+        findViewById(R.id.rating_options).setVisibility(View.GONE);
+        findViewById(R.id.filter_options).setVisibility(View.VISIBLE);
+        findViewById(R.id.service_providers_list).setVisibility(View.VISIBLE);
+
     }
 
+/*
     private void showRatingSelectDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -91,16 +114,16 @@ public class Service_providers_list extends AppCompatActivity{
         btnSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //Need to make a method that makes a list based on the given rating and displays it
-                final int min = Integer.parseInt(minRating.getText().toString());
-                final int max = Integer.parseInt(maxRating.getText().toString());
+                min = minRating.getProgress();
+                max = maxRating.getProgress();
 
-               ArrayList<User> temp= dbHandler.getServiceProviders(serviceName,min,max);
-               //adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, temp);
+                ArrayList<User> temp= dbHandler.getServiceProviders(serviceName,min,max);
+                adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, temp);
                 listView.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, temp));
                 b.dismiss();
             }
         });
-    }
+    }*/
 
 
     }

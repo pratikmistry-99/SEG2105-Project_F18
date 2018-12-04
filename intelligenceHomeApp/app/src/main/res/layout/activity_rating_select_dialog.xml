@@ -8,7 +8,6 @@
     tools:context="com.example.gaba.intelligence_homeapp.rating_select_dialog">
 
     <LinearLayout
-        android:id="@+id/LL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -30,13 +29,13 @@
             android:layout_height="wrap_content"
             android:text="Minimum Rating" />
 
-        <EditText
-            android:id="@+id/editMin"
+        <SeekBar
+            android:id="@+id/seekBar2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Enter number between 1 and 5"
-            android:inputType="number" />
+            android:layout_height="51dp"
+            android:clickable="true"
+            android:max="5"
+            android:progress="1" />
 
         <TextView
             android:id="@+id/textView9"
@@ -45,27 +44,20 @@
             android:text="Maximum Rating"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/editMax"
+        <SeekBar
+            android:id="@+id/seekBar3"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:clickable="true"
+            android:max="5"
+            android:progress="5" />
+
+        <Button
+            android:id="@+id/btnSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Enter number between 1 and 5"
-            android:inputType="number" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="SEARCH" />
-
-        </LinearLayout>
+            android:layout_weight="1"
+            android:text="SEARCH" />
 
 
     </LinearLayout>

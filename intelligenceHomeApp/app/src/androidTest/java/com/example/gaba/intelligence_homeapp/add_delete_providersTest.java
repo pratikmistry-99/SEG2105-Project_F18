@@ -17,6 +17,9 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 
+
+/** TODO: DELETE THIS CLASS After correct "serviceProvidersTest" is complete
+ * currently stuck instantiating a User*/
 public class add_delete_providersTest {
 	
 	@Rule

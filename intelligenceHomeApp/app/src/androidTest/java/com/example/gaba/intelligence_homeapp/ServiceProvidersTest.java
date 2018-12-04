@@ -101,7 +101,7 @@ public class ServiceProvidersTest {
 //
 //   @Test
 //   @UiThreadTest
-//   public void checkAddAvailability(){
+//   public void checkAddAvailabilityButton(){
 //        selectAvail = sProviders.findViewById(R.id.avail);
 //        selectAvail.isClicked();
 //   }
@@ -109,7 +109,7 @@ public class ServiceProvidersTest {
 //    @Test
 //    @UiThreadTest
 //    public void validateAvailEntries(){
-//        //TODO: Add a profile and subsequent availability to one slot
+//        //TODO: Add availability to one slot
 //        //TODO: Then check to make sure number is a digit (make sure this actually is done in our group)
 //        //Due to errors running WelcomeScreen Activity, i could not yet test run these test classes
 //        assertEquals(5, 5);

@@ -91,10 +91,11 @@ public class Service_providers_list extends AppCompatActivity{
         btnSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //Need to make a method that makes a list based on the given rating and displays it
-                final int min = (int)minSeekBar.getProgress();
-                final int max = (int)maxSeekBar.getProgress();
-                ArrayList<User> temp= dbHandler.getServiceProviders(serviceName,min,max);
-                //adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, temp);
+                final int min = minSeekBar.getProgress(); //Program crashed here, maybe add editText instead of seekBar?
+                final int max = maxSeekBar.getProgress();
+
+               ArrayList<User> temp= dbHandler.getServiceProviders(serviceName,min,max);
+               //adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, temp);
                 listView.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, temp));
                 b.dismiss();
             }

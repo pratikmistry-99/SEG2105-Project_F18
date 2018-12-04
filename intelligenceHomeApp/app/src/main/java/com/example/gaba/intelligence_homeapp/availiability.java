@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class availiability extends AppCompatActivity {
 
@@ -47,6 +48,7 @@ public class availiability extends AppCompatActivity {
         MyDBHandler dbHandler = new MyDBHandler(this);
         String av = dbHandler.getAvailabilities(getIntent().getStringExtra("username"));
 
+
         if (av != null) {
             availabilities = av.split("//");
             if (availabilities.length == 7) {
@@ -68,7 +70,6 @@ public class availiability extends AppCompatActivity {
 
             }
         }
-
     }
 
     public void saveBtn(View view){

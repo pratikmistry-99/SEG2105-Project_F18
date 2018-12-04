@@ -33,6 +33,7 @@ public class HomeOwnerTest {
         protected Intent getActivityIntent()
         {
             Intent intent = new Intent();
+            intent.putExtra("Name","Billy");
             intent.putExtra("username","Billy");
             intent.putExtra("role","Home Owner");
             return intent;
@@ -107,4 +108,8 @@ public class HomeOwnerTest {
         //Test if correct inputs set to search engine
         // assertNotNull(welcomeScreen.findViewById(R.id.searchEngine);
     }
+    @Test
+    @UiThreadTest
+    public void checkServiceProvidersList(){}
+
 }

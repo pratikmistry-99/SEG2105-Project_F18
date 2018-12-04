@@ -613,8 +613,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return providers;
     }
 
-    public ArrayList<User> getServiceProviders(String serviceName, int min, int max) {
-        ArrayList<User> providers = getServiceProviders(serviceName);
+    public ArrayList<User> getServiceProviders_rating(String serviceName, int min, int max, ArrayList<User> providers) {
+        //ArrayList<User> providers = getServiceProviders(serviceName);
         ArrayList<User> provider_with_ratingContraint = new ArrayList<User>();
         SQLiteDatabase db = this.getReadableDatabase();
         for(int i =0 ; i<providers.size(); i++){

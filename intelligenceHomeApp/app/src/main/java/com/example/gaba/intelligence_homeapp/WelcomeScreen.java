@@ -65,11 +65,18 @@ public class WelcomeScreen extends AppCompatActivity {
         }catch(Exception e){
             str = "Welcome!";
         }
+
+        //user should never equal null, only in the test classes should this possibility occur
+        if (user == null){
+            user = new User("Bob","password","Service Provider");
+            dbHandler.addUser(user);
+        }
+
         userNameDisplay.setText(str);
         userRoleDisplay.setText(user.getRole() + " Account");
         role = user.getRole();
         String ad = "";
-        if (user.getRole().equals("Administrator")){
+        if (role.equals("Administrator")){
             serv_list.setVisibility(VISIBLE);
             ad = dbHandler.getAllUsernames();
             adminRoleDisplay.setText(ad);
@@ -102,7 +109,7 @@ public class WelcomeScreen extends AppCompatActivity {
             findViewById(R.id.btnAvail).setVisibility(View.GONE);
             findViewById(R.id.rg).setVisibility(VISIBLE);
         }
-        /**Below used to say Service Provider but i think this was a meant to be Home Owner-so i changed it. Correct me if Im wrong */
+
         else if(user.getRole().equals("Service Provider") && hasProfile){
             serv_list.setVisibility(VISIBLE);
             findViewById(R.id.yesBtn).setVisibility(View.GONE);

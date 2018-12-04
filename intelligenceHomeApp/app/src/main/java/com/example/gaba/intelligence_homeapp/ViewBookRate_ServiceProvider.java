@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ViewBookRate_ServiceProvider extends AppCompatActivity{
     String serviceName;
@@ -114,6 +115,7 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
             time = "Sunday // " + availabilities[6].trim();
 
         dbHandler.addBooking(getIntent().getStringExtra("accountOwner"),username, time);
+        Toast.makeText(getApplicationContext(), "Service Booked!",Toast.LENGTH_SHORT).show();
     }
 
     public void rate(View view){

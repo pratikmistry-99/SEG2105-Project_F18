@@ -30,7 +30,7 @@ public class SignupScreen extends AppCompatActivity{
     TextView generalBag;
 
     boolean usernameError;
-    
+
     /**
      * Methods create an admin account if the account
      * If admin account was already created throws exception

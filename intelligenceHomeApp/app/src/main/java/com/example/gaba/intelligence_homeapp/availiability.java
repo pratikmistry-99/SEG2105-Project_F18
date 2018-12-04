@@ -83,5 +83,4 @@ public class availiability extends AppCompatActivity {
         dbHandler.updateAvailability(username, availability);
         finish();
     }
-
 }

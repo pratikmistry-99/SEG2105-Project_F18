@@ -35,8 +35,8 @@ public class Service_providers_list extends AppCompatActivity{
         setContentView(R.layout.activity_service_providers_list);
         serviceName = getIntent().getStringExtra("serviceName");
         btnPickTimes = (Button) findViewById(R.id.pickTimes);
-        minRating = findViewById(R.id.editMax);
-        maxRating = findViewById(R.id.editMin);
+        minRating = (EditText) findViewById(R.id.editMax);
+        maxRating = (EditText) findViewById(R.id.editMin);
         // Get ListView object from xml layout
         listView = findViewById(R.id.servProv);
         //For each item in database, add to serviceList

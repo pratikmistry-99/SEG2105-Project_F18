@@ -30,6 +30,7 @@ public class WelcomeScreen extends AppCompatActivity {
     User user;
     String role;
     Button serv_list;
+    Button bookings;
     Button avail;
     Button createProf;
     RadioButton licenseTrue;
@@ -54,6 +55,7 @@ public class WelcomeScreen extends AppCompatActivity {
         licenseFalse = findViewById(R.id.noBtn);
         licenseTrue = findViewById(R.id.yesBtn);
         serv_list = findViewById(R.id.servList);
+        bookings = findViewById(R.id.bookings);
         emptyCredentialsAlert = findViewById(R.id.EmptyProfileAlert);
 
         MyDBHandler dbHandler = new MyDBHandler(this);
@@ -111,6 +113,7 @@ public class WelcomeScreen extends AppCompatActivity {
         boolean hasProfile = dbHandler.hasProfile(user.getUsername());
         if(user.getRole().equals("Service Provider") && !hasProfile){
             serv_list.setVisibility(View.GONE);
+            bookings.setVisibility(View.GONE);
             findViewById(R.id.yesBtn).setVisibility(VISIBLE);
             findViewById(R.id.noBtn).setVisibility(VISIBLE);
             findViewById(R.id.noBtn).setVisibility(VISIBLE);
@@ -124,6 +127,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
         else if(user.getRole().equals("Service Provider") && hasProfile){
             serv_list.setVisibility(VISIBLE);
+            bookings.setVisibility(VISIBLE);
             findViewById(R.id.yesBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
@@ -144,6 +148,7 @@ public class WelcomeScreen extends AppCompatActivity {
         }
         else if (user.getRole().equals("Home Owner")){
             serv_list.setVisibility(VISIBLE);
+            bookings.setVisibility(VISIBLE);
             findViewById(R.id.yesBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
             findViewById(R.id.noBtn).setVisibility(View.GONE);
@@ -213,6 +218,14 @@ public class WelcomeScreen extends AppCompatActivity {
     public void sList(View view){
 
         Intent intent = new Intent(getApplicationContext(),ServiceList.class);
+        intent.putExtra("role", role);
+        intent.putExtra("username", user.getUsername());
+        startActivityForResult(intent,0);
+    }
+
+    public void bList(View view){
+
+        Intent intent = new Intent(getApplicationContext(),BookingsList.class);
         intent.putExtra("role", role);
         intent.putExtra("username", user.getUsername());
         startActivityForResult(intent,0);

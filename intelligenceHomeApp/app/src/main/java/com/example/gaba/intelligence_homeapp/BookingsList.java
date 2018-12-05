@@ -9,10 +9,12 @@ import java.util.ArrayList;
 
 public class BookingsList extends AppCompatActivity {
 
-    ArrayList<Service> bookingsList = new ArrayList<>();
+    ArrayList<Booking> bookingsList = new ArrayList<>();
     ListView listView;
     ArrayAdapter<Service> adapter;
     MyDBHandler dbHandler;
+    String username;
+    String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +23,15 @@ public class BookingsList extends AppCompatActivity {
         listView = findViewById(R.id.bookings);
         //For each item in database, add to serviceList
         dbHandler = new MyDBHandler(this);
-        //getIntent
-        //bookingsList =  (dbHandler.getAllBookings();
-        //Create an ArrayAdapter and Set it on the BookingsList
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, bookingsList);
-        listView.setAdapter(adapter);
+        role = getIntent().getStringExtra("role");
+        username = getIntent().getStringExtra("username");
+
+        if (role.equals("Service Provider")){
+            bookingsList =  dbHandler.getAllBookings(username);
+        }
+        else{
+            bookingsList = dbHandler.getAllBookings_homeOwner(username);
+        }
 
 
     }

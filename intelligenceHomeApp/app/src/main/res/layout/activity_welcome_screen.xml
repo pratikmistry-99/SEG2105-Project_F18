@@ -44,13 +44,29 @@
             android:text="value"
             android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/servList"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="sList"
-            android:text="Go to service list"
-            android:visibility="invisible" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/servList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="sList"
+                android:text="Go to service list"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/bookings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="bList"
+                android:text="My curent bookings"
+                android:visibility="invisible" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/txtProfile"

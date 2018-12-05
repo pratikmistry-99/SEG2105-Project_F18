@@ -81,11 +81,11 @@ public class Booking  extends AppCompatActivity {
     public String toString(){
 
         if(serviceProvider_name.equals("") ||homeowner_name.equals(""))
-            return "Service: "+serviceName+ "\nTime: " + time.replace("//", ":")+ "HH";
+            return "Service: "+serviceName+ "\nTime: " + time.replace("//", "from").replace("-", " (HH) to ")+ " (HH)";
         else
             return "Service: "+serviceName+"\nService Provider: " + serviceProvider_name
                 + "\nHomeowner: " + homeowner_name
-                + "\nTime: " + time.replace("//", ":")+ "HH";
+                +"\n"+time.replace("//", "").replace("-", ":00 (HH) to")+ ":00 (HH)";
     }
 
     public boolean equals(Booking b){

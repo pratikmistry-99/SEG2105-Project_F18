@@ -31,7 +31,8 @@
         <activity android:name=".Service_providers_list" />
         <activity android:name=".ViewBookRate_ServiceProvider" />
         <activity android:name=".rateProvider" />
-        <activity android:name=".rating_select_dialog"></activity>
+        <activity android:name=".rating_select_dialog" />
+        <activity android:name=".BookingsList"></activity>
     </application>
 
 </manifest>

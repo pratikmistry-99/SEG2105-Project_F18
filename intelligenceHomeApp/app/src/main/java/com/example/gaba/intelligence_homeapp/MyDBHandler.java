@@ -14,7 +14,7 @@ import java.util.ArrayList;
 //class used to create the SQLite database
 public class MyDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "int_eligence_homeApp.db";
+    private static final String DATABASE_NAME = "int_eligence_home.db";
 
     //Table 1
     public static final String TABLE_USERS = "users";
@@ -224,7 +224,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
             return true;
         }
-        return false;
+        else
+            return false;
     }
 
 

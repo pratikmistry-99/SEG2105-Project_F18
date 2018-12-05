@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
 
 public class HomeOwnerTest {
 
@@ -42,7 +43,7 @@ public class HomeOwnerTest {
     };
     private WelcomeScreen hOwner = null;
     private MyDBHandler database = null;
-    private Button ServiceList;
+    private Button sListBtn;
 
 //    @BeforeClass
     // public static void setUpBefore(){
@@ -64,8 +65,9 @@ public class HomeOwnerTest {
     @Test
     @UiThreadTest
     public void checkServiceListAccess(){
-//        assertNotNull(hOwner.findViewById(R.id.));
-        assertEquals(1,1);
+        sListBtn = hOwner.findViewById(R.id.servList);
+        sListBtn.performClick();
+        assertTrue(sListBtn.isClickable());
     }
 
 

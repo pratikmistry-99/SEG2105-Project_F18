@@ -32,7 +32,8 @@ public class BookingsList extends AppCompatActivity {
         else{
             bookingsList = dbHandler.getAllBookings_homeOwner(username);
         }
-
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, bookingsList);
+        listView.setAdapter(adapter);
 
     }
 }

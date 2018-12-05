@@ -83,11 +83,6 @@ public class ServiceList extends AppCompatActivity {
         });
     }
 
-    //TODO: implement the activity to show service providers for the selected service
-    private void showServiceProviders(final String serviceName) {
-
-    }
-
     //  Method used to create a dialog box that it used to update and delete services
     private void showUpdateDeleteDialog(final String serviceName, final double serviceRate){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -146,6 +141,7 @@ public class ServiceList extends AppCompatActivity {
 
     // Method used to add a service in the database and list
     public void addService(View view){
+
         String name = editService.getText().toString().trim();
         double rate = 0.0;
         boolean validRate = true;
@@ -161,6 +157,8 @@ public class ServiceList extends AppCompatActivity {
             finish();
             Toast.makeText(this,"Please enter a valid Name and Rate",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getApplicationContext(),ServiceList.class);
+            intent.putExtra("username", username);
+            intent.putExtra("role", role);
             startActivityForResult(intent,0);
         }
         else{

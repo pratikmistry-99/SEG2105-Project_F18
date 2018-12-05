@@ -90,7 +90,12 @@ public class SignupScreenTest {
         cAccountButton.performClick();
 
         User u = database.findUser("user1");
-        assertEquals("password1",u.getPassword());
+
+        try {
+            assertEquals(PasswordEncryption.encrypt("password1"),u.getPassword());
+        }
+        catch (Exception e){}
+        //assertEquals("password1",u.getPassword());
         assertEquals("user1", u.getUsername());
         assertEquals("Home Owner", u.getRole());
 
@@ -117,7 +122,11 @@ public class SignupScreenTest {
         cAccountButton.performClick();
 
         User u = database.findUser("user2");
-        assertEquals("password2",u.getPassword());
+        try {
+            assertEquals(PasswordEncryption.encrypt("password2"),u.getPassword());
+        }
+        catch (Exception e){}
+        //assertEquals("password2",u.getPassword());
         assertEquals("user2", u.getUsername());
         assertEquals("Service Provider", u.getRole());
     }
@@ -143,7 +152,10 @@ public class SignupScreenTest {
         cAccountButton.performClick();
 
         User u = database.findUser("admin");
-        assertEquals("admin",u.getPassword());
+        try {
+            assertEquals(PasswordEncryption.encrypt("admin"),u.getPassword());
+        }
+        catch (Exception e){}
         assertEquals("admin", u.getUsername());
         assertEquals("Administrator", u.getRole());
 

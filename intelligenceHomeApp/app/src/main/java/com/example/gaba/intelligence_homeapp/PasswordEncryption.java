@@ -3,6 +3,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.io.UnsupportedEncodingException;
 
+// *** Obtained from Professor Lucia Moura (CSI 2110 - Fall 2018) ***
+// Generated the hash code for a given string, which was used to encrypt passwords in our app.
 public class PasswordEncryption extends AppCompatActivity{
     // Output format options
     public static final int OUT_HEX = 0;
@@ -196,3 +198,5 @@ public class PasswordEncryption extends AppCompatActivity{
         return (x << n) | (x >>> (32 - n));
     }
 }
+
+// *** Obtained from Professor Lucia Moura (CSI 2110 - Fall 2018) ***

@@ -816,6 +816,21 @@ public class MyDBHandler extends SQLiteOpenHelper {
             comments = "\nNOT REVIEWED YET! \nBE THE FIRST ONE TO REVIEW!";
         return comments;
     }
+
+    public ArrayList<String> getAllPasswords(){
+        ArrayList<String> passwords = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * FROM " + TABLE_USERS;
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                String password = cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD));
+                passwords.add(password);
+                cursor.moveToNext();
+            }
+        }
+        return passwords;
+    }
 }
 /*
     //Table 1

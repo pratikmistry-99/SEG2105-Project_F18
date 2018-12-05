@@ -66,17 +66,23 @@ public class WelcomeScreen extends AppCompatActivity {
             str = "Welcome!";
         }
 
-        //When running App from Login, the following should never run
+        //When runnign App from Login, the following should never run
         // only set for when app doesn't start with login
-        String roleType = getIntent().getStringExtra("roleType");
-        String hO = "HomeOwner"; String sP = "ServiceProvider";
-        if(roleType.equals(hO)){ roleType = "Home Owner"; }
-        else if(roleType.equals(sP)){roleType = "Service Provider";}
-
-        if(user == null){
-            user = new User("Bob","password",roleType);
-            dbHandler.addUser(user);
+        try {
+            String roleType = getIntent().getStringExtra("roleType");
+            String hO = "HomeOwner";
+            String sP = "ServiceProvider";
+            if(roleType.equals(hO)){ roleType = "Home Owner"; }
+            else if(roleType.equals(sP)){roleType = "Service Provider";}
+            else{roleType = null;}
+            if(user == null && !roleType.equals(null)){
+                user = new User("Bob","password",roleType);
+                dbHandler.addUser(user);
+            }
+        }catch(Exception e){
+            String roleType = null;
         }
+
 
         userNameDisplay.setText(str);
         userRoleDisplay.setText(user.getRole() + " Account");

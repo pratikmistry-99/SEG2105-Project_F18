@@ -58,19 +58,17 @@ public class HomeOwnerTest {
        database = new MyDBHandler(hOwner);
 
     }
-
-//    @AfterClass
-//    public static void cleanUpAfter(){
-////       Clear all tables
-////        MyDBHandler database = new MyDBHandler();
-//        database.clearAllTables();
-//    }
+    @After
+    public void cleanUp(){database.clearAllTables();}
 
     @Test
     @UiThreadTest
     public void checkServiceListAccess(){
+//        assertNotNull(hOwner.findViewById(R.id.));
         assertEquals(1,1);
     }
+
+
     @Test
     @UiThreadTest
     public void searchByType(){

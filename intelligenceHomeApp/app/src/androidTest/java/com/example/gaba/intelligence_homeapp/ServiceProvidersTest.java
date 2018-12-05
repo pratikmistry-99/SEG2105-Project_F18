@@ -33,7 +33,6 @@ public class ServiceProvidersTest {
         protected Intent getActivityIntent()
         {
             Intent intent = new Intent();
-
             intent.putExtra("roleType","ServiceProvider");
             intent.putExtra("username","Bob");
             intent.putExtra("role","Service Provider");
@@ -52,8 +51,9 @@ public class ServiceProvidersTest {
         sProvider = sProviderTestRule.getActivity();
         database = new MyDBHandler(sProvider);
 
-        //database.clearServiceListTables();
     }
+    @After
+    public void cleanUp(){database.clearAllTables();}
 
     @Test
     @UiThreadTest

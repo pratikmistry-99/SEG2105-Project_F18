@@ -2,8 +2,10 @@ package com.example.gaba.intelligence_homeapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.annotation.UiThreadTest;
 import android.support.test.rule.ActivityTestRule;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,13 +19,13 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 
 public class ServiceProvidersTest {
-
     @Rule
     public ActivityTestRule<WelcomeScreen> sProviderTestRule = new ActivityTestRule<WelcomeScreen>(WelcomeScreen.class)
     {
@@ -32,7 +34,7 @@ public class ServiceProvidersTest {
         {
             Intent intent = new Intent();
 
-            intent.putExtra("Name","Bob");
+            intent.putExtra("roleType","ServiceProvider");
             intent.putExtra("username","Bob");
             intent.putExtra("role","Service Provider");
             return intent;
@@ -44,19 +46,18 @@ public class ServiceProvidersTest {
     private RadioButton licensing;
     private Button createProfile, selectAvail;
     private TextView textInput;
-    private RadioGroup rGroup;
 
     @Before
     public void setUp(){
         sProvider = sProviderTestRule.getActivity();
         database = new MyDBHandler(sProvider);
+
         //database.clearServiceListTables();
     }
 
     @Test
     @UiThreadTest
     public void checkProfileCreation(){
-        assertEquals(1,1);
         assertNotNull(sProvider.findViewById(R.id.editAddress));
         textInput = sProvider.findViewById(R.id.editAddress);
         textInput.setText("800 King Edward");

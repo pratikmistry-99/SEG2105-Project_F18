@@ -33,7 +33,7 @@ public class HomeOwnerTest {
         protected Intent getActivityIntent()
         {
             Intent intent = new Intent();
-            intent.putExtra("Name","Billy");
+            intent.putExtra("roleType","HomeOwner");
             intent.putExtra("username","Billy");
             intent.putExtra("role","Home Owner");
             return intent;

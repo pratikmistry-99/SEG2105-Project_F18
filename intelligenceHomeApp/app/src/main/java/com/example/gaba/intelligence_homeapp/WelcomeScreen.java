@@ -66,19 +66,15 @@ public class WelcomeScreen extends AppCompatActivity {
             str = "Welcome!";
         }
 
-        //user should never equal null, only in the test classes should this possibility occur
-        String test = getIntent().getStringExtra("role");
-//        if (user == null){
-//            if(test == "Service Provider"){
-//                user = new User("Bob","password","Service Provider");
-//                dbHandler.addUser(user);
-//            }else if(test == "Home Owner"){
-//                user = new User("Billy","password","Home Owner");
-//                dbHandler.addUser(user);
-//            }
-//        }
+        //When running App from Login, the following should never run
+        // only set for when app doesn't start with login
+        String roleType = getIntent().getStringExtra("roleType");
+        String hO = "HomeOwner"; String sP = "ServiceProvider";
+        if(roleType.equals(hO)){ roleType = "Home Owner"; }
+        else if(roleType.equals(sP)){roleType = "Service Provider";}
+
         if(user == null){
-            user = new User("Billy","password","Home Owner");
+            user = new User("Bob","password",roleType);
             dbHandler.addUser(user);
         }
 

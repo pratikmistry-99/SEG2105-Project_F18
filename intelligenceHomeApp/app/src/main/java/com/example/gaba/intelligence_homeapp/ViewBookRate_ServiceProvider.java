@@ -115,12 +115,13 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
             time = "Saturday // " + availabilities[5].trim();
         else if (sun_rb.isChecked())
             time = "Sunday // " + availabilities[6].trim();
-        if (!time.equals("")){
+        System.out.println(time);
+        if (!time.equals("") && !time.split("//")[1].trim().equals("-")){
             dbHandler.addBooking(serviceName, getIntent().getStringExtra("accountOwner"),username, time);
             Toast.makeText(getApplicationContext(), "Service Booked!",Toast.LENGTH_SHORT).show();
         }
         else
-            Toast.makeText(getApplicationContext(), "Please pick a Time Slot",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please pick a Valid Time Slot",Toast.LENGTH_SHORT).show();
     }
 
     public void rate(View view){

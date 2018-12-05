@@ -73,6 +73,42 @@ public class availiability extends AppCompatActivity {
     }
 
     public void saveBtn(View view){
+        boolean validInput = true;
+        try {
+            if (Integer.parseInt(mon_f.getText().toString()) > 23)
+                validInput = false;
+            else if (Integer.parseInt(mon_t.getText().toString()) > 23 || Integer.parseInt(mon_f.getText().toString())>= Integer.parseInt(mon_t.getText().toString()))
+                validInput = false;
+            else if (Integer.parseInt(tue_f.getText().toString()) > 23)
+                validInput = false;
+            else if (Integer.parseInt(tue_t.getText().toString()) > 23 || Integer.parseInt(tue_f.getText().toString())>=Integer.parseInt(tue_t.getText().toString()))
+                validInput = false;
+            else if (Integer.parseInt(wed_f.getText().toString()) > 23)
+                validInput = false;
+            else if (Integer.parseInt(wed_t.getText().toString()) > 23 || Integer.parseInt(wed_f.getText().toString())>= Integer.parseInt(wed_t.getText().toString()))
+                validInput = false;
+            else if (Integer.parseInt(thu_f.getText().toString()) > 23)
+                validInput = false;
+            else if (Integer.parseInt(thu_t.getText().toString()) > 23 || Integer.parseInt(thu_f.getText().toString())>= Integer.parseInt(thu_t.getText().toString()))
+                validInput = false;
+            else if (Integer.parseInt(fri_f.getText().toString()) > 23)
+                validInput = false;
+            else if (Integer.parseInt(fri_t.getText().toString()) > 23 || Integer.parseInt(fri_f.getText().toString())>= Integer.parseInt(fri_t.getText().toString()))
+                validInput = false;
+            else if (Integer.parseInt(sat_f.getText().toString()) > 23)
+                validInput = false;
+            else if (Integer.parseInt(sat_t.getText().toString()) > 23 || Integer.parseInt(sat_f.getText().toString())>= Integer.parseInt(sat_t.getText().toString()))
+                validInput = false;
+            else if (Integer.parseInt(sun_f.getText().toString()) > 23)
+                validInput = false;
+            else if (Integer.parseInt(sun_t.getText().toString()) > 23 || Integer.parseInt(sun_f.getText().toString())>= Integer.parseInt(sun_t.getText().toString()))
+                validInput = false;
+        }
+        catch (Exception e){
+            
+        }
+        if(validInput)
+        {
         String availability = mon_f.getText().toString()+" - "+mon_t.getText().toString()+" // "+tue_f.getText().toString()+" - "+
                 tue_t.getText().toString()+" // "+wed_f.getText().toString()+" - "+wed_t.getText().toString()+" // "+
                 thu_f.getText().toString() + " - "+ thu_t.getText().toString()+" // "+fri_f.getText().toString()+" - "+fri_t.getText().toString()+" // "+
@@ -82,5 +118,8 @@ public class availiability extends AppCompatActivity {
         String username = getIntent().getStringExtra("username");
         dbHandler.updateAvailability(username, availability);
         finish();
+        }
+        else
+            Toast.makeText(this,"Invalid times",Toast.LENGTH_LONG).show();
     }
 }

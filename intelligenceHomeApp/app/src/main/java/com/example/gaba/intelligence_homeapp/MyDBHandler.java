@@ -613,7 +613,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return providers;
     }
 
-    public ArrayList<User> getServiceProviders_rating(String serviceName, int min, int max, ArrayList<User> providers) {
+    public ArrayList<User> getServiceProviders_rating(int min, int max, ArrayList<User> providers) {
         //ArrayList<User> providers = getServiceProviders(serviceName);
         ArrayList<User> provider_with_ratingContraint = new ArrayList<User>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -632,6 +632,52 @@ public class MyDBHandler extends SQLiteOpenHelper {
         }
 
         return provider_with_ratingContraint;
+    }
+
+    public ArrayList<User> getServiceProviders_time(int min, int max, ArrayList<User> providers) {
+        //ArrayList<User> providers = getServiceProviders(serviceName);
+        ArrayList<User> provider_with_timeConstraint = new ArrayList<User>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        for(int i =0 ; i<providers.size(); i++){
+            User u = providers.get(i);
+            int p_id = getUserPK(u.getUsername());
+            if(p_id>=0){
+                String query = "Select * FROM " + TABLE_SERVICE_PROVIDER_PROFILES + " WHERE " + COLUMN_PROFILE_ID + " = \"" + p_id + "\"";
+                Cursor cursor = db.rawQuery(query, null);
+                if (cursor.moveToFirst()) {
+                    String availability = cursor.getString(cursor.getColumnIndex(COLUMN_AVAILABILITY));
+                    String[] av = availability.split("//");
+                    boolean add = false;
+                    for (int j = 0; j < av.length; j++){
+                        int tempf;
+                        int tempt;
+                        try {
+                            tempf = Integer.parseInt(av[j].split("-")[0].trim());
+                            tempt = Integer.parseInt(av[j].split("-")[1].trim());
+                        }
+                        catch (Exception e){
+                            tempf = -1;
+                            tempt = -1;
+                        }
+
+                        if (min < tempt && min>=tempf)
+                            add = true;
+                        else if(max <= tempt && max > tempf)
+                            add = true;
+                        else if (tempf<max && tempf>= min)
+                            add = true;
+                        else if (tempt <= max && tempt> min)
+                            add = true;
+
+                    }
+
+                    if (add)
+                        provider_with_timeConstraint.add(u);
+                }
+            }
+        }
+
+        return provider_with_timeConstraint;
     }
 
     public int getUserPK(String username){

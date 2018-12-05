@@ -32,6 +32,9 @@ public class Service_providers_list extends AppCompatActivity{
     int minFilter = 0;
     int maxFilter = 5;
 
+    int minTime = 0;
+    int maxTime = 24;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +88,7 @@ public class Service_providers_list extends AppCompatActivity{
         minFilter = minRating.getProgress();
         maxFilter = maxRating.getProgress();
 
-        serviceProvidersList = dbHandler.getServiceProviders_rating(serviceName,minFilter,maxFilter, serviceProvidersList);
+        serviceProvidersList = dbHandler.getServiceProviders_rating(minFilter,maxFilter, dbHandler.getServiceProviders_time(minTime,maxTime,dbHandler.getServiceProviders(serviceName)));
         adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, serviceProvidersList);
         listView.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, serviceProvidersList));
 
@@ -106,12 +109,17 @@ public class Service_providers_list extends AppCompatActivity{
 
     }
     public void updateTimeFilter(View view){
-        int minTime = Integer.parseInt(((EditText)findViewById(R.id.minTime)).getText().toString());
-        int maxTime = Integer.parseInt(((EditText)findViewById(R.id.maxTime)).getText().toString());
 
-        serviceProvidersList = dbHandler.getServiceProviders_rating(serviceName,minTime,maxTime, serviceProvidersList);
-        adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, serviceProvidersList);
-        listView.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, serviceProvidersList));
+        try {
+            minTime = Integer.parseInt(((EditText) findViewById(R.id.minTime)).getText().toString());
+            maxTime = Integer.parseInt(((EditText) findViewById(R.id.maxTime)).getText().toString());
+            serviceProvidersList = dbHandler.getServiceProviders_time(minTime,maxTime, dbHandler.getServiceProviders_rating(minFilter,maxFilter,dbHandler.getServiceProviders(serviceName)));
+            adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, serviceProvidersList);
+            listView.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, serviceProvidersList));
+        }
+        catch (Exception e){
+            resetFilter();
+        }
 
         findViewById(R.id.time_options).setVisibility(View.GONE);
         findViewById(R.id.filter_options).setVisibility(View.VISIBLE);
@@ -119,10 +127,41 @@ public class Service_providers_list extends AppCompatActivity{
 
     }
 
+    public void resetFilter(){
+        serviceProvidersList =  (dbHandler.getServiceProviders(serviceName));
+        adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, serviceProvidersList);
+        listView.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, serviceProvidersList));
+
+        ((SeekBar)findViewById(R.id.barMin)).setProgress(0);
+        ((SeekBar)findViewById(R.id.barMax)).setProgress(5);
+
+        minFilter = 0;
+        maxFilter = 5;
+
+        ((EditText) findViewById(R.id.maxTime)).setText("");
+        ((EditText) findViewById(R.id.minTime)).setText("");
+
+        minTime = 0;
+        maxTime = 24;
+    }
+
     public void resetFilter(View view){
         serviceProvidersList =  (dbHandler.getServiceProviders(serviceName));
         adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, serviceProvidersList);
         listView.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, serviceProvidersList));
+
+        ((SeekBar)findViewById(R.id.barMin)).setProgress(0);
+        ((SeekBar)findViewById(R.id.barMax)).setProgress(5);
+
+        minFilter = 0;
+        maxFilter = 5;
+
+        ((EditText) findViewById(R.id.maxTime)).setText("");
+        ((EditText) findViewById(R.id.minTime)).setText("");
+
+        minTime = 0;
+        maxTime = 24;
+
     }
 
 /*

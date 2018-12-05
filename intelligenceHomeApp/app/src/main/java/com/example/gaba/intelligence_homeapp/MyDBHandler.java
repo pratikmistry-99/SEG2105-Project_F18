@@ -154,10 +154,21 @@ public class MyDBHandler extends SQLiteOpenHelper {
             h_name = cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME));
 
         ArrayList<Booking> bookings = getAllBookings(s_name);
-        Booking booking = new Booking(s_name.trim(), h_name.trim(),time.trim(), serviceName.trim());
-        System.out.println(bookings.size());
+        Booking booking = new Booking(s_name, h_name,time, serviceName);
+        //System.out.println(bookings.size());
+        //System.out.println("serviceName: "+" =>"+serviceName);
+        //System.out.println("h_id: "+homeowner+" =>"+getUserPK(homeowner));
+        //System.out.println("sp_id: "+serviceProvider+" =>"+getUserPK(serviceProvider));
+        //System.out.println("time: "+time);
+        boolean b = false;
+        for(int i = 0; i < bookings.size(); i++)
+        {
+            if (((Booking)(bookings.get(i))).equals(booking))
+                b = true;
+        }
 
-        if(!bookings.contains(booking)) {
+        if(!b) {
+
             values.put(COLUMN_BOOKED_SERVICE, serviceName);
             values.put(COLUMN_HOMEOWNER, getUserPK(homeowner));
             values.put(COLUMN_SERVICE_PROVIDER, getUserPK(serviceProvider));
@@ -722,6 +733,20 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return i;
     }
 
+    public String getUsername_pk(int pk){
+        String i = "";
+        if (pk>=0)
+        {
+            SQLiteDatabase db = this.getReadableDatabase();
+            String query = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERID + " = \"" + pk + "\"";
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                i = cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME));
+            }
+        }
+        return i;
+    }
+
 
     public ArrayList<Booking> getAllBookings(String serviceProvider){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -737,6 +762,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 b.setHomeOwner(cursor.getString(cursor.getColumnIndex(COLUMN_HOMEOWNER)));
                 b.setBookingTime(cursor.getString(cursor.getColumnIndex(COLUMN_TIME)));
                 b.setServiceName(cursor.getString(cursor.getColumnIndex(COLUMN_BOOKED_SERVICE)));
+                b.setServiceProviderName(getUsername_pk(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICE_PROVIDER)))));
+                b.setHomeOwnerName(getUsername_pk(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_HOMEOWNER)))));
                 bookings.add(b);
                 cursor.moveToNext();
             }
@@ -758,6 +785,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 b.setHomeOwner(cursor.getString(cursor.getColumnIndex(COLUMN_HOMEOWNER)));
                 b.setBookingTime(cursor.getString(cursor.getColumnIndex(COLUMN_TIME)));
                 b.setServiceName(cursor.getString(cursor.getColumnIndex(COLUMN_BOOKED_SERVICE)));
+                b.setServiceProviderName(getUsername_pk(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICE_PROVIDER)))));
+                b.setHomeOwnerName(getUsername_pk(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_HOMEOWNER)))));
                 bookings.add(b);
                 cursor.moveToNext();
             }

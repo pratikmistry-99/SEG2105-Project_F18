@@ -8,10 +8,14 @@ public class Booking  extends AppCompatActivity {
     String homeOwner;
     String time;
     String serviceName;
+    String serviceProvider_name;
+    String homeowner_name;
 
     public Booking(){
         serviceProvider = "";
         homeOwner = "";
+        serviceProvider_name = "";
+        homeowner_name = "";
         time = "";
         serviceName = "";
     }
@@ -21,6 +25,8 @@ public class Booking  extends AppCompatActivity {
         homeOwner = home;
         time = t;
         serviceName = sn;
+        serviceProvider_name = "";
+        homeowner_name = "";
     }
 
     public String getServiceProvider(){
@@ -55,10 +61,31 @@ public class Booking  extends AppCompatActivity {
         serviceName = sn;
     }
 
+    public String getServiceProvideName(){
+        return serviceProvider_name;
+    }
+
+    public String getHomeOwnerName(){
+        return homeowner_name;
+    }
+
+    public void setServiceProviderName(String sp){
+        serviceProvider_name = sp;
+    }
+
+    public void setHomeOwnerName(String home){
+        homeowner_name = home;
+    }
 
 
     public String toString(){
-        return homeOwner + " booked "+serviceName+" service with " + serviceProvider+" at " + time;
+
+        if(serviceProvider_name.equals("") ||homeowner_name.equals(""))
+            return "Service: "+serviceName+ "\nTime: " + time.replace("//", ":")+ "HH";
+        else
+            return "Service: "+serviceName+"\nService Provider: " + serviceProvider_name
+                + "\nHomeowner: " + homeowner_name
+                + "\nTime: " + time.replace("//", ":")+ "HH";
     }
 
     public boolean equals(Booking b){

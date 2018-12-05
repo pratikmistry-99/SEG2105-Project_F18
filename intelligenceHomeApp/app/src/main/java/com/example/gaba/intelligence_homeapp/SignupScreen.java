@@ -89,8 +89,13 @@ public class SignupScreen extends AppCompatActivity{
             } else if (admin.isChecked()) {
                 role = "Administrator";
             }
-            user = new User(addUser.getText().toString(), addPassword.getText().toString(), role);
-
+            try {
+                user = new User(addUser.getText().toString(), PasswordEncryption.encrypt(addPassword.getText().toString()), role);
+            }
+            catch(Exception e){
+                Toast.makeText(getApplicationContext(), "Error Creating Account!",Toast.LENGTH_SHORT).show();
+                return;
+            }
             RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
 
 

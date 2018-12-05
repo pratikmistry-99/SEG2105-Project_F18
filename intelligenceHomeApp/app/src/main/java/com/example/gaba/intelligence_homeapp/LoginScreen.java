@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 // class used to create a login screen, to allow users and admin to login
 public class LoginScreen extends AppCompatActivity {
@@ -49,22 +50,27 @@ public class LoginScreen extends AppCompatActivity {
 
         User user = dbHandler.findUser(userName.getText().toString());
         //findViewById(R.id.imageView).setVisibility(View.GONE);
-        if (user!=null && user.getPassword().toString().equals(pswrd.getText().toString())) {
-            pswrd.setText("");
-            Intent intent = new Intent(getApplicationContext(),WelcomeScreen.class);
+        try {
+            if (user != null && user.getPassword().toString().equals(PasswordEncryption.encrypt(pswrd.getText().toString()))) {
+                pswrd.setText("");
+                Intent intent = new Intent(getApplicationContext(), WelcomeScreen.class);
 
-            String nameValue = userName.getText().toString();
-            intent.putExtra("Name",nameValue);
+                String nameValue = userName.getText().toString();
+                intent.putExtra("Name", nameValue);
 
-            String role = getIntent().getStringExtra("Role");
-            intent.putExtra("ROLE",role);
-            //finish();// this makes sure that the login screen activity ends before logging in.
-            startActivityForResult(intent,0);
+                String role = getIntent().getStringExtra("Role");
+                intent.putExtra("ROLE", role);
+                //finish();// this makes sure that the login screen activity ends before logging in.
+                startActivityForResult(intent, 0);
 
-        } else {
-            TextView err = findViewById(R.id.invalid);
-            err.setVisibility(View.VISIBLE);
-            pswrd.setText("");
+            } else {
+                TextView err = findViewById(R.id.invalid);
+                err.setVisibility(View.VISIBLE);
+                pswrd.setText("");
+            }
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Error Logging in!",Toast.LENGTH_SHORT).show();
         }
     }
 

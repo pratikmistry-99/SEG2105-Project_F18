@@ -40,9 +40,11 @@ public class HomeOwnerTest {
         }
 
     };
-    private MyDBHandler database;
+    private WelcomeScreen hOwner = null;
+    private MyDBHandler database = null;
+    private Button ServiceList;
 
-    @BeforeClass
+//    @BeforeClass
     // public static void setUpBefore(){
     //Create Service Lists with at least 2 service Providers
     //Service Provider with company title: "Bug Watcher"
@@ -52,17 +54,17 @@ public class HomeOwnerTest {
 
     @Before
     public void setUp(){
-       WelcomeScreen hOwner = hOwnerTestRule.getActivity();
+       hOwner = hOwnerTestRule.getActivity();
        database = new MyDBHandler(hOwner);
 
     }
 
-    @AfterClass
-    public static void cleanUpAfter(){
-//       Clear all tables
-//        MyDBHandler database = new MyDBHandler();
+//    @AfterClass
+//    public static void cleanUpAfter(){
+////       Clear all tables
+////        MyDBHandler database = new MyDBHandler();
 //        database.clearAllTables();
-    }
+//    }
 
     @Test
     @UiThreadTest
@@ -102,14 +104,14 @@ public class HomeOwnerTest {
         //call checkBookingFeature so a service gets Booked (if not deleted)
         //Then rate that service and validate rating as the services only rating
     }
-    @Test
-    @UiThreadTest
-    public void validateNumericalInput(){
-        //Test if correct inputs set to search engine
-        // assertNotNull(welcomeScreen.findViewById(R.id.searchEngine);
-    }
-    @Test
-    @UiThreadTest
-    public void checkServiceProvidersList(){}
+//    @Test
+//    @UiThreadTest
+//    public void validateNumericalInput(){
+//        //Test if correct inputs set to search engine
+//        // assertNotNull(welcomeScreen.findViewById(R.id.searchEngine);
+//    }
+//    @Test
+//    @UiThreadTest
+//    public void checkServiceProvidersList(){}
 
 }

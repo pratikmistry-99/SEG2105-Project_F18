@@ -9,6 +9,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class ViewBookRate_ServiceProvider extends AppCompatActivity{
     String serviceName;
     String username;
@@ -122,13 +124,37 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
     }
 
     public void rate(View view){
-
         Intent intent = new Intent(getApplicationContext(), rateProvider.class);
         intent.putExtra("username", username);
         intent.putExtra("serviceName", serviceName);
         intent.putExtra("accountOwner", getIntent().getStringExtra("accountOwner"));
         finish();
         startActivityForResult(intent, 0);
+    }
+
+    public void viewReviews(View view){
+        findViewById(R.id.timePicker).setVisibility(View.GONE);
+        findViewById(R.id.btnRate).setVisibility(View.GONE);
+        findViewById(R.id.viewReviewsBtn).setVisibility(View.GONE);
+        findViewById(R.id.profileInfo).setVisibility(View.GONE);
+        findViewById(R.id.btnBook).setVisibility(View.GONE);
+        ((TextView)findViewById(R.id.title)).setText("Reviews");
+        findViewById(R.id.reviewsView).setVisibility(View.VISIBLE);
+        findViewById(R.id.backBtn).setVisibility(View.VISIBLE);
+        MyDBHandler dbHandler = new MyDBHandler(getApplicationContext());
+        String reviews = dbHandler.getAllComments(username);
+        ((TextView)findViewById(R.id.reviewsView)).setText(reviews);
+    }
+
+    public void returnToViewBookAndRate_sp(View view){
+        findViewById(R.id.timePicker).setVisibility(View.VISIBLE);
+        findViewById(R.id.btnRate).setVisibility(View.VISIBLE);
+        findViewById(R.id.viewReviewsBtn).setVisibility(View.VISIBLE);
+        findViewById(R.id.profileInfo).setVisibility(View.VISIBLE);
+        findViewById(R.id.btnBook).setVisibility(View.VISIBLE);
+        ((TextView)findViewById(R.id.title)).setText("Service Provider Info");
+        findViewById(R.id.backBtn).setVisibility(View.GONE);
+        findViewById(R.id.reviewsView).setVisibility(View.GONE);
     }
 
 }

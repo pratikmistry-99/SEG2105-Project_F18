@@ -7,7 +7,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -109,7 +108,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         //TABLE 5 - stores the service providers ratings
         String CREATE_REVIEWS_TABLE = "CREATE TABLE " +
                 TABLE_SERVICE_PROVIDER_REVIEWS + "("
-                + COLUMN_USER_KEY + " INTEGER,"+ COLUMN_RATING+" INTEGER,"+COLUMN_COMMENT + " TEXT" +")";
+                + COLUMN_USER_KEY + " INTEGER,"+ COLUMN_RATING+" INTEGER,"+COLUMN_COMMENT + " TEXT" +
+                " ,FOREIGN KEY(" + COLUMN_USER_KEY + ") REFERENCES " + TABLE_USERS + "( " + COLUMN_USERID + ")"+")";
         db.execSQL(CREATE_REVIEWS_TABLE);
 
         //Table 6 - stores all bookings
@@ -706,19 +706,39 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String query = "Select * FROM " + TABLE_BOOKINGS + " WHERE " + COLUMN_SERVICE_PROVIDER + " = \"" + id + "\"";
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
-            while(cursor.isAfterLast()){
+            while(!cursor.isAfterLast()){
                 Booking b = new Booking();
                 b.setServiceProvider(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICE_PROVIDER)));
                 b.setHomeOwner(cursor.getString(cursor.getColumnIndex(COLUMN_HOMEOWNER)));
                 b.setBookingTime(cursor.getString(cursor.getColumnIndex(COLUMN_TIME)));
                 b.setServiceName(cursor.getString(cursor.getColumnIndex(COLUMN_BOOKED_SERVICE)));
                 bookings.add(b);
+                cursor.moveToNext();
             }
         }
         return bookings;
     }
-    public void getAllComments(){
+    public String getAllComments(String sp){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int id = getUserPK(sp);
+        String comments = "";
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
 
+        String query = "Select * FROM " + TABLE_SERVICE_PROVIDER_REVIEWS + " WHERE " + COLUMN_USER_KEY + " = \"" + id + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        int count = 1;
+        if(cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                comments+="\n\n __________\n Review #"+count+"\n -----------------";
+                comments+="\n Rating: "+cursor.getString(cursor.getColumnIndex(COLUMN_RATING));
+                comments+="\n Comment: "+cursor.getString(cursor.getColumnIndex(COLUMN_COMMENT));
+                cursor.moveToNext();
+                count++;
+            }
+        }
+        if(comments.equals(""))
+            comments = "\nNOT REVIEWED YET! \nBE THE FIRST ONE TO REVIEW!";
+        return comments;
     }
 }
 /*

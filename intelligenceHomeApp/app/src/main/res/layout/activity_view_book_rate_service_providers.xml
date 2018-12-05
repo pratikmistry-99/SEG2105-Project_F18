@@ -38,7 +38,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Service Provider Info"
@@ -108,6 +108,13 @@
                     android:text="Sunday: " />
             </RadioGroup>
 
+            <TextView
+                android:id="@+id/reviewsView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:visibility="gone" />
+
             <Button
                 android:id="@+id/btnBook"
                 android:layout_width="match_parent"
@@ -121,6 +128,22 @@
                 android:layout_height="wrap_content"
                 android:onClick="rate"
                 android:text="Rate" />
+
+            <Button
+                android:id="@+id/viewReviewsBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="viewReviews"
+                android:text="View Reviews" />
+
+            <Button
+                android:id="@+id/backBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GO BACK"
+                android:onClick="returnToViewBookAndRate_sp"
+                android:visibility="gone" />
+
         </LinearLayout>
     </ScrollView>
 

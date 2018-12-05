@@ -744,6 +744,27 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return bookings;
     }
 
+    public ArrayList<Booking> getAllBookings_homeOwner(String homeOwner){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int id = getUserPK(homeOwner);
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
+
+        String query = "Select * FROM " + TABLE_BOOKINGS + " WHERE " + COLUMN_HOMEOWNER + " = \"" + id + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                Booking b = new Booking();
+                b.setServiceProvider(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICE_PROVIDER)));
+                b.setHomeOwner(cursor.getString(cursor.getColumnIndex(COLUMN_HOMEOWNER)));
+                b.setBookingTime(cursor.getString(cursor.getColumnIndex(COLUMN_TIME)));
+                b.setServiceName(cursor.getString(cursor.getColumnIndex(COLUMN_BOOKED_SERVICE)));
+                bookings.add(b);
+                cursor.moveToNext();
+            }
+        }
+        return bookings;
+    }
+
     public String getAllComments(String sp){
         SQLiteDatabase db = this.getReadableDatabase();
         int id = getUserPK(sp);

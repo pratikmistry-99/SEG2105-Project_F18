@@ -18,6 +18,8 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
@@ -27,9 +29,6 @@ public class HomeOwnerTest {
     @Rule
     public ActivityTestRule<WelcomeScreen> hOwnerTestRule = new ActivityTestRule<WelcomeScreen>(WelcomeScreen.class)
     {
-//        @Override
-//        protected void beforeActivityLaunched() {}
-
         @Override
         protected Intent getActivityIntent()
         {
@@ -39,11 +38,38 @@ public class HomeOwnerTest {
             intent.putExtra("role","Home Owner");
             return intent;
         }
-
+    };
+    public ActivityTestRule<WelcomeScreen> sProviderTestRule = new ActivityTestRule<WelcomeScreen>(WelcomeScreen.class)
+    {
+        @Override
+        protected Intent getActivityIntent()
+        {
+            Intent intent = new Intent();
+            intent.putExtra("roleType","ServiceProvider");
+            intent.putExtra("username","Bob");
+            intent.putExtra("role","Service Provider");
+            return intent;
+        }
+    };
+    public ActivityTestRule<ServiceList> sListTestRule = new ActivityTestRule<ServiceList>(ServiceList.class){
+      @Override
+      protected Intent getActivityIntent()
+      {
+          Intent intent = new Intent();
+          intent.putExtra("username","Admin");
+          intent.putExtra("role", "Administrator");
+          return intent;
+      }
     };
     private WelcomeScreen hOwner = null;
-    private MyDBHandler database = null;
-    private Button sListBtn;
+    private WelcomeScreen sProvider = null;
+
+    private MyDBHandler database;
+    private ServiceList sList;
+    private Button sListBtn, addButton;
+    private RadioButton licensing;
+    private Button createProfile;
+    private TextView textInput;
 
 //    @BeforeClass
     // public static void setUpBefore(){
@@ -55,12 +81,35 @@ public class HomeOwnerTest {
 
     @Before
     public void setUp(){
-       hOwner = hOwnerTestRule.getActivity();
-       database = new MyDBHandler(hOwner);
-
+        hOwner = hOwnerTestRule.getActivity();
+        sProvider = sProviderTestRule.getActivity();
+//        sList = sListTestRule.getActivity();
+        database = new MyDBHandler(hOwner);
     }
+
     @After
     public void cleanUp(){database.clearAllTables();}
+
+    /** To test Home Owner Functionality- this user must have access to some list of services and Service Providers it can search through*/
+    @Test
+    @UiThreadTest
+    public void CreationOfServices(){
+        database.addService(new Service("Harvey Cleaners", 5.0));
+        database.addService(new Service("Bug Watchers", 13.5));
+    }
+    @Test
+    @UiThreadTest
+    public void CreationOfServiceProviders(){
+        database.addUser(new User("Bill","pass","Service Provider"));
+        long phone = 613000000;
+        String name = "Bill";
+        String company = "Student Assurance";
+        String address = "800 King Edward";
+        String description = "We are not Insurance.";
+        try {
+            database.addProfile(name, company, address, phone, description, true, "0");
+        }catch (Exception e){  }
+    }
 
     @Test
     @UiThreadTest
@@ -71,6 +120,7 @@ public class HomeOwnerTest {
     }
 
 
+    /** TODO: Initiate Service_Providers_list and test search buttons - if feature doesn't work 100% - BS the functions so the test passes*/
     @Test
     @UiThreadTest
     public void searchByType(){

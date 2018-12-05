@@ -114,7 +114,7 @@ public class ViewBookRate_ServiceProvider extends AppCompatActivity{
         else if (sun_rb.isChecked())
             time = "Sunday // " + availabilities[6].trim();
         if (!time.equals("")){
-            dbHandler.addBooking(getIntent().getStringExtra("accountOwner"),username, time);
+            dbHandler.addBooking(serviceName, getIntent().getStringExtra("accountOwner"),username, time);
             Toast.makeText(getApplicationContext(), "Service Booked!",Toast.LENGTH_SHORT).show();
         }
         else

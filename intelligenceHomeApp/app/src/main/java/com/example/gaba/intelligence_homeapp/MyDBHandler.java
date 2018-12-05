@@ -55,6 +55,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     //Table 6
     public static final String TABLE_BOOKINGS = "bookings";
     public static final String COLUMN_BOOKING_ID = "booking_id";
+    public static final String COLUMN_BOOKED_SERVICE = "booked_service";
     public static final String COLUMN_HOMEOWNER = "homeOwner";
     public static final String COLUMN_SERVICE_PROVIDER = "service_provider";
     public static final String COLUMN_TIME = "time_slot";
@@ -114,8 +115,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         //Table 6 - stores all bookings
         String CREATE_BOOKINGS_TABLE = "CREATE TABLE " +
                 TABLE_BOOKINGS + "("
-                + COLUMN_BOOKING_ID + " INTEGER PRIMARY KEY,"+ COLUMN_HOMEOWNER+" TEXT,"+COLUMN_SERVICE_PROVIDER + " TEXT,"
-                +COLUMN_TIME+" TEXT"+")";
+                + COLUMN_BOOKING_ID + " INTEGER PRIMARY KEY,"+ COLUMN_BOOKED_SERVICE+" TEXT,"+ COLUMN_HOMEOWNER+" INTEGER,"+COLUMN_SERVICE_PROVIDER + " INTEGER,"
+                +COLUMN_TIME+" TEXT"+" ,FOREIGN KEY(" + COLUMN_HOMEOWNER + ") REFERENCES " + TABLE_USERS + "( " + COLUMN_USERID + ")"+
+                " ,FOREIGN KEY(" + COLUMN_SERVICE_PROVIDER + ") REFERENCES " + TABLE_USERS + "( " + COLUMN_USERID + ")"+")";
         db.execSQL(CREATE_BOOKINGS_TABLE);
     }
 
@@ -137,11 +139,13 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void addBooking(String homeowner, String serviceProvider, String time){
+    public void addBooking(String serviceName,String homeowner, String serviceProvider, String time){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_HOMEOWNER, homeowner);
-        values.put(COLUMN_SERVICE_PROVIDER, serviceProvider);
+
+        values.put(COLUMN_BOOKED_SERVICE, serviceName);
+        values.put(COLUMN_HOMEOWNER, getUserPK(homeowner));
+        values.put(COLUMN_SERVICE_PROVIDER, getUserPK(serviceProvider));
         values.put(COLUMN_TIME, time);
 
         db.insert(TABLE_BOOKINGS, null, values);
@@ -691,6 +695,30 @@ public class MyDBHandler extends SQLiteOpenHelper {
             i = cursor.getInt(cursor.getColumnIndex(COLUMN_USERID));
         }
         return i;
+    }
+
+
+    public ArrayList<Booking> getAllBookings(String serviceProvider){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int id = getUserPK(serviceProvider);
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
+
+        String query = "Select * FROM " + TABLE_BOOKINGS + " WHERE " + COLUMN_SERVICE_PROVIDER + " = \"" + id + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            while(cursor.isAfterLast()){
+                Booking b = new Booking();
+                b.setServiceProvider(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICE_PROVIDER)));
+                b.setHomeOwner(cursor.getString(cursor.getColumnIndex(COLUMN_HOMEOWNER)));
+                b.setBookingTime(cursor.getString(cursor.getColumnIndex(COLUMN_TIME)));
+                b.setServiceName(cursor.getString(cursor.getColumnIndex(COLUMN_BOOKED_SERVICE)));
+                bookings.add(b);
+            }
+        }
+        return bookings;
+    }
+    public void getAllComments(){
+
     }
 }
 /*

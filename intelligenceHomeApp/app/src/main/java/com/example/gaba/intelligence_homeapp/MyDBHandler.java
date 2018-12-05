@@ -139,17 +139,42 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void addBooking(String serviceName,String homeowner, String serviceProvider, String time){
+    public boolean addBooking(String serviceName,String homeowner, String serviceProvider, String time){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        String query = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERID + " = \"" + serviceProvider + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        String h_name = "", s_name = "";
+        if(cursor.moveToFirst())
+            s_name = cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME));
 
-        values.put(COLUMN_BOOKED_SERVICE, serviceName);
-        values.put(COLUMN_HOMEOWNER, getUserPK(homeowner));
-        values.put(COLUMN_SERVICE_PROVIDER, getUserPK(serviceProvider));
-        values.put(COLUMN_TIME, time);
+        query = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERID + " = \"" + homeowner + "\"";
+        cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst())
+            h_name = cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME));
 
-        db.insert(TABLE_BOOKINGS, null, values);
+        ArrayList<Booking> bookings = getAllBookings(s_name);
+        Booking booking = new Booking(s_name.trim(), h_name.trim(),time.trim(), serviceName.trim());
+        System.out.println(bookings.size());
+
+        if(!bookings.contains(booking)) {
+            values.put(COLUMN_BOOKED_SERVICE, serviceName);
+            values.put(COLUMN_HOMEOWNER, getUserPK(homeowner));
+            values.put(COLUMN_SERVICE_PROVIDER, getUserPK(serviceProvider));
+            values.put(COLUMN_TIME, time);
+
+            db.insert(TABLE_BOOKINGS, null, values);
+            db.close();
+            return true;
+        }
         db.close();
+        return false;
+    }
+
+    public void deleteBooking(String serviceName,String homeowner, String serviceProvider, String time){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_BOOKINGS, COLUMN_HOMEOWNER + " = \"" + homeowner + "\"" + ""
+                + " AND " + COLUMN_SERVICE_PROVIDER + " = \"" + serviceProvider + "\""+ " AND " + COLUMN_BOOKED_SERVICE + " = \"" + serviceName + "\""+ " AND " + COLUMN_TIME + " = \"" + time + "\"", null);
     }
 
 
@@ -704,6 +729,26 @@ public class MyDBHandler extends SQLiteOpenHelper {
         ArrayList<Booking> bookings = new ArrayList<Booking>();
 
         String query = "Select * FROM " + TABLE_BOOKINGS + " WHERE " + COLUMN_SERVICE_PROVIDER + " = \"" + id + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                Booking b = new Booking();
+                b.setServiceProvider(cursor.getString(cursor.getColumnIndex(COLUMN_SERVICE_PROVIDER)));
+                b.setHomeOwner(cursor.getString(cursor.getColumnIndex(COLUMN_HOMEOWNER)));
+                b.setBookingTime(cursor.getString(cursor.getColumnIndex(COLUMN_TIME)));
+                b.setServiceName(cursor.getString(cursor.getColumnIndex(COLUMN_BOOKED_SERVICE)));
+                bookings.add(b);
+                cursor.moveToNext();
+            }
+        }
+        return bookings;
+    }
+
+    public ArrayList<Booking> getAllBookings(int s_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
+
+        String query = "Select * FROM " + TABLE_BOOKINGS + " WHERE " + COLUMN_SERVICE_PROVIDER + " = \"" + s_id + "\"";
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
             while(!cursor.isAfterLast()){

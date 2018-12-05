@@ -16,9 +16,11 @@ public class Booking  extends AppCompatActivity {
         serviceName = "";
     }
 
-    public Booking(String sp, String home){
-        serviceProvider = home;
+    public Booking(String sp, String home, String t, String sn){
+        serviceProvider = sp;
         homeOwner = home;
+        time = t;
+        serviceName = sn;
     }
 
     public String getServiceProvider(){
@@ -59,5 +61,10 @@ public class Booking  extends AppCompatActivity {
         return homeOwner + " booked "+serviceName+" service with " + serviceProvider+" at " + time;
     }
 
+    public boolean equals(Booking b){
+        if (b.getServiceName().equals(serviceName) && b.getBookingTime().equals( time) && b.getHomeOwner().equals(homeOwner) && b.getServiceName().equals( serviceProvider))
+            return true;
+        return false;
+    }
 
 }

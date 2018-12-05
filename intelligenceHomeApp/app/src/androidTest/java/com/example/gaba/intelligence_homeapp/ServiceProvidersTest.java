@@ -71,8 +71,9 @@ public class ServiceProvidersTest {
         String company = textInput.getText().toString();
 
         textInput = sProvider.findViewById(R.id.editPhone);
-        textInput.setText("613 000 0000");
-        //long phoneNum = Long.parseLong(textInput.getText().toString());
+        textInput.setText("6130000000");
+//        long pN = textInput.getText().toString();
+        long phoneNum = Long.parseLong(textInput.getText().toString());
 
         licensing = sProvider.findViewById(R.id.yesBtn);
         licensing.setChecked(true);
@@ -82,31 +83,32 @@ public class ServiceProvidersTest {
         createProfile.performClick();
 
         User u = database.findUser("Bob");
-//        database.addProfile(u.getUsername(),company,address,phoneNum,description,license,"");
         assertEquals("Bob", u.getUsername());
-       //assertEquals(true, database.hasProfile("Bob"));
+        assertEquals(true, database.hasProfile("Bob"));
     }
 
     /** Checks to make sure when an account/user is deleted, their profile is gone as well*/
    @Test
    @UiThreadTest
    public void checkForNoProfile(){
-        assertEquals(false, database.hasProfile("Bob"));
+       database.clearAllTables();
+       assertEquals(false, database.hasProfile("Bob"));
    }
 
-//   @Test
-//   @UiThreadTest
-//   public void checkAddAvailabilityButton(){
-//        selectAvail = sProviders.findViewById(R.id.avail);
-//        selectAvail.isClicked();
-//   }
-//
+   @Test
+   @UiThreadTest
+   public void checkAddAvailabilityButton(){
+        selectAvail = sProvider.findViewById(R.id.btnAvail);
+        selectAvail.performClick();
+   }
+
 //    @Test
 //    @UiThreadTest
 //    public void validateAvailEntries(){
 //        //TODO: Add availability to one slot
 //        //TODO: Then check to make sure number is a digit (make sure this actually is done in our group)
 //        //Due to errors running WelcomeScreen Activity, i could not yet test run these test classes
-//        assertEquals(5, 5);
+//
+//
 //    }
 }

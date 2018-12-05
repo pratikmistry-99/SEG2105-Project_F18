@@ -67,14 +67,20 @@ public class WelcomeScreen extends AppCompatActivity {
         }
 
         //user should never equal null, only in the test classes should this possibility occur
-        if (user == null){
-            user = new User("Bob","password","Service Provider");
+        String test = getIntent().getStringExtra("role");
+//        if (user == null){
+//            if(test == "Service Provider"){
+//                user = new User("Bob","password","Service Provider");
+//                dbHandler.addUser(user);
+//            }else if(test == "Home Owner"){
+//                user = new User("Billy","password","Home Owner");
+//                dbHandler.addUser(user);
+//            }
+//        }
+        if(user == null){
+            user = new User("Billy","password","Home Owner");
             dbHandler.addUser(user);
         }
-//        else if(){
-//            user = new User("Billy","password","Home Owner");
-//            dbHandler.addUser(user);
-//        }
 
         userNameDisplay.setText(str);
         userRoleDisplay.setText(user.getRole() + " Account");

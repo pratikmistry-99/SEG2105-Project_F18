@@ -72,7 +72,6 @@ public class ServiceProvidersTest {
 
         textInput = sProvider.findViewById(R.id.editPhone);
         textInput.setText("6130000000");
-//        long pN = textInput.getText().toString();
         long phoneNum = Long.parseLong(textInput.getText().toString());
 
         licensing = sProvider.findViewById(R.id.yesBtn);

@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 // class creates a list view of all services, and allows admin to add, edit or delete services
@@ -146,7 +147,7 @@ public class ServiceList extends AppCompatActivity {
         double rate = 0.0;
         boolean validRate = true;
         try {
-            rate = Double.parseDouble(String.valueOf(editRate.getText().toString()));
+            rate = Double.parseDouble(editRate.getText().toString());
         }
         catch (Exception e){
             validRate = false;

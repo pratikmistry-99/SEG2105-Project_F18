@@ -646,31 +646,32 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 Cursor cursor = db.rawQuery(query, null);
                 if (cursor.moveToFirst()) {
                     String availability = cursor.getString(cursor.getColumnIndex(COLUMN_AVAILABILITY));
-                    String[] av = availability.split("//");
                     boolean add = false;
-                    for (int j = 0; j < av.length; j++){
-                        int tempf;
-                        int tempt;
-                        try {
-                            tempf = Integer.parseInt(av[j].split("-")[0].trim());
-                            tempt = Integer.parseInt(av[j].split("-")[1].trim());
-                        }
-                        catch (Exception e){
-                            tempf = -1;
-                            tempt = -1;
-                        }
+                    if (availability!=null) {
+                        String[] av = availability.split("//");
 
-                        if (min < tempt && min>=tempf)
-                            add = true;
-                        else if(max <= tempt && max > tempf)
-                            add = true;
-                        else if (tempf<max && tempf>= min)
-                            add = true;
-                        else if (tempt <= max && tempt> min)
-                            add = true;
+                        for (int j = 0; j < av.length; j++) {
+                            int tempf;
+                            int tempt;
+                            try {
+                                tempf = Integer.parseInt(av[j].split("-")[0].trim());
+                                tempt = Integer.parseInt(av[j].split("-")[1].trim());
+                            } catch (Exception e) {
+                                tempf = -1;
+                                tempt = -1;
+                            }
 
+                            if (min < tempt && min >= tempf)
+                                add = true;
+                            else if (max <= tempt && max > tempf)
+                                add = true;
+                            else if (tempf < max && tempf >= min)
+                                add = true;
+                            else if (tempt <= max && tempt > min)
+                                add = true;
+
+                        }
                     }
-
                     if (add)
                         provider_with_timeConstraint.add(u);
                 }

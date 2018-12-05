@@ -105,7 +105,7 @@ public class availiability extends AppCompatActivity {
                 validInput = false;
         }
         catch (Exception e){
-            
+
         }
         if(validInput)
         {

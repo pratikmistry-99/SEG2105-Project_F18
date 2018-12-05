@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -110,6 +111,7 @@ public class Service_providers_list extends AppCompatActivity{
     }
     public void updateTimeFilter(View view){
 
+
         try {
             minTime = Integer.parseInt(((EditText) findViewById(R.id.minTime)).getText().toString());
             maxTime = Integer.parseInt(((EditText) findViewById(R.id.maxTime)).getText().toString());
@@ -121,10 +123,13 @@ public class Service_providers_list extends AppCompatActivity{
             resetFilter();
         }
 
-        findViewById(R.id.time_options).setVisibility(View.GONE);
-        findViewById(R.id.filter_options).setVisibility(View.VISIBLE);
-        findViewById(R.id.service_providers_list).setVisibility(View.VISIBLE);
-
+        if(maxTime>=minTime) {
+            findViewById(R.id.time_options).setVisibility(View.GONE);
+            findViewById(R.id.filter_options).setVisibility(View.VISIBLE);
+            findViewById(R.id.service_providers_list).setVisibility(View.VISIBLE);
+        }
+        else
+            Toast.makeText(this,"Invalid Time Interval",Toast.LENGTH_LONG).show();
     }
 
     public void resetFilter(){

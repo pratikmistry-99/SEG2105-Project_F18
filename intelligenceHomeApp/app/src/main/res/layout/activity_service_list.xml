@@ -35,7 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/editService"
-            android:hint="Enter rate" />
+            android:hint="Enter rate"
+            android:inputType="number|numberDecimal" />
 
         <Button
             android:id="@+id/btnAddService"

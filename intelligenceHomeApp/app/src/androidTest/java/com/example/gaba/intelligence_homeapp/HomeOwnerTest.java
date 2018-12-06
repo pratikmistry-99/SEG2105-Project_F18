@@ -63,21 +63,13 @@ public class HomeOwnerTest {
     };
     private WelcomeScreen hOwner = null;
     private WelcomeScreen sProvider = null;
-
     private MyDBHandler database;
     private ServiceList sList;
+
     private Button sListBtn, addButton;
     private RadioButton licensing;
     private Button createProfile;
     private TextView textInput;
-
-//    @BeforeClass
-    // public static void setUpBefore(){
-    //Create Service Lists with at least 2 service Providers
-    //Service Provider with company title: "Bug Watcher"
-    // service 1: Bug Watching with availability set to Wednesdays
-    // 11 to 16 hrs
-    // }
 
     @Before
     public void setUp(){
@@ -86,7 +78,6 @@ public class HomeOwnerTest {
 //        sList = sListTestRule.getActivity();
         database = new MyDBHandler(hOwner);
     }
-
     @After
     public void cleanUp(){database.clearAllTables();}
 
@@ -97,6 +88,7 @@ public class HomeOwnerTest {
         database.addService(new Service("Harvey Cleaners", 5.0));
         database.addService(new Service("Bug Watchers", 13.5));
     }
+    
     @Test
     @UiThreadTest
     public void CreationOfServiceProviders(){
@@ -109,6 +101,15 @@ public class HomeOwnerTest {
         try {
             database.addProfile(name, company, address, phone, description, true, "0");
         }catch (Exception e){  }
+
+        assertNotNull(database.getServiceProviderInfo("Bill"));
+
+        database.addUser(new User("Saraaah","pass","Service Provider"));
+        long phoneNum = 613000123;
+        try {
+            database.addProfile("Saraaah", "uOTTAWA", "800 King Edward", phoneNum, "Say whaa", false, "0");
+        }catch (Exception e){  }
+        assertNotNull(database.getServiceProviderInfo("Saraaah"));
     }
 
     @Test

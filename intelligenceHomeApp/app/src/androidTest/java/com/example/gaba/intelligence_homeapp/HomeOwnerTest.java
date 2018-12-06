@@ -92,6 +92,8 @@ public class HomeOwnerTest {
     @Test
     @UiThreadTest
     public void CreationOfServiceProviders(){
+
+        CreationOfServices();
         database.addUser(new User("Bill","pass","Service Provider"));
         long phone = 613000000;
         String name = "Bill";
@@ -110,6 +112,11 @@ public class HomeOwnerTest {
             database.addProfile("Saraaah", "uOTTAWA", "800 King Edward", phoneNum, "Say whaa", false, "0");
         }catch (Exception e){  }
         assertNotNull(database.getServiceProviderInfo("Saraaah"));
+
+        database.addProviderToService("Bill", "Harvey Cleaners");
+        database.addProviderToService("Saraaah", "Bug Watchers");
+        database.addProviderToService("Saraaah", "Harvey Cleaners");
+
     }
 
     @Test

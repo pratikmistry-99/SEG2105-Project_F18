@@ -21,3 +21,6 @@ Nikita Bliumkin 8752021
 =======
 >>>>>>> e6ce66c8789f67e693ef5bfb49969fc73feb8ea9
 
+Build Status
+[![Build
+Status](https://circleci.com/gh/pratikmistry-99/SEG2105-Project_F18/tree/master)](https://circleci.com/gh/pratikmistry-99/SEG2105-Project_F18)

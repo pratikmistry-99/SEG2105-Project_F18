@@ -52,7 +52,7 @@
             <Button
                 android:id="@+id/servList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="sList"
                 android:text="Go to service list"
@@ -61,7 +61,7 @@
             <Button
                 android:id="@+id/bookings"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="bList"
                 android:text="My curent bookings"
